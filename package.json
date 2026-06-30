@@ -1,0 +1,35 @@
+{
+  "name": "@fastgpt/community-plugins",
+  "version": "0.1.0",
+  "description": "Community plugin registry and publishing automation for FastGPT",
+  "type": "module",
+  "scripts": {
+    "validate": "tsx scripts/validate.ts",
+    "publish": "tsx scripts/publish.ts",
+    "revoke": "tsx scripts/revoke.ts",
+    "test": "vitest run",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "fastgpt",
+    "plugins",
+    "community"
+  ],
+  "author": "FastGPT Community",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.28.2",
+  "devDependencies": {
+    "@fastgpt-plugin/cli": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "tsx": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "zod": "catalog:"
+  }
+}

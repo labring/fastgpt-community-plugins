@@ -1,0 +1,130 @@
+name: Publish Community Plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      plugin_id:
+        description: "Plugin id from plugins.json"
+        required: true
+      package_path:
+        description: "Optional prebuilt .pkg path. Leave empty to use plugins/<id>/<id>.pkg"
+        required: false
+      review_path:
+        description: "AI review verdict JSON path"
+        required: true
+      dry_run:
+        description: "Write receipt without uploading"
+        required: false
+        default: "false"
+      skip_build:
+        description: "Skip plugin build/pack before publish"
+        required: false
+        default: "false"
+      actor:
+        description: "Actor recorded in the publish event"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: community-plugin-lifecycle-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
+      - name: Configure npm auth
+        shell: bash
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -n "${NPM_TOKEN:-}" ]; then
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          fi
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate hard gates
+        run: pnpm run validate -- --skip-build
+
+      - name: Publish plugin
+        env:
+          ACTOR_INPUT: ${{ inputs.actor }}
+          MARKETPLACE_BASE_URL: ${{ secrets.MARKETPLACE_BASE_URL }}
+          MARKETPLACE_AUTH: ${{ secrets.MARKETPLACE_AUTH }}
+          PACKAGE_PATH: ${{ inputs.package_path }}
+          PLUGIN_ID: ${{ inputs.plugin_id }}
+          REVIEW_PATH: ${{ inputs.review_path }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          SKIP_BUILD: ${{ inputs.skip_build }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--plugin "$PLUGIN_ID")
+          args+=(--review "$REVIEW_PATH")
+          if [ -n "$ACTOR_INPUT" ]; then
+            args+=(--actor "$ACTOR_INPUT")
+          fi
+          if [ -n "$PACKAGE_PATH" ]; then
+            args+=(--package "$PACKAGE_PATH")
+          fi
+          if [ "$DRY_RUN" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          if [ "$SKIP_BUILD" = "true" ]; then
+            args+=(--skip-build)
+          fi
+          pnpm run publish -- "${args[@]}"
+
+      - name: Commit lifecycle state
+        if: ${{ inputs.dry_run != 'true' }}
+        env:
+          PLUGIN_ID: ${{ inputs.plugin_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins.json events
+          if git diff --cached --quiet; then
+            echo "No lifecycle state changes to commit."
+            exit 0
+          fi
+          git commit -m "Publish community plugin ${PLUGIN_ID}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-receipts
+          path: dist/receipts
+          if-no-files-found: error
+
+      - name: Upload lifecycle events
+        if: ${{ inputs.dry_run != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lifecycle-events
+          path: events
+          if-no-files-found: error

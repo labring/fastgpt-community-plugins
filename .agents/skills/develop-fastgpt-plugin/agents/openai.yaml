@@ -1,0 +1,4 @@
+interface:
+  display_name: "Develop FastGPT Plugin"
+  short_description: "面向新手的 FastGPT 插件开发完整向导"
+  default_prompt: "Use $develop-fastgpt-plugin to guide a beginner through building, testing, and submitting a FastGPT plugin."

@@ -1,0 +1,96 @@
+name: Revoke Community Plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      plugin_id:
+        description: "Plugin id from plugins.json"
+        required: true
+      version:
+        description: "Optional plugin version; defaults to current registry entry"
+        required: false
+      reason:
+        description: "security-risk | broken | policy-violation | maintainer-request | duplicate | other"
+        required: true
+      details:
+        description: "Human-readable revoke reason"
+        required: true
+      marketplace_release_id:
+        description: "Optional marketplace release id for future marketplace-side revoke integration"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: community-plugin-lifecycle-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  revoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Revoke plugin in repository state
+        env:
+          PLUGIN_ID: ${{ inputs.plugin_id }}
+          VERSION: ${{ inputs.version }}
+          REASON: ${{ inputs.reason }}
+          DETAILS: ${{ inputs.details }}
+          MARKETPLACE_RELEASE_ID: ${{ inputs.marketplace_release_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--plugin "$PLUGIN_ID")
+          args+=(--reason "$REASON")
+          args+=(--details "$DETAILS")
+          args+=(--actor "${{ github.actor }}")
+          if [ -n "$VERSION" ]; then
+            args+=(--version "$VERSION")
+          fi
+          if [ -n "$MARKETPLACE_RELEASE_ID" ]; then
+            args+=(--marketplace-release-id "$MARKETPLACE_RELEASE_ID")
+          fi
+          pnpm run revoke -- "${args[@]}"
+
+      - name: Commit lifecycle state
+        env:
+          PLUGIN_ID: ${{ inputs.plugin_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins.json events
+          if git diff --cached --quiet; then
+            echo "No lifecycle state changes to commit."
+            exit 0
+          fi
+          git commit -m "Revoke community plugin ${PLUGIN_ID}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload revoke events
+        uses: actions/upload-artifact@v4
+        with:
+          name: lifecycle-events
+          path: events
+          if-no-files-found: error
