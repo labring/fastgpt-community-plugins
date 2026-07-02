@@ -36,16 +36,16 @@ Example:
 
 ```json
 {
-  "pluginId": "weather-tool",
+  "pluginId": "weatherTool",
   "version": "0.1.0",
   "type": "tool",
-  "source": "https://github.com/example/weather-tool",
+  "source": "https://github.com/example/weatherTool",
   "commit": "abcdef1234567890",
-  "submodule": "plugins/weather-tool",
+  "submodule": "plugins/weatherTool",
   "path": ".",
   "status": "pending",
   "support": "community",
-  "review": "reviews/weather-tool/0.1.0.json"
+  "review": "reviews/weatherTool/0.1.0.json"
 }
 ```
 
@@ -53,7 +53,7 @@ The AI verdict JSON must match `schemas/review.ts`:
 
 ```json
 {
-  "pluginId": "weather-tool",
+  "pluginId": "weatherTool",
   "version": "0.1.0",
   "verdict": "pass",
   "summary": "No blocking policy risks found.",

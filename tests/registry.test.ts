@@ -8,12 +8,12 @@ describe('registry schema', () => {
       version: 1,
       plugins: [
         {
-          pluginId: 'weather-tool',
+          pluginId: 'weatherTool',
           version: '0.1.0',
           type: 'tool',
-          source: 'https://github.com/example/weather-tool',
+          source: 'https://github.com/example/weatherTool',
           commit: 'abcdef1234567890',
-          submodule: 'plugins/weather-tool',
+          submodule: 'plugins/weatherTool',
           path: 'packages/tool'
         }
       ]
@@ -29,11 +29,20 @@ describe('registry schema', () => {
       parseRegistryJson({
         version: 1,
         plugins: [
-          validPlugin({ pluginId: 'weather-tool' }),
-          validPlugin({ pluginId: 'weather-tool', version: '0.2.0' })
+          validPlugin({ pluginId: 'weatherTool' }),
+          validPlugin({ pluginId: 'weatherTool', version: '0.2.0' })
         ]
       })
     ).toThrow('duplicate pluginId');
+  });
+
+  it('requires lower camelCase plugin ids', () => {
+    const issues = validateRegistryJson({
+      version: 1,
+      plugins: [validPlugin({ pluginId: 'weather-tool' })]
+    });
+
+    expect(issues.map((issue) => issue.message)).toContain('must use lower camelCase letters and numbers');
   });
 
   it('rejects absolute and parent-relative paths', () => {
@@ -53,7 +62,7 @@ describe('registry schema', () => {
   it('requires submodules to live under plugins/', () => {
     const issues = validateRegistryJson({
       version: 1,
-      plugins: [validPlugin({ submodule: 'vendor/weather-tool' })]
+      plugins: [validPlugin({ submodule: 'vendor/weatherTool' })]
     });
 
     expect(issues.map((issue) => issue.message)).toContain('must live under plugins/');
@@ -65,9 +74,9 @@ describe('registry schema', () => {
       plugins: [
         validPlugin({
           status: 'revoked',
-          review: 'reviews/weather-tool/0.1.0.json',
-          latestPublishEvent: 'events/2026-06-29/weather-tool-0.1.0-published.json',
-          latestRevokeEvent: 'events/2026-06-30/weather-tool-0.1.0-revoked.json'
+          review: 'reviews/weatherTool/0.1.0.json',
+          latestPublishEvent: 'events/2026-06-29/weatherTool-0.1.0-published.json',
+          latestRevokeEvent: 'events/2026-06-30/weatherTool-0.1.0-revoked.json'
         })
       ]
     });
@@ -79,12 +88,12 @@ describe('registry schema', () => {
 
 function validPlugin(overrides: Record<string, unknown> = {}) {
   return {
-    pluginId: 'weather-tool',
+    pluginId: 'weatherTool',
     version: '0.1.0',
     type: 'tool',
-    source: 'https://github.com/example/weather-tool',
+    source: 'https://github.com/example/weatherTool',
     commit: 'abcdef1234567890',
-    submodule: 'plugins/weather-tool',
+    submodule: 'plugins/weatherTool',
     path: '.',
     ...overrides
   };

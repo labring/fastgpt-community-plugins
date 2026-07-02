@@ -25,12 +25,12 @@ describe('revokePlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.',
             status: 'active'
           }
@@ -41,7 +41,7 @@ describe('revokePlugin', () => {
     const event = revokePlugin({
       root,
       registryPath,
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       reason: 'broken',
       details: 'Fails current package check.',
       eventDir: 'events',
@@ -67,12 +67,12 @@ describe('revokePlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.',
             status: 'active'
           }
@@ -83,7 +83,7 @@ describe('revokePlugin', () => {
     const options = {
       root,
       registryPath,
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       reason: 'broken' as const,
       details: 'Fails current package check.',
       eventDir: 'events',

@@ -15,7 +15,7 @@ This skill is advisory. It produces review evidence and a verdict for the reposi
 - version
 - source repo URL
 - source commit SHA
-- submodule path, usually `plugins/<plugin-id>`
+- submodule path, usually `plugins/<pluginId>`
 - optional nested plugin path, default `.`
 
 ## Required Context
@@ -42,7 +42,7 @@ Write a JSON file that matches `schemas/review.ts`, typically:
 
 ```json
 {
-  "pluginId": "weather-tool",
+  "pluginId": "weatherTool",
   "version": "0.1.0",
   "verdict": "pass",
   "summary": "Deterministic gates passed. No blocking policy risks found. Community-maintained plugin; no official quality warranty implied.",

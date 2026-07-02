@@ -16,7 +16,8 @@
 ## 仓库定位
 
 - 通过 `plugins.json` 维护轻量级社区插件索引。
-- 每个插件源码位于独立仓库，本仓库只在 `plugins/<plugin-id>` 下保存固定 commit 的 git submodule。
+- 每个插件源码位于独立仓库，本仓库只在 `plugins/<pluginId>` 下保存固定 commit 的 git submodule。
+- `pluginId` 使用 lower camelCase，例如 `googleSheets`。
 - 发布前执行 schema、submodule、源码结构和策略规则校验。
 - 使用 AI skills 完成插件候选审核和每日 publish/revoke 摘要。
 - 通过 GitHub Actions 发布审核通过的 `.pkg` 产物。
@@ -38,8 +39,8 @@
 │   ├── publish.yml                 # 手动发布 workflow
 │   └── revoke.yml                  # 手动仓库侧 revoke workflow
 ├── events/<yyyy-mm-dd>/            # 已提交的 publish/revoke 生命周期事件
-├── plugins/<plugin-id>/            # 社区插件 submodule
-├── reviews/<plugin-id>/            # AI review verdict 产物
+├── plugins/<pluginId>/             # 社区插件 submodule
+├── reviews/<pluginId>/             # AI review verdict 产物
 ├── schemas/                        # registry、review、lifecycle event 契约
 ├── scripts/                        # 校验、发布、revoke、策略规则脚本
 ├── tests/                          # 确定性规则的 Vitest 测试
@@ -58,16 +59,16 @@
   "version": 1,
   "plugins": [
     {
-      "pluginId": "weather-tool",
+      "pluginId": "weatherTool",
       "version": "0.1.0",
       "type": "tool",
-      "source": "https://github.com/example/weather-tool",
+      "source": "https://github.com/example/weatherTool",
       "commit": "abcdef1234567890",
-      "submodule": "plugins/weather-tool",
+      "submodule": "plugins/weatherTool",
       "path": ".",
       "status": "pending",
       "support": "community",
-      "review": "reviews/weather-tool/0.1.0.json"
+      "review": "reviews/weatherTool/0.1.0.json"
     }
   ]
 }
@@ -99,11 +100,17 @@ pnpm test
 # 校验 registry、submodule 和策略规则
 pnpm run validate
 
+# 新增或更新 registry 条目
+pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plugin-repo-url> --commit <commit-sha>
+
+# 从本地 submodule package 推断 registry 元信息
+pnpm run registry -- upsert --from plugins/googleSheets --source <plugin-repo-url> --commit <commit-sha>
+
 # 生成 dry-run 发布 receipt，不修改 registry 状态
-pnpm run publish -- --plugin <plugin-id> --review <reviews/plugin/version.json> --dry-run --skip-build
+pnpm run publish -- --plugin <pluginId> --review <reviews/plugin/version.json> --dry-run --skip-build
 
 # 在仓库侧 revoke 插件并写入 revoke event
-pnpm run revoke -- --plugin <plugin-id> --reason broken --details "Fails current package check"
+pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
 ```
 
 ## 新增社区插件
@@ -113,11 +120,15 @@ pnpm run revoke -- --plugin <plugin-id> --reason broken --details "Fails current
 1. 将插件仓库添加为 submodule：
 
    ```bash
-   git submodule add <plugin-repo-url> plugins/<plugin-id>
-   git -C plugins/<plugin-id> checkout <commit-sha>
+   git submodule add <plugin-repo-url> plugins/<pluginId>
+   git -C plugins/<pluginId> checkout <commit-sha>
    ```
 
-2. 在 `plugins.json` 中新增或更新对应条目。
+2. 在 `plugins.json` 中新增或更新对应条目：
+
+   ```bash
+   pnpm run registry -- upsert --from plugins/<pluginId> --source <plugin-repo-url> --commit <commit-sha>
+   ```
 
 3. 运行确定性校验：
 

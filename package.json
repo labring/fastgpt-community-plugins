@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "validate": "tsx scripts/validate.ts",
+    "registry": "tsx scripts/registry.ts",
     "publish": "tsx scripts/publish.ts",
     "revoke": "tsx scripts/revoke.ts",
     "test": "vitest run",

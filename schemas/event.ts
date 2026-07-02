@@ -2,6 +2,8 @@ import fs from 'node:fs';
 
 import { z } from 'zod';
 
+import { PluginIdSchema } from './registry.js';
+
 const EventPathSchema = z
   .string()
   .min(1)
@@ -25,7 +27,7 @@ const MarketplaceSchema = z.object({
 export const PublishEventSchema = z.object({
   schemaVersion: z.literal(1),
   eventType: z.literal('published'),
-  pluginId: z.string().min(1),
+  pluginId: PluginIdSchema,
   version: z.string().min(1),
   source: SourceSchema,
   package: z.object({
@@ -56,7 +58,7 @@ export const RevokeReasonSchema = z.enum([
 export const RevokeEventSchema = z.object({
   schemaVersion: z.literal(1),
   eventType: z.literal('revoked'),
-  pluginId: z.string().min(1),
+  pluginId: PluginIdSchema,
   version: z.string().min(1),
   reason: RevokeReasonSchema,
   details: z.string().min(1),

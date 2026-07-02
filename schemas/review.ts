@@ -2,8 +2,10 @@ import fs from 'node:fs';
 
 import { z } from 'zod';
 
+import { PluginIdSchema } from './registry.js';
+
 export const AiReviewVerdictSchema = z.object({
-  pluginId: z.string().min(1),
+  pluginId: PluginIdSchema,
   version: z.string().min(1),
   verdict: z.enum(['pass', 'warn', 'fail']),
   summary: z.string().min(1),

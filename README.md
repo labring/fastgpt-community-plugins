@@ -16,7 +16,8 @@ This repository indexes community-provided FastGPT plugins, runs deterministic v
 ## Repository Scope
 
 - Maintain a lightweight registry of community plugin references in `plugins.json`.
-- Store each plugin as a pinned git submodule under `plugins/<plugin-id>`.
+- Store each plugin as a pinned git submodule under `plugins/<pluginId>`.
+- Use lower camelCase plugin ids, for example `googleSheets`.
 - Run schema, submodule, source layout, and policy gates before publish.
 - Use AI skills for plugin intake review and daily publish/revoke summaries.
 - Publish approved `.pkg` artifacts through GitHub Actions.
@@ -38,8 +39,8 @@ Community plugins are reviewed for publishability and traceability. The review s
 │   ├── publish.yml                 # Manual publish workflow
 │   └── revoke.yml                  # Manual repository-side revoke workflow
 ├── events/<yyyy-mm-dd>/            # Committed publish/revoke lifecycle events
-├── plugins/<plugin-id>/            # Community plugin submodules
-├── reviews/<plugin-id>/            # AI review verdict artifacts
+├── plugins/<pluginId>/             # Community plugin submodules
+├── reviews/<pluginId>/             # AI review verdict artifacts
 ├── schemas/                        # Registry, review, and lifecycle event contracts
 ├── scripts/                        # Validation, publish, revoke, and policy gates
 ├── tests/                          # Vitest coverage for deterministic gates
@@ -58,16 +59,16 @@ Community plugins are reviewed for publishability and traceability. The review s
   "version": 1,
   "plugins": [
     {
-      "pluginId": "weather-tool",
+      "pluginId": "weatherTool",
       "version": "0.1.0",
       "type": "tool",
-      "source": "https://github.com/example/weather-tool",
+      "source": "https://github.com/example/weatherTool",
       "commit": "abcdef1234567890",
-      "submodule": "plugins/weather-tool",
+      "submodule": "plugins/weatherTool",
       "path": ".",
       "status": "pending",
       "support": "community",
-      "review": "reviews/weather-tool/0.1.0.json"
+      "review": "reviews/weatherTool/0.1.0.json"
     }
   ]
 }
@@ -99,11 +100,17 @@ pnpm test
 # Validate registry, submodules, and policy gates
 pnpm run validate
 
+# Add or update a registry entry
+pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plugin-repo-url> --commit <commit-sha>
+
+# Infer registry metadata from a local submodule package
+pnpm run registry -- upsert --from plugins/googleSheets --source <plugin-repo-url> --commit <commit-sha>
+
 # Generate a dry-run publish receipt without mutating registry state
-pnpm run publish -- --plugin <plugin-id> --review <reviews/plugin/version.json> --dry-run --skip-build
+pnpm run publish -- --plugin <pluginId> --review <reviews/plugin/version.json> --dry-run --skip-build
 
 # Revoke a plugin in repository state and write a revoke event
-pnpm run revoke -- --plugin <plugin-id> --reason broken --details "Fails current package check"
+pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
 ```
 
 ## Add a Community Plugin
@@ -113,11 +120,15 @@ Community plugin source code should live in its own repository. This registry on
 1. Add the plugin repository as a submodule:
 
    ```bash
-   git submodule add <plugin-repo-url> plugins/<plugin-id>
-   git -C plugins/<plugin-id> checkout <commit-sha>
+   git submodule add <plugin-repo-url> plugins/<pluginId>
+   git -C plugins/<pluginId> checkout <commit-sha>
    ```
 
-2. Add or update the matching entry in `plugins.json`.
+2. Add or update the matching entry in `plugins.json`:
+
+   ```bash
+   pnpm run registry -- upsert --from plugins/<pluginId> --source <plugin-repo-url> --commit <commit-sha>
+   ```
 
 3. Run deterministic validation:
 

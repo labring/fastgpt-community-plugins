@@ -7,16 +7,16 @@ describe('lifecycle event schema', () => {
     const published = LifecycleEventSchema.parse({
       schemaVersion: 1,
       eventType: 'published',
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       version: '0.1.0',
       source: {
-        repo: 'https://github.com/example/weather-tool',
+        repo: 'https://github.com/example/weatherTool',
         commit: 'abcdef1234567890',
-        submodule: 'plugins/weather-tool',
+        submodule: 'plugins/weatherTool',
         path: '.'
       },
       package: {
-        file: 'weather-tool.pkg',
+        file: 'weatherTool.pkg',
         sha256: 'a'.repeat(64),
         sizeBytes: 1
       },
@@ -37,7 +37,7 @@ describe('lifecycle event schema', () => {
     const revoked = LifecycleEventSchema.parse({
       schemaVersion: 1,
       eventType: 'revoked',
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       version: '0.1.0',
       reason: 'broken',
       details: 'Fails current package check.',

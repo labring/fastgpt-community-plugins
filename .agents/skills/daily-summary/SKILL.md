@@ -30,7 +30,7 @@ Produce concise Markdown:
 
 ## Newly Published
 
-- `weather-tool` v0.1.0 — community-maintained tool. Review: pass. Marketplace release: mkt_123.
+- `weatherTool` v0.1.0 — community-maintained tool. Review: pass. Marketplace release: mkt_123.
 
 ## Revoked
 

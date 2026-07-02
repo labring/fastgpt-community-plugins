@@ -371,7 +371,7 @@ async function main(): Promise<void> {
 
   const pluginId = args.get('plugin');
   if (typeof pluginId !== 'string') {
-    throw new Error('Usage: pnpm publish -- --plugin <plugin-id> [--package <path>] [--dry-run]');
+    throw new Error('Usage: pnpm publish -- --plugin <pluginId> [--package <path>] [--dry-run]');
   }
 
   const receipt = await publishPlugin({

@@ -9,10 +9,10 @@ const RelativePluginPathSchema = z
   .refine((value) => !path.isAbsolute(value), 'must be a relative path')
   .refine((value) => !value.split(/[\\/]+/).includes('..'), 'must not contain .. segments');
 
-const PluginIdSchema = z
+export const PluginIdSchema = z
   .string()
   .min(1)
-  .regex(/^[a-z0-9][a-z0-9._-]*$/, 'must use lowercase letters, numbers, dots, underscores, or hyphens');
+  .regex(/^[a-z][a-zA-Z0-9]*$/, 'must use lower camelCase letters and numbers');
 
 const CommitSchema = z
   .string()

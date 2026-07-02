@@ -19,8 +19,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weather-tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weather-tool', 'weather-tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -28,12 +28,12 @@ describe('publishPlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.'
           }
         ]
@@ -43,7 +43,7 @@ describe('publishPlugin', () => {
     const receipt = await publishPlugin({
       root,
       registryPath: path.join(root, 'plugins.json'),
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       reviewPath: 'ai-review.json',
       receiptDir: 'dist/receipts',
       eventDir: 'events',
@@ -56,7 +56,7 @@ describe('publishPlugin', () => {
       root,
       'dist',
       'receipts',
-      'weather-tool',
+      'weatherTool',
       '0.1.0',
       'publish-receipt.json'
     );
@@ -74,8 +74,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weather-tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weather-tool', 'weather-tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -83,12 +83,12 @@ describe('publishPlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.'
           }
         ]
@@ -108,7 +108,7 @@ describe('publishPlugin', () => {
       const receipt = await publishPlugin({
         root,
         registryPath: path.join(root, 'plugins.json'),
-        pluginId: 'weather-tool',
+        pluginId: 'weatherTool',
         reviewPath: 'ai-review.json',
         receiptDir: 'dist/receipts',
         eventDir: 'events',
@@ -133,8 +133,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weather-tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weather-tool', 'weather-tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -142,12 +142,12 @@ describe('publishPlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.'
           }
         ]
@@ -166,7 +166,7 @@ describe('publishPlugin', () => {
     const options = {
       root,
       registryPath: path.join(root, 'plugins.json'),
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       reviewPath: 'ai-review.json',
       receiptDir: 'dist/receipts',
       eventDir: 'events',
@@ -197,8 +197,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weather-tool', 'packages', 'tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weather-tool', 'packages', 'tool', 'tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool', 'packages', 'tool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'packages', 'tool', 'tool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -206,12 +206,12 @@ describe('publishPlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: 'packages/tool'
           }
         ]
@@ -221,7 +221,7 @@ describe('publishPlugin', () => {
     const receipt = await publishPlugin({
       root,
       registryPath: path.join(root, 'plugins.json'),
-      pluginId: 'weather-tool',
+      pluginId: 'weatherTool',
       reviewPath: 'ai-review.json',
       receiptDir: 'dist/receipts',
       eventDir: 'events',
@@ -237,8 +237,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weather-tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weather-tool', 'weather-tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('warn'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -246,12 +246,12 @@ describe('publishPlugin', () => {
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.'
           }
         ]
@@ -262,7 +262,7 @@ describe('publishPlugin', () => {
       publishPlugin({
         root,
         registryPath: path.join(root, 'plugins.json'),
-        pluginId: 'weather-tool',
+        pluginId: 'weatherTool',
         reviewPath: 'ai-review.json',
         receiptDir: 'dist/receipts',
         eventDir: 'events',
@@ -277,20 +277,20 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weather-tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weather-tool', 'weather-tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
       JSON.stringify({
         version: 1,
         plugins: [
           {
-            pluginId: 'weather-tool',
+            pluginId: 'weatherTool',
             version: '0.1.0',
             type: 'tool',
-            source: 'https://github.com/example/weather-tool',
+            source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weather-tool',
+            submodule: 'plugins/weatherTool',
             path: '.'
           }
         ]
@@ -301,7 +301,7 @@ describe('publishPlugin', () => {
       publishPlugin({
         root,
         registryPath: path.join(root, 'plugins.json'),
-        pluginId: 'weather-tool',
+        pluginId: 'weatherTool',
         receiptDir: 'dist/receipts',
         eventDir: 'events',
         actor: 'test-runner',
@@ -314,7 +314,7 @@ describe('publishPlugin', () => {
 
 function reviewJson(verdict: 'pass' | 'warn' | 'fail'): string {
   return JSON.stringify({
-    pluginId: 'weather-tool',
+    pluginId: 'weatherTool',
     version: '0.1.0',
     verdict,
     summary: `fixture ${verdict}`,

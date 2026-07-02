@@ -98,7 +98,7 @@ async function main(): Promise<void> {
   const reason = args.get('reason') as RevokeReason | undefined;
   const details = args.get('details');
   if (!pluginId || !reason || !details) {
-    throw new Error('Usage: pnpm revoke -- --plugin <plugin-id> --reason <reason> --details <text>');
+    throw new Error('Usage: pnpm revoke -- --plugin <pluginId> --reason <reason> --details <text>');
   }
 
   const event = revokePlugin({

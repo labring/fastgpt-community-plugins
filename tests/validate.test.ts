@@ -5,8 +5,8 @@ import type { PluginRegistryEntry } from '../schemas/registry.js';
 
 describe('detectChangedPluginIds', () => {
   const plugins: PluginRegistryEntry[] = [
-    plugin('weather-tool', 'plugins/weather-tool'),
-    plugin('search-tool', 'plugins/search-tool')
+    plugin('weatherTool', 'plugins/weatherTool'),
+    plugin('searchTool', 'plugins/searchTool')
   ];
 
   it('returns no changed plugins when no diff range is provided', () => {
