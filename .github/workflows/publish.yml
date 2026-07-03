@@ -7,7 +7,7 @@ on:
         description: "Plugin id from plugins.json"
         required: true
       package_path:
-        description: "Optional prebuilt .pkg path. Leave empty to use plugins/<id>/<id>.pkg"
+        description: "Optional prebuilt .pkg path. Leave empty to use packages/tools/<id>/<id>.pkg"
         required: false
       review_path:
         description: "AI review verdict JSON path"

@@ -5,7 +5,7 @@ on:
     paths:
       - "plugins.json"
       - ".gitmodules"
-      - "plugins/**"
+      - "packages/tools/**"
       - "reviews/**"
       - "events/**"
       - "schemas/**"
@@ -62,9 +62,9 @@ jobs:
       - name: Unit tests
         run: pnpm test
 
-      - name: Validate registry
+      - name: Validate registry and changed plugin packages
         env:
           BASE_SHA: ${{ inputs.base_sha || github.event.pull_request.base.sha || '' }}
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || 'HEAD' }}
         run: |
-          pnpm run validate -- --base "$BASE_SHA" --head "$HEAD_SHA"
+          pnpm run plugin -- check --base "$BASE_SHA" --head "$HEAD_SHA"
