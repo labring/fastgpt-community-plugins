@@ -10,7 +10,7 @@
 
 [FastGPT](https://github.com/labring/FastGPT) 社区插件索引与发布自动化仓库。
 
-本仓库用于索引社区贡献的 FastGPT 插件，执行确定性校验，保留 Agent 辅助审核证据，记录 publish/revoke 生命周期事件，并为通过审核的社区插件提供发布到 FastGPT Marketplace 的 workflow 入口。
+本仓库用于索引社区贡献的 FastGPT 插件，执行确定性校验，通过 PR comment 保留 Agent 辅助审核证据，记录 publish/revoke 生命周期事件，并为通过审核的社区插件提供发布到 FastGPT Marketplace 的 workflow 入口。
 </div>
 
 ## 仓库定位
@@ -40,8 +40,7 @@
 │   └── revoke.yml                  # 手动仓库侧 revoke workflow
 ├── events/<yyyy-mm-dd>/            # 已提交的 publish/revoke 生命周期事件
 ├── packages/tools/<pluginId>/      # 社区插件 submodule
-├── reviews/<pluginId>/             # AI review verdict 产物
-├── schemas/                        # registry、review、lifecycle event 契约
+├── schemas/                        # registry、review verdict、lifecycle event 契约
 ├── scripts/                        # 校验、发布、revoke、策略规则脚本
 ├── tests/                          # 确定性规则的 Vitest 测试
 ├── plugins.json                    # 机器可读的社区插件索引
@@ -67,8 +66,7 @@
       "submodule": "packages/tools/weatherTool",
       "path": ".",
       "status": "pending",
-      "support": "community",
-      "review": "reviews/weatherTool/0.1.0.json"
+      "support": "community"
     }
   ]
 }
@@ -85,9 +83,10 @@
 - 自己的 `package.json`，依赖使用明确版本；
 - 自己的 `packageManager` 字段；
 - 自己的 `pnpm-lock.yaml`；
+- 依赖需要 lifecycle scripts 时，在插件仓内声明自己的 pnpm build-script approvals，例如 `onlyBuiltDependencies`；
 - 不使用 `catalog:` 或 `workspace:` 依赖协议。
 
-根目录 `pnpm-workspace.yaml` 的 catalog 只服务本 registry 仓库的脚本、schemas 和测试。
+根目录 `pnpm-workspace.yaml` 的 catalog 只服务本 registry 仓库的脚本、schemas 和测试。校验和发布命令会在插件目录中用 `pnpm install --frozen-lockfile --ignore-workspace` 按独立仓安装 submodule。
 
 ## 环境要求
 
@@ -148,7 +147,7 @@ pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plug
 pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
 # 生成 dry-run 发布 receipt，不修改 registry 状态
-pnpm run publish -- --plugin <pluginId> --review <reviews/plugin/version.json> --dry-run --skip-build
+pnpm run publish -- --plugin <pluginId> --review-verdict pass --review-summary "<summary>" --dry-run --skip-build
 
 # 在仓库侧 revoke 插件并写入 revoke event
 pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
@@ -173,20 +172,16 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
    pnpm run plugin -- add --from packages/tools/<pluginId>
    ```
 
-4. 运行确定性校验：
+4. 运行确定性校验。`plugin check` 会按独立仓安装插件：
 
    ```bash
-   pnpm run validate
+   pnpm run plugin -- check <pluginId>
    pnpm test
    ```
 
-5. 使用 `plugin-review` skill 检查固定 commit 的插件，并写入 review verdict，推荐路径为：
+5. 提交 PR，包含 registry 条目和 submodule 指针。
 
-   ```text
-   reviews/<pluginId>/<version>.json
-   ```
-
-6. 提交 PR，包含 registry 条目、submodule 指针、校验结果和 review artifact。
+6. 使用 `plugin-review` skill 检查固定 commit 的插件，并将问题或可发布性 verdict 作为 GitHub PR comment 发出。不要把 review verdict JSON 提交进本仓库。
 
 ## AI Skills
 
@@ -194,7 +189,7 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
 
 - `develop-fastgpt-plugin`：帮助贡献者创建、测试、打包和提交 FastGPT 插件。
 - `plugin-discovery`：准备候选 registry 条目、submodule 命令和 intake notes。
-- `plugin-review`：审核固定 commit 的插件候选，并输出结构化 `pass`、`warn` 或 `fail` verdict。
+- `plugin-review`：审核固定 commit 的插件候选，并在 PR comment 中输出结构化 `pass`、`warn` 或 `fail` verdict。
 - `daily-summary`：读取已提交的 lifecycle events 和当前 registry 状态，生成可读的每日摘要。
 
 确定性脚本负责 schema 校验、策略规则、package 检查、publish event 写入和 revoke event 写入。
@@ -204,8 +199,8 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
 发布是手动触发且带审核门禁的流程：
 
 1. `validate.yml` 校验 registry schema、submodule 一致性、源码结构和策略规则。
-2. `plugin-review` 生成结构化 AI verdict。
-3. `publish.yml` 构建或接收 `.pkg`，要求 review 文件通过，上传 Marketplace，写入 publish event，更新 `plugins.json`，并将生命周期状态提交回仓库。
+2. `plugin-review` 将结构化 AI verdict 和 findings 评论到 PR。
+3. `publish.yml` 构建或接收 `.pkg`，要求 review verdict 输入通过，上传 Marketplace，写入 publish event，更新 `plugins.json`，并将生命周期状态提交回仓库。
 4. publish receipt 会作为 GitHub Actions artifact 上传到 `dist/receipts`。
 
 GitHub Actions 需要配置以下 secrets：

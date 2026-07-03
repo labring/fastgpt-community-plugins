@@ -37,7 +37,6 @@ export const PublishEventSchema = z.object({
   }),
   review: z.object({
     verdict: z.literal('pass'),
-    reviewFile: EventPathSchema.optional(),
     summary: z.string().min(1),
     generatedAt: z.string().nullable()
   }),

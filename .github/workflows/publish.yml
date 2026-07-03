@@ -9,8 +9,16 @@ on:
       package_path:
         description: "Optional prebuilt .pkg path. Leave empty to use packages/tools/<id>/<id>.pkg"
         required: false
-      review_path:
-        description: "AI review verdict JSON path"
+      review_verdict:
+        description: "AI review verdict from the PR review comment or automation"
+        required: true
+        type: choice
+        options:
+          - pass
+          - warn
+          - fail
+      review_summary:
+        description: "One-line AI review summary recorded in the publish event"
         required: true
       dry_run:
         description: "Write receipt without uploading"
@@ -81,14 +89,16 @@ jobs:
           MARKETPLACE_AUTH: ${{ secrets.MARKETPLACE_AUTH }}
           PACKAGE_PATH: ${{ inputs.package_path }}
           PLUGIN_ID: ${{ inputs.plugin_id }}
-          REVIEW_PATH: ${{ inputs.review_path }}
+          REVIEW_VERDICT: ${{ inputs.review_verdict }}
+          REVIEW_SUMMARY: ${{ inputs.review_summary }}
           DRY_RUN: ${{ inputs.dry_run }}
           SKIP_BUILD: ${{ inputs.skip_build }}
         shell: bash
         run: |
           set -euo pipefail
           args=("$PLUGIN_ID")
-          args+=(--review "$REVIEW_PATH")
+          args+=(--review-verdict "$REVIEW_VERDICT")
+          args+=(--review-summary "$REVIEW_SUMMARY")
           if [ -n "$ACTOR_INPUT" ]; then
             args+=(--actor "$ACTOR_INPUT")
           fi

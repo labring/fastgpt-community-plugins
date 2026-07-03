@@ -74,7 +74,6 @@ describe('registry schema', () => {
       plugins: [
         validPlugin({
           status: 'revoked',
-          review: 'reviews/weatherTool/0.1.0.json',
           latestPublishEvent: 'events/2026-06-29/weatherTool-0.1.0-published.json',
           latestRevokeEvent: 'events/2026-06-30/weatherTool-0.1.0-revoked.json'
         })
@@ -83,6 +82,19 @@ describe('registry schema', () => {
 
     expect(registry.plugins[0]?.status).toBe('revoked');
     expect(registry.plugins[0]?.latestRevokeEvent).toContain('revoked.json');
+  });
+
+  it('rejects review pointers in registry entries', () => {
+    const issues = validateRegistryJson({
+      version: 1,
+      plugins: [
+        validPlugin({
+          review: 'reviews/weatherTool/0.1.0.json'
+        })
+      ]
+    });
+
+    expect(issues.some((issue) => issue.path === 'plugins.0' && issue.message.includes('review'))).toBe(true);
   });
 });
 

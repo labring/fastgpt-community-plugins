@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { publishPlugin } from '../scripts/publish.js';
+import { buildPluginPackage, publishPlugin } from '../scripts/publish.js';
 
 const tempDirs: string[] = [];
 
@@ -118,9 +118,15 @@ describe('publishPlugin', () => {
       });
 
       const registry = JSON.parse(fs.readFileSync(path.join(root, 'plugins.json'), 'utf8'));
+      const event = JSON.parse(fs.readFileSync(findEvent(root, 'published') ?? '', 'utf8'));
       expect(receipt.marketplace.releaseId).toBe('mkt_123');
       expect(registry.plugins[0].status).toBe('active');
       expect(registry.plugins[0].latestPublishEvent).toContain('published.json');
+      expect(event.review).toMatchObject({
+        verdict: 'pass',
+        summary: 'fixture pass'
+      });
+      expect(event.review).not.toHaveProperty('reviewFile');
       expect(findEvent(root, 'published')).toBeTruthy();
     } finally {
       globalThis.fetch = originalFetch;
@@ -273,7 +279,91 @@ describe('publishPlugin', () => {
     ).rejects.toThrow('AI review verdict is warn');
   });
 
-  it('requires an AI review file for real publish', async () => {
+  it('accepts a direct AI review verdict without a review file', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
+    tempDirs.push(root);
+
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.writeFileSync(
+      path.join(root, 'plugins.json'),
+      JSON.stringify({
+        version: 1,
+        plugins: [
+          {
+            pluginId: 'weatherTool',
+            version: '0.1.0',
+            type: 'tool',
+            source: 'https://github.com/example/weatherTool',
+            commit: 'abcdef1234567890',
+            submodule: 'packages/tools/weatherTool',
+            path: '.'
+          }
+        ]
+      })
+    );
+
+    const receipt = await publishPlugin({
+      root,
+      registryPath: path.join(root, 'plugins.json'),
+      pluginId: 'weatherTool',
+      reviewVerdict: 'pass',
+      reviewSummary: 'PR review comment approved publish.',
+      reviewGeneratedAt: '2026-06-05T00:00:00.000Z',
+      receiptDir: 'dist/receipts',
+      eventDir: 'events',
+      actor: 'test-runner',
+      dryRun: true,
+      skipBuild: true
+    });
+
+    expect(receipt.review).toEqual({
+      aiVerdict: 'pass',
+      summary: 'PR review comment approved publish.',
+      generatedAt: '2026-06-05T00:00:00.000Z'
+    });
+  });
+
+  it('requires a summary with direct AI review verdicts', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
+    tempDirs.push(root);
+
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.writeFileSync(
+      path.join(root, 'plugins.json'),
+      JSON.stringify({
+        version: 1,
+        plugins: [
+          {
+            pluginId: 'weatherTool',
+            version: '0.1.0',
+            type: 'tool',
+            source: 'https://github.com/example/weatherTool',
+            commit: 'abcdef1234567890',
+            submodule: 'packages/tools/weatherTool',
+            path: '.'
+          }
+        ]
+      })
+    );
+
+    await expect(
+      publishPlugin({
+        root,
+        registryPath: path.join(root, 'plugins.json'),
+        pluginId: 'weatherTool',
+        reviewVerdict: 'pass',
+        receiptDir: 'dist/receipts',
+        eventDir: 'events',
+        actor: 'test-runner',
+        dryRun: true,
+        skipBuild: true
+      })
+    ).rejects.toThrow('--review-summary is required');
+  });
+
+  it('requires AI review evidence for real publish', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
@@ -308,7 +398,65 @@ describe('publishPlugin', () => {
         dryRun: false,
         skipBuild: true
       })
-    ).rejects.toThrow('--review is required for publish');
+    ).rejects.toThrow('--review or --review-verdict is required for publish');
+  });
+
+  it('installs and builds plugin packages as independent repositories', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
+    tempDirs.push(root);
+    const binDir = path.join(root, 'bin');
+    const pluginRoot = path.join(root, 'packages', 'tools', 'weatherTool');
+    fs.mkdirSync(binDir, { recursive: true });
+    fs.mkdirSync(pluginRoot, { recursive: true });
+    const logPath = path.join(root, 'pnpm-calls.jsonl');
+    const pnpmShim = path.join(binDir, 'pnpm');
+    fs.writeFileSync(
+      pnpmShim,
+      [
+        '#!/usr/bin/env node',
+        "const fs = require('node:fs');",
+        "fs.appendFileSync(process.env.PNPM_CALL_LOG, JSON.stringify({ cwd: process.cwd(), args: process.argv.slice(2) }) + '\\n');"
+      ].join('\n')
+    );
+    fs.chmodSync(pnpmShim, 0o755);
+
+    const originalPath = process.env.PATH;
+    const originalLog = process.env.PNPM_CALL_LOG;
+    process.env.PATH = `${binDir}${path.delimiter}${process.env.PATH ?? ''}`;
+    process.env.PNPM_CALL_LOG = logPath;
+
+    try {
+      buildPluginPackage(root, {
+        pluginId: 'weatherTool',
+        version: '0.1.0',
+        type: 'tool',
+        source: 'https://github.com/example/weatherTool',
+        commit: 'abcdef1234567890',
+        submodule: 'packages/tools/weatherTool',
+        path: '.',
+        status: 'pending',
+        support: 'community'
+      });
+    } finally {
+      process.env.PATH = originalPath;
+      if (originalLog === undefined) {
+        delete process.env.PNPM_CALL_LOG;
+      } else {
+        process.env.PNPM_CALL_LOG = originalLog;
+      }
+    }
+
+    const calls = fs
+      .readFileSync(logPath, 'utf8')
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line));
+    const pluginRealPath = fs.realpathSync(pluginRoot);
+    expect(calls).toEqual([
+      { cwd: pluginRealPath, args: ['install', '--frozen-lockfile', '--ignore-workspace'] },
+      { cwd: pluginRealPath, args: ['run', 'build'] },
+      { cwd: pluginRealPath, args: ['run', 'pack'] }
+    ]);
   });
 });
 

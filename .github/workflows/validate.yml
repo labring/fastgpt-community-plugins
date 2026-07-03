@@ -6,7 +6,6 @@ on:
       - "plugins.json"
       - ".gitmodules"
       - "packages/tools/**"
-      - "reviews/**"
       - "events/**"
       - "schemas/**"
       - "scripts/**"

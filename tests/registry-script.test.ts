@@ -39,7 +39,7 @@ describe('registry CLI helpers', () => {
 
     const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
     expect(result.action).toBe('created');
-    expect(result.entry.review).toBe('reviews/googleSheets/0.1.0.json');
+    expect(result.entry).not.toHaveProperty('review');
     expect(result.submoduleCommand).toContain('packages/tools/googleSheets');
     expect(registry.plugins[0]).toMatchObject({
       pluginId: 'googleSheets',
@@ -77,7 +77,8 @@ describe('registry CLI helpers', () => {
       pluginId: 'googleSheets',
       version: '0.1.0',
       submodule: 'packages/tools/googleSheets',
-      path: '.'
+      path: '.',
+      support: 'community'
     });
     expect(result.submoduleCommand).toBeUndefined();
   });

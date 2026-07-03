@@ -1,6 +1,6 @@
 ---
 name: plugin-review
-description: Review a FastGPT community plugin candidate and produce a structured publishability verdict for this registry.
+description: Review a FastGPT community plugin candidate and post a structured publishability verdict to the pull request.
 ---
 
 # FastGPT Community Plugin Review
@@ -8,6 +8,8 @@ description: Review a FastGPT community plugin candidate and produce a structure
 Use this skill when a candidate plugin PR, submodule, or local plugin path needs Agent review before publish.
 
 This skill is advisory. It produces review evidence and a verdict for the repository workflow. It is not an official quality guarantee and does not make FastGPT responsible for ongoing plugin maintenance.
+
+Review evidence belongs in the GitHub pull request discussion. Do not add review verdict JSON files to `plugins.json`, and do not require contributors to commit `reviews/<pluginId>/<version>.json`.
 
 ## Required Inputs
 
@@ -38,7 +40,43 @@ Never use `pass` to mean the plugin is feature-complete, bug-free, or officially
 
 ## Output Contract
 
-Write a JSON file that matches `schemas/review.ts`, typically:
+Post a GitHub PR comment with this structure:
+
+```markdown
+## Plugin Review: <pluginId>@<version>
+
+Verdict: pass | warn | fail
+Source: <repo>@<commit>
+Plugin root: <submodule>/<path>
+
+### Findings
+- [P1] path:line - problem and required fix
+
+### Evidence
+- registry/submodule:
+- install/build/check/pack:
+- policy scan:
+- package sha256:
+
+### Publish Decision
+Proceed | Blocked | Needs human review
+```
+
+When the review is running in a PR and `gh` is available, post the comment:
+
+```bash
+gh pr comment <pr-number> --body-file <review-comment.md>
+```
+
+For specific plugin source issues, include exact file and line references in the comment. Use inline GitHub review comments only when the line is part of the PR diff and the API context is available; otherwise use the top-level PR comment.
+
+If a publish workflow needs a machine-readable verdict, pass it directly:
+
+```bash
+pnpm run plugin -- publish <pluginId> --review-verdict pass --review-summary "<summary>"
+```
+
+The JSON shape in `schemas/review.ts` is still useful when another automation layer needs to exchange verdict data internally:
 
 ```json
 {
@@ -50,15 +88,9 @@ Write a JSON file that matches `schemas/review.ts`, typically:
 }
 ```
 
-Recommended path:
-
-```text
-reviews/<pluginId>/<version>.json
-```
-
 ## Review Notes
 
-In the summary or accompanying PR comment, include:
+In the PR comment, include:
 
 - source repo and commit inspected
 - plugin root path

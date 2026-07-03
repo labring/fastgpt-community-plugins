@@ -19,7 +19,7 @@ The input source is repository state: committed lifecycle events under `events/<
 1. Read `schemas/event.ts`.
 2. Read all `events/<date>/*.json` files for the target date.
 3. Read `plugins.json` to enrich plugin metadata and current status.
-4. If an event references a review file, read that review summary.
+4. Use the review summary embedded in each publish event.
 
 ## Output
 

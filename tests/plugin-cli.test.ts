@@ -96,8 +96,7 @@ describe('plugin CLI', () => {
             submodule: 'packages/tools/googleSheets',
             path: '.',
             status: 'pending',
-            support: 'community',
-            review: 'reviews/googleSheets/0.1.0.json'
+            support: 'community'
           }
         ]
       })
@@ -112,9 +111,9 @@ describe('plugin CLI', () => {
     const registry = JSON.parse(fs.readFileSync(path.join(root, 'plugins.json'), 'utf8'));
     expect(registry.plugins[0]).toMatchObject({
       pluginId: 'googleSheets',
-      version: '0.2.0',
-      review: 'reviews/googleSheets/0.2.0.json'
+      version: '0.2.0'
     });
+    expect(registry.plugins[0]).not.toHaveProperty('review');
   });
 
   it('normalizes GitHub SSH remotes to registry-compatible URLs', () => {

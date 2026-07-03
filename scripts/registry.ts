@@ -22,7 +22,6 @@ export type UpsertRegistryOptions = {
   commit?: string;
   submodule?: string;
   pluginPath?: string;
-  review?: string;
   status?: RegistryStatus;
   from?: string;
   dryRun: boolean;
@@ -56,7 +55,6 @@ export function upsertRegistryEntry(options: UpsertRegistryOptions): UpsertRegis
   const existing = existingIndex >= 0 ? registry.plugins[existingIndex] : undefined;
   const submodule = options.submodule ?? inferred.submodule ?? `${PLUGIN_SUBMODULE_ROOT}/${pluginId}`;
   const pluginPath = options.pluginPath ?? inferred.pluginPath ?? '.';
-  const review = options.review ?? `reviews/${pluginId}/${version}.json`;
   const status = options.status ?? existing?.status ?? 'pending';
   const entry: PluginRegistryEntry = {
     ...(existing && existing.version === version
@@ -73,8 +71,7 @@ export function upsertRegistryEntry(options: UpsertRegistryOptions): UpsertRegis
     submodule,
     path: pluginPath,
     status,
-    support: 'community',
-    review
+    support: 'community'
   };
 
   if (existingIndex >= 0) {
@@ -271,7 +268,6 @@ async function main(): Promise<void> {
     commit: readStringArg(args, 'commit'),
     submodule: readStringArg(args, 'submodule'),
     pluginPath: readStringArg(args, 'path'),
-    review: readStringArg(args, 'review'),
     status: readStringArg(args, 'status') as RegistryStatus | undefined,
     from: readStringArg(args, 'from'),
     dryRun: Boolean(args.get('dryRun'))

@@ -1,6 +1,6 @@
 ---
 name: plugin-discovery
-description: Internal FastGPT community plugin intake helper. Detects candidate plugin metadata and prepares registry/review artifacts for this repository.
+description: Internal FastGPT community plugin intake helper. Detects candidate plugin metadata and prepares registry intake notes for this repository.
 ---
 
 # FastGPT Plugin Discovery
@@ -18,7 +18,7 @@ Given a candidate plugin repository or local path, produce a reviewable intake b
 - build/check/pack command plan
 - hard-gate risk report
 - AI policy review recommendation: `pass`, `warn`, or `fail`
-- expected review file path
+- expected PR review comment content
 - expected publish/revoke event evidence
 - reviewer checklist
 
@@ -45,12 +45,11 @@ Example:
   "submodule": "packages/tools/weatherTool",
   "path": ".",
   "status": "pending",
-  "support": "community",
-  "review": "reviews/weatherTool/0.1.0.json"
+  "support": "community"
 }
 ```
 
-The AI verdict JSON must match `schemas/review.ts`:
+Do not include a `review` field in registry entries. Review findings should be posted as GitHub PR comments. If publish automation needs a machine-readable verdict, pass it directly with `--review-verdict` and `--review-summary`. The JSON shape in `schemas/review.ts` is only for internal automation handoff:
 
 ```json
 {
@@ -84,7 +83,7 @@ Mark the intake as blocked if any of these are found:
 ## Review Report Template
 
 ```markdown
-# Plugin Review: <pluginId>@<version>
+## Plugin Review: <pluginId>@<version>
 
 Source: <repo>
 Commit: <sha>
@@ -109,6 +108,11 @@ Verdict: pass | warn | fail
 - filesystem/process:
 - dependency risk:
 
+## GitHub Comment
+- target PR:
+- top-level comment posted:
+- inline comments posted:
+
 ## Publish Evidence
 - package:
 - sha256:
@@ -119,6 +123,7 @@ Verdict: pass | warn | fail
 - [ ] Plugin repository has its own `packageManager` and `pnpm-lock.yaml`
 - [ ] Plugin dependencies do not use `catalog:` or `workspace:`
 - [ ] `.pkg` was rebuilt from pinned source
+- [ ] Findings were posted to the GitHub PR when a PR exists
 - [ ] Publish event contains package checksum and marketplace release id after publish
 - [ ] Revoke action can mark the registry entry revoked and write a revoke event
 ```

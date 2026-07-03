@@ -84,7 +84,6 @@ export function detectChangedPluginIds(input: {
         (file) =>
           file === normalizedSubmodule ||
           file.startsWith(`${normalizedSubmodule}/`) ||
-          file === plugin.review ||
           file === plugin.latestPublishEvent ||
           file === plugin.latestRevokeEvent
       )
@@ -218,7 +217,7 @@ function getChangedFiles(root: string, baseSha?: string, headSha = 'HEAD'): stri
   }
 
   const output = tryRunGit(
-    ['diff', '--name-only', baseSha, headSha, '--', 'plugins.json', '.gitmodules', 'packages/tools', 'reviews', 'events'],
+    ['diff', '--name-only', baseSha, headSha, '--', 'plugins.json', '.gitmodules', 'packages/tools', 'events'],
     root
   );
   if (!output) {

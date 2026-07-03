@@ -36,15 +36,14 @@ export const PluginRegistryEntrySchema = z.object({
   path: RelativePluginPathSchema.default('.'),
   status: z.enum(['pending', 'active', 'revoked', 'deprecated', 'rejected']).default('pending'),
   support: z.enum(['community']).default('community'),
-  review: RelativePluginPathSchema.optional(),
   latestPublishEvent: RelativePluginPathSchema.optional(),
   latestRevokeEvent: RelativePluginPathSchema.optional()
-});
+}).strict();
 
 export const PluginRegistrySchema = z.object({
   version: z.literal(1),
   plugins: z.array(PluginRegistryEntrySchema)
-});
+}).strict();
 
 export type PluginRegistry = z.infer<typeof PluginRegistrySchema>;
 export type PluginRegistryEntry = z.infer<typeof PluginRegistryEntrySchema>;

@@ -38,13 +38,11 @@ type AddOptions = CommonOptions & {
   commit?: string;
   submodule?: string;
   path?: string;
-  review?: string;
   status?: RegistryStatus;
 };
 
 type SyncOptions = CommonOptions & {
   path?: string;
-  review?: string;
   status?: RegistryStatus;
 };
 
@@ -57,6 +55,9 @@ type CheckOptions = CommonOptions & {
 type PublishCommandOptions = CommonOptions & {
   package?: string;
   review?: string;
+  reviewVerdict?: string;
+  reviewSummary?: string;
+  reviewGeneratedAt?: string;
   receiptDir?: string;
   eventDir?: string;
   actor?: string;
@@ -121,7 +122,6 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
     .option('--commit <sha>', 'plugin source commit SHA')
     .option('--submodule <path>', 'submodule path under packages/tools/')
     .option('--path <path>', 'nested plugin path inside the submodule')
-    .option('--review <path>', 'review verdict path')
     .option('--status <status>', 'registry status')
     .option('--registry <path>', 'registry file path', 'plugins.json')
     .option('--dry-run', 'print result without writing plugins.json')
@@ -142,7 +142,6 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
     .description('Refresh a registry entry from its pinned submodule path.')
     .argument('<pluginId>', 'plugin id to sync')
     .option('--path <path>', 'override nested plugin path inside the submodule')
-    .option('--review <path>', 'review verdict path')
     .option('--status <status>', 'registry status')
     .option('--registry <path>', 'registry file path', 'plugins.json')
     .option('--dry-run', 'print result without writing plugins.json')
@@ -174,7 +173,10 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
     .description('Publish an approved plugin package through the existing publish flow.')
     .argument('<pluginId>', 'plugin id to publish')
     .option('--package <path>', 'prebuilt package path')
-    .option('--review <path>', 'AI review verdict path')
+    .option('--review <path>', 'runtime AI review verdict JSON path')
+    .option('--review-verdict <verdict>', 'AI review verdict: pass, warn, or fail')
+    .option('--review-summary <text>', 'AI review summary used when --review-verdict is provided')
+    .option('--review-generated-at <datetime>', 'AI review generation timestamp')
     .option('--receipt-dir <dir>', 'receipt output directory', 'dist/receipts')
     .option('--event-dir <dir>', 'event output directory', 'events')
     .option('--actor <name>', 'publish actor')
@@ -194,6 +196,9 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
         pluginId,
         packagePath: options.package,
         reviewPath: options.review,
+        reviewVerdict: options.reviewVerdict,
+        reviewSummary: options.reviewSummary,
+        reviewGeneratedAt: options.reviewGeneratedAt,
         receiptDir: options.receiptDir ?? 'dist/receipts',
         eventDir: options.eventDir ?? 'events',
         actor: options.actor ?? context.env?.GITHUB_ACTOR ?? process.env.GITHUB_ACTOR ?? 'local',
@@ -261,7 +266,6 @@ async function addPlugin(root: string, options: AddOptions, context: PluginCliCo
     commit,
     submodule: options.submodule ?? inferred.submodule,
     pluginPath: options.path ?? inferred.pluginPath,
-    review: options.review,
     status: options.status,
     from,
     dryRun: Boolean(options.dryRun)
@@ -284,7 +288,6 @@ function syncPlugin(root: string, pluginId: string, options: SyncOptions) {
     commit: inferred.commit ?? plugin.commit,
     submodule: plugin.submodule,
     pluginPath: options.path ?? inferred.pluginPath ?? plugin.path,
-    review: options.review ?? (version === plugin.version ? plugin.review : undefined),
     status: options.status ?? plugin.status,
     dryRun: Boolean(options.dryRun)
   });

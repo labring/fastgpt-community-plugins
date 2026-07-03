@@ -19,6 +19,9 @@ export type PublishOptions = {
   pluginId: string;
   packagePath?: string;
   reviewPath?: string;
+  reviewVerdict?: string;
+  reviewSummary?: string;
+  reviewGeneratedAt?: string;
   receiptDir: string;
   eventDir: string;
   actor: string;
@@ -53,8 +56,7 @@ export type PublishReceipt = {
   publishedAt: string;
 };
 
-type ResolvedAiReview = AiReviewVerdict & { reviewFile?: string };
-type PublishableAiReview = ResolvedAiReview & { verdict: 'pass' };
+type PublishableAiReview = AiReviewVerdict & { verdict: 'pass' };
 
 export async function publishPlugin(options: PublishOptions): Promise<PublishReceipt> {
   const registry = readRegistryFile(options.registryPath);
@@ -64,7 +66,17 @@ export async function publishPlugin(options: PublishOptions): Promise<PublishRec
     throw new Error(`Plugin not found in registry: ${options.pluginId}`);
   }
 
-  const aiReview = resolvePublishableAiReview(options.root, plugin, options.reviewPath, options.dryRun);
+  const aiReview = resolvePublishableAiReview(
+    options.root,
+    plugin,
+    options.reviewPath,
+    {
+      verdict: options.reviewVerdict,
+      summary: options.reviewSummary,
+      generatedAt: options.reviewGeneratedAt
+    },
+    options.dryRun
+  );
 
   if (!options.skipBuild) {
     buildPluginPackage(options.root, plugin);
@@ -117,7 +129,6 @@ export async function publishPlugin(options: PublishOptions): Promise<PublishRec
     package: receipt.package,
     review: {
       verdict: 'pass',
-      reviewFile: aiReview.reviewFile,
       summary: aiReview.summary,
       generatedAt: aiReview.generatedAt ?? null
     },
@@ -139,25 +150,39 @@ function resolveAiReview(
   root: string,
   plugin: PluginRegistryEntry,
   reviewPath: string | undefined,
+  reviewInput: { verdict?: string; summary?: string; generatedAt?: string },
   allowDefaultReview: boolean
-): ResolvedAiReview {
+): AiReviewVerdict {
   if (reviewPath) {
     const absolutePath = path.resolve(root, reviewPath);
+    return readAiReviewVerdict(absolutePath);
+  }
+
+  const verdict = normalizeReviewVerdict(reviewInput.verdict);
+  if (verdict) {
+    const summary = reviewInput.summary?.trim();
+    if (!summary) {
+      throw new Error(`${plugin.pluginId}: --review-summary is required when --review-verdict is used`);
+    }
+
     return {
-      ...readAiReviewVerdict(absolutePath),
-      reviewFile: toRepositoryRelativePath(root, absolutePath, 'review path')
+      pluginId: plugin.pluginId,
+      version: plugin.version,
+      verdict,
+      summary,
+      ...(reviewInput.generatedAt ? { generatedAt: reviewInput.generatedAt } : {})
     };
   }
 
   if (!allowDefaultReview) {
-    throw new Error(`${plugin.pluginId}: --review is required for publish`);
+    throw new Error(`${plugin.pluginId}: --review or --review-verdict is required for publish`);
   }
 
   return {
     pluginId: plugin.pluginId,
     version: plugin.version,
     verdict: 'pass',
-    summary: 'No AI review file provided; allowed only for explicit dry-run or early internal bootstrap.'
+    summary: 'No AI review verdict provided; allowed only for explicit dry-run or early internal bootstrap.'
   };
 }
 
@@ -165,11 +190,24 @@ function resolvePublishableAiReview(
   root: string,
   plugin: PluginRegistryEntry,
   reviewPath: string | undefined,
+  reviewInput: { verdict?: string; summary?: string; generatedAt?: string },
   allowDefaultReview: boolean
 ): PublishableAiReview {
-  const review = resolveAiReview(root, plugin, reviewPath, allowDefaultReview);
+  const review = resolveAiReview(root, plugin, reviewPath, reviewInput, allowDefaultReview);
   assertPublishableAiReview(plugin, review);
   return review;
+}
+
+function normalizeReviewVerdict(verdict: string | undefined): AiReviewVerdict['verdict'] | undefined {
+  if (!verdict) {
+    return undefined;
+  }
+
+  if (verdict === 'pass' || verdict === 'warn' || verdict === 'fail') {
+    return verdict;
+  }
+
+  throw new Error(`Invalid AI review verdict: ${verdict}`);
 }
 
 function assertPublishableAiReview(
@@ -189,9 +227,9 @@ function assertPublishableAiReview(
 
 export function buildPluginPackage(root: string, plugin: PluginRegistryEntry): void {
   const pluginRoot = resolvePluginRoot(root, plugin);
-  runPnpm(['--dir', pluginRoot, 'install', '--frozen-lockfile'], root);
-  runPnpm(['--dir', pluginRoot, 'run', 'build'], root);
-  runPnpm(['--dir', pluginRoot, 'run', 'pack'], root);
+  runPnpm(['install', '--frozen-lockfile', '--ignore-workspace'], pluginRoot);
+  runPnpm(['run', 'build'], pluginRoot);
+  runPnpm(['run', 'pack'], pluginRoot);
 }
 
 function runPnpm(args: string[], cwd: string): void {
@@ -381,6 +419,10 @@ async function main(): Promise<void> {
     pluginId,
     packagePath: typeof args.get('package') === 'string' ? String(args.get('package')) : undefined,
     reviewPath: typeof args.get('review') === 'string' ? String(args.get('review')) : undefined,
+    reviewVerdict: typeof args.get('review-verdict') === 'string' ? String(args.get('review-verdict')) : undefined,
+    reviewSummary: typeof args.get('review-summary') === 'string' ? String(args.get('review-summary')) : undefined,
+    reviewGeneratedAt:
+      typeof args.get('review-generated-at') === 'string' ? String(args.get('review-generated-at')) : undefined,
     receiptDir: String(args.get('receipt-dir') ?? 'dist/receipts'),
     eventDir: String(args.get('event-dir') ?? 'events'),
     actor: String(args.get('actor') ?? process.env.GITHUB_ACTOR ?? 'local'),

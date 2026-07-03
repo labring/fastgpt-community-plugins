@@ -231,7 +231,7 @@ pnpm run validate
 pnpm test
 ```
 
-准备社区索引 PR 时，使用已有 `plugin-discovery` skill 生成 intake bundle。PR 应包含 registry entry、submodule 指针、验证结果，以及仓库要求的 policy review artifact。
+准备社区索引 PR 时，使用已有 `plugin-discovery` skill 生成 intake bundle。PR 应包含 registry entry 和 submodule 指针；验证结果与 policy review findings 通过 GitHub PR comment 留痕。
 
 创建 PR 前确认：
 

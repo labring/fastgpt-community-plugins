@@ -10,7 +10,7 @@
 
 [FastGPT](https://github.com/labring/FastGPT) community plugin registry and publishing automation.
 
-This repository indexes community-provided FastGPT plugins, runs deterministic validation, keeps Agent-assisted review evidence, writes publish/revoke lifecycle events, and provides the workflow entry point for publishing approved community plugins to FastGPT Marketplace.
+This repository indexes community-provided FastGPT plugins, runs deterministic validation, records Agent-assisted review evidence in pull request comments, writes publish/revoke lifecycle events, and provides the workflow entry point for publishing approved community plugins to FastGPT Marketplace.
 </div>
 
 ## Repository Scope
@@ -40,8 +40,7 @@ Community plugins are reviewed for publishability and traceability. The review s
 │   └── revoke.yml                  # Manual repository-side revoke workflow
 ├── events/<yyyy-mm-dd>/            # Committed publish/revoke lifecycle events
 ├── packages/tools/<pluginId>/      # Community plugin submodules
-├── reviews/<pluginId>/             # AI review verdict artifacts
-├── schemas/                        # Registry, review, and lifecycle event contracts
+├── schemas/                        # Registry, review verdict, and lifecycle event contracts
 ├── scripts/                        # Validation, publish, revoke, and policy gates
 ├── tests/                          # Vitest coverage for deterministic gates
 ├── plugins.json                    # Machine-readable community plugin registry
@@ -67,8 +66,7 @@ Community plugins are reviewed for publishability and traceability. The review s
       "submodule": "packages/tools/weatherTool",
       "path": ".",
       "status": "pending",
-      "support": "community",
-      "review": "reviews/weatherTool/0.1.0.json"
+      "support": "community"
     }
   ]
 }
@@ -85,9 +83,10 @@ Each plugin repository should provide:
 - explicit dependency versions in its own `package.json`;
 - its own `packageManager` field;
 - its own `pnpm-lock.yaml`;
+- its own pnpm build-script approvals when dependencies require lifecycle scripts, for example `onlyBuiltDependencies`;
 - no `catalog:` or `workspace:` dependency specifiers.
 
-The root `pnpm-workspace.yaml` catalog is only for this registry repository's scripts, schemas, and tests.
+The root `pnpm-workspace.yaml` catalog is only for this registry repository's scripts, schemas, and tests. Validation and publish commands install plugin submodules with `pnpm install --frozen-lockfile --ignore-workspace` from the plugin directory.
 
 ## Requirements
 
@@ -148,7 +147,7 @@ pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plug
 pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
 # Generate a dry-run publish receipt without mutating registry state
-pnpm run publish -- --plugin <pluginId> --review <reviews/plugin/version.json> --dry-run --skip-build
+pnpm run publish -- --plugin <pluginId> --review-verdict pass --review-summary "<summary>" --dry-run --skip-build
 
 # Revoke a plugin in repository state and write a revoke event
 pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
@@ -173,20 +172,16 @@ Community plugin source code should live in its own repository. This registry on
    pnpm run plugin -- add --from packages/tools/<pluginId>
    ```
 
-4. Run deterministic validation:
+4. Run deterministic validation. `plugin check` installs the plugin as an independent repository:
 
    ```bash
-   pnpm run validate
+   pnpm run plugin -- check <pluginId>
    pnpm test
    ```
 
-5. Use the `plugin-review` skill to inspect the pinned plugin and write a review verdict, usually at:
+5. Open a pull request containing the registry entry and submodule pointer.
 
-   ```text
-   reviews/<pluginId>/<version>.json
-   ```
-
-6. Open a pull request containing the registry entry, submodule pointer, validation result, and review artifact.
+6. Use the `plugin-review` skill to inspect the pinned plugin and post findings or a publishability verdict as a GitHub PR comment. Do not commit review verdict JSON into this repository.
 
 ## AI Skills
 
@@ -194,7 +189,7 @@ This repository intentionally keeps subjective review and summary work in Codex 
 
 - `develop-fastgpt-plugin`: helps contributors create, test, package, and submit FastGPT plugins.
 - `plugin-discovery`: prepares candidate registry entries, submodule commands, and intake notes.
-- `plugin-review`: reviews a pinned plugin candidate and writes a structured `pass`, `warn`, or `fail` verdict.
+- `plugin-review`: reviews a pinned plugin candidate and comments a structured `pass`, `warn`, or `fail` verdict on the pull request.
 - `daily-summary`: reads committed lifecycle events and current registry state to produce a human-readable daily digest.
 
 Deterministic scripts remain responsible for schema validation, policy gates, package checks, publish event writing, and revoke event writing.
@@ -204,8 +199,8 @@ Deterministic scripts remain responsible for schema validation, policy gates, pa
 Publishing is manual and gated:
 
 1. `validate.yml` verifies registry schema, submodule consistency, source layout, and policy gates.
-2. `plugin-review` produces a structured AI verdict.
-3. `publish.yml` builds or accepts a `.pkg`, requires a passing review file, uploads to Marketplace, writes a publish event, updates `plugins.json`, and commits lifecycle state back to the repository.
+2. `plugin-review` posts a structured AI verdict and findings to the pull request.
+3. `publish.yml` builds or accepts a `.pkg`, requires a passing review verdict input, uploads to Marketplace, writes a publish event, updates `plugins.json`, and commits lifecycle state back to the repository.
 4. The publish receipt is uploaded as a GitHub Actions artifact under `dist/receipts`.
 
 Required GitHub Actions secrets:
