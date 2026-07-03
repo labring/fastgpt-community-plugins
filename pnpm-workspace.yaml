@@ -10,7 +10,7 @@ catalog:
   commander: ^14.0.3
   "@vitest/coverage-v8": ^4.0.18
   tsx: ^4.21.0
-  turbo: 2.8.3
+  turbo: 2.9.14
   typescript: ^5.9.3
   vitest: ^4.0.18
   zod: ^4.3.6
