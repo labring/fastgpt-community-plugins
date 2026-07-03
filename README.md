@@ -101,6 +101,30 @@ corepack prepare pnpm@10.28.2 --activate
 pnpm install
 ```
 
+## Sparse Checkout
+
+This repository may contain many plugin submodules under `packages/tools/*`. Do not clone or update every tool by default.
+
+Recommended clone:
+
+```bash
+git clone --filter=blob:none --sparse <community-registry-url> fastgpt-community-plugins
+cd fastgpt-community-plugins
+git sparse-checkout set --no-cone '/*' '!/packages/tools/*'
+pnpm install
+```
+
+When you need one plugin, fetch only that submodule:
+
+```bash
+git sparse-checkout add packages/tools/googleSheets
+git submodule update --init --recursive packages/tools/googleSheets
+pnpm run plugin -- check googleSheets
+```
+
+Avoid running `git submodule update --init --recursive` without a path; it will fetch every community plugin.
+In sparse checkouts, use `pnpm run plugin -- check <pluginId>` or `pnpm run plugin -- check --base <base> --head <head>` for targeted validation. Full `pnpm run validate` expects the relevant submodules to be present.
+
 ## Common Commands
 
 ```bash

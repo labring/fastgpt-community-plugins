@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { readRegistryFile, resolvePluginRoot, type PluginRegistryEntry } from '../schemas/registry.js';
+import { parseRegistryJson, readRegistryFile, resolvePluginRoot, type PluginRegistryEntry } from '../schemas/registry.js';
 import { tryRunGit } from './git.js';
 import { scanPluginPolicy } from './policy.js';
 
@@ -11,6 +11,7 @@ export type ValidateOptions = {
   baseSha?: string;
   headSha?: string;
   skipBuild: boolean;
+  pluginIds?: string[];
 };
 
 export type ValidateResult = {
@@ -24,16 +25,25 @@ export async function validateRegistry(options: ValidateOptions): Promise<Valida
   const errors: string[] = [];
   const warnings: string[] = [];
 
-  for (const plugin of registry.plugins) {
-    validatePluginEntry(options.root, plugin, errors, warnings);
-  }
-
   const changedPluginIds = detectChangedPluginIds({
     root: options.root,
     baseSha: options.baseSha,
     headSha: options.headSha,
     plugins: registry.plugins
   });
+  const selectedPluginIds = options.pluginIds
+    ? new Set(options.pluginIds)
+    : options.baseSha
+      ? new Set(changedPluginIds)
+      : undefined;
+
+  for (const plugin of registry.plugins) {
+    if (selectedPluginIds && !selectedPluginIds.has(plugin.pluginId)) {
+      continue;
+    }
+
+    validatePluginEntry(options.root, plugin, errors, warnings);
+  }
 
   if (!options.skipBuild && changedPluginIds.length > 0) {
     warnings.push(
@@ -60,11 +70,12 @@ export function detectChangedPluginIds(input: {
     return [];
   }
 
-  if (changedFiles.some((file) => file === 'plugins.json' || file === '.gitmodules' || file.startsWith('events/'))) {
-    return input.plugins.map((plugin) => plugin.pluginId).sort((a, b) => a.localeCompare(b));
-  }
-
   const changedIds = new Set<string>();
+  if (changedFiles.includes('plugins.json')) {
+    for (const pluginId of detectRegistryChangedPluginIds(input.root, input.baseSha, input.headSha, input.plugins)) {
+      changedIds.add(pluginId);
+    }
+  }
 
   for (const plugin of input.plugins) {
     const normalizedSubmodule = normalizePath(plugin.submodule);
@@ -83,6 +94,62 @@ export function detectChangedPluginIds(input: {
   }
 
   return [...changedIds].sort((a, b) => a.localeCompare(b));
+}
+
+function detectRegistryChangedPluginIds(
+  root: string,
+  baseSha: string | undefined,
+  headSha: string | undefined,
+  currentPlugins: PluginRegistryEntry[]
+): string[] {
+  if (!baseSha) {
+    return currentPlugins.map((plugin) => plugin.pluginId);
+  }
+
+  const basePlugins = readRegistryPluginsAtRef(root, baseSha);
+  const headPlugins = readRegistryPluginsAtRef(root, headSha ?? 'HEAD') ?? currentPlugins;
+  if (!basePlugins) {
+    return headPlugins.map((plugin) => plugin.pluginId);
+  }
+
+  const baseById = new Map(basePlugins.map((plugin) => [plugin.pluginId, stableJson(plugin)]));
+  const headById = new Map(headPlugins.map((plugin) => [plugin.pluginId, stableJson(plugin)]));
+  const pluginIds = new Set([...baseById.keys(), ...headById.keys()]);
+
+  return [...pluginIds].filter((pluginId) => baseById.get(pluginId) !== headById.get(pluginId));
+}
+
+function readRegistryPluginsAtRef(root: string, ref: string): PluginRegistryEntry[] | null {
+  const raw = tryRunGit(['show', `${ref}:plugins.json`], root);
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    return parseRegistryJson(JSON.parse(raw)).plugins;
+  } catch {
+    return null;
+  }
+}
+
+function stableJson(value: unknown): string {
+  return JSON.stringify(sortJson(value));
+}
+
+function sortJson(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map(sortJson);
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value)
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([key, nestedValue]) => [key, sortJson(nestedValue)])
+    );
+  }
+
+  return value;
 }
 
 function validatePluginEntry(
@@ -220,7 +287,8 @@ async function main(): Promise<void> {
     registryPath: path.resolve(root, String(args.get('registry') ?? 'plugins.json')),
     baseSha: typeof args.get('base') === 'string' ? String(args.get('base')) : undefined,
     headSha: typeof args.get('head') === 'string' ? String(args.get('head')) : undefined,
-    skipBuild: Boolean(args.get('skipBuild'))
+    skipBuild: Boolean(args.get('skipBuild')),
+    pluginIds: readRepeatedStringArgs(args, 'plugin')
   });
 
   for (const warning of result.warnings) {
@@ -245,6 +313,18 @@ async function main(): Promise<void> {
       2
     )
   );
+}
+
+function readRepeatedStringArgs(args: Map<string, string | boolean>, name: string): string[] | undefined {
+  const value = args.get(name);
+  if (typeof value !== 'string') {
+    return undefined;
+  }
+
+  return value
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

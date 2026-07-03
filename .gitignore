@@ -6,3 +6,4 @@ coverage/
 .turbo/
 .env
 .env.local
+.local/

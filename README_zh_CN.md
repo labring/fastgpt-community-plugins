@@ -101,6 +101,30 @@ corepack prepare pnpm@10.28.2 --activate
 pnpm install
 ```
 
+## Sparse Checkout
+
+本仓库后续会在 `packages/tools/*` 下挂很多插件 submodule。默认不要拉取和初始化所有工具。
+
+推荐克隆方式：
+
+```bash
+git clone --filter=blob:none --sparse <community-registry-url> fastgpt-community-plugins
+cd fastgpt-community-plugins
+git sparse-checkout set --no-cone '/*' '!/packages/tools/*'
+pnpm install
+```
+
+需要处理某个插件时，只拉取对应 submodule：
+
+```bash
+git sparse-checkout add packages/tools/googleSheets
+git submodule update --init --recursive packages/tools/googleSheets
+pnpm run plugin -- check googleSheets
+```
+
+避免直接运行不带路径的 `git submodule update --init --recursive`，那会把所有社区插件都拉下来。
+在 sparse checkout 下，使用 `pnpm run plugin -- check <pluginId>` 或 `pnpm run plugin -- check --base <base> --head <head>` 做目标校验。完整 `pnpm run validate` 需要相关 submodule 已经存在。
+
 ## 常用命令
 
 ```bash

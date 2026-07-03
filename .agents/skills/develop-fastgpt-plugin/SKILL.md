@@ -76,12 +76,14 @@ git config --global user.email "<your-email>"
 已有仓库时：
 
 ```bash
-git clone <repo-url>
+git clone --filter=blob:none --sparse <repo-url>
 cd <repo>
+git sparse-checkout set --no-cone '/*' '!/packages/tools/*'
 pnpm install
 ```
 
 Node 和 pnpm 版本以当前仓库 `package.json` 的 `engines` 和 `packageManager` 为准。
+在 `fastgpt-community-plugins` 中，不要运行不带路径的 `git submodule update --init --recursive`；需要某个插件时只初始化 `packages/tools/<pluginId>`。
 
 ## 2. 判断需求和插件类型
 

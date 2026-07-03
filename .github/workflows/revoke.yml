@@ -35,7 +35,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: recursive
+          submodules: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packages/tools/*
 
       - name: Set up Node.js
         uses: actions/setup-node@v4

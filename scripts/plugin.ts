@@ -6,10 +6,11 @@ import { Command } from 'commander';
 
 import { type RevokeReason } from '../schemas/event.js';
 import { readRegistryFile, type PluginRegistryEntry } from '../schemas/registry.js';
+import { runGit, tryRunGit } from './git.js';
 import { publishPlugin } from './publish.js';
 import { type RegistryStatus, inferPluginFromPath, upsertRegistryEntry } from './registry.js';
 import { revokePlugin } from './revoke.js';
-import { validateRegistry } from './validate.js';
+import { detectChangedPluginIds, validateRegistry } from './validate.js';
 
 type OutputMode = 'human' | 'json';
 
@@ -182,9 +183,14 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
     .option('--skip-build', 'skip plugin-local install/build/pack')
     .option('--json', 'print machine-readable JSON')
     .action(async (pluginId: string, options: PublishCommandOptions) => {
+      const registryPath = path.resolve(root, options.registry ?? 'plugins.json');
+      if (!options.package || !options.skipBuild) {
+        ensurePluginSubmodules(root, readRegistryFile(registryPath).plugins, [pluginId]);
+      }
+
       const receipt = await publishPlugin({
         root,
-        registryPath: path.resolve(root, options.registry ?? 'plugins.json'),
+        registryPath,
         pluginId,
         packagePath: options.package,
         reviewPath: options.review,
@@ -286,15 +292,24 @@ function syncPlugin(root: string, pluginId: string, options: SyncOptions) {
 
 async function checkPlugins(root: string, pluginId: string | undefined, options: CheckOptions) {
   const registryPath = path.resolve(root, options.registry ?? 'plugins.json');
+  const registry = readRegistryFile(registryPath);
+  const changedPluginIds = detectChangedPluginIds({
+    root,
+    baseSha: options.base,
+    headSha: options.head,
+    plugins: registry.plugins
+  });
+  const targetIds = resolveCheckTargets(registry.plugins, pluginId, changedPluginIds, options);
+  ensurePluginSubmodules(root, registry.plugins, targetIds);
+
   const validation = await validateRegistry({
     root,
     registryPath,
     baseSha: options.base,
     headSha: options.head,
-    skipBuild: true
+    skipBuild: true,
+    pluginIds: pluginId || options.base ? targetIds : undefined
   });
-  const registry = readRegistryFile(registryPath);
-  const targetIds = resolveCheckTargets(registry.plugins, pluginId, validation.changedPluginIds, options);
 
   if (validation.errors.length === 0 && !options.skipBuild) {
     const { buildPluginPackage } = await import('./publish.js');
@@ -309,6 +324,22 @@ async function checkPlugins(root: string, pluginId: string | undefined, options:
     errors: validation.errors,
     warnings: validation.warnings
   };
+}
+
+function ensurePluginSubmodules(root: string, plugins: PluginRegistryEntry[], pluginIds: string[]): void {
+  for (const pluginId of pluginIds) {
+    const plugin = findPlugin(plugins, pluginId);
+    ensureSparsePath(root, plugin.submodule);
+    runGit(['submodule', 'update', '--init', '--recursive', plugin.submodule], root);
+  }
+}
+
+function ensureSparsePath(root: string, submodulePath: string): void {
+  if (tryRunGit(['sparse-checkout', 'list'], root) === null) {
+    return;
+  }
+
+  tryRunGit(['sparse-checkout', 'add', submodulePath], root);
 }
 
 function resolveCheckTargets(
