@@ -19,8 +19,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -33,7 +33,7 @@ describe('publishPlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.'
           }
         ]
@@ -74,8 +74,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -88,7 +88,7 @@ describe('publishPlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.'
           }
         ]
@@ -133,8 +133,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -147,7 +147,7 @@ describe('publishPlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.'
           }
         ]
@@ -197,8 +197,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool', 'packages', 'tool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'packages', 'tool', 'tool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool', 'packages', 'tool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'packages', 'tool', 'tool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('pass'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -211,7 +211,7 @@ describe('publishPlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: 'packages/tool'
           }
         ]
@@ -237,8 +237,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(path.join(root, 'ai-review.json'), reviewJson('warn'));
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
@@ -251,7 +251,7 @@ describe('publishPlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.'
           }
         ]
@@ -277,8 +277,8 @@ describe('publishPlugin', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-publish-'));
     tempDirs.push(root);
 
-    fs.mkdirSync(path.join(root, 'plugins', 'weatherTool'), { recursive: true });
-    fs.writeFileSync(path.join(root, 'plugins', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
+    fs.mkdirSync(path.join(root, 'packages', 'tools', 'weatherTool'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'packages', 'tools', 'weatherTool', 'weatherTool.pkg'), 'pkg-content');
     fs.writeFileSync(
       path.join(root, 'plugins.json'),
       JSON.stringify({
@@ -290,7 +290,7 @@ describe('publishPlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.'
           }
         ]

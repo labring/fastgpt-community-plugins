@@ -30,7 +30,7 @@ describe('revokePlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.',
             status: 'active'
           }
@@ -72,7 +72,7 @@ describe('revokePlugin', () => {
             type: 'tool',
             source: 'https://github.com/example/weatherTool',
             commit: 'abcdef1234567890',
-            submodule: 'plugins/weatherTool',
+            submodule: 'packages/tools/weatherTool',
             path: '.',
             status: 'active'
           }

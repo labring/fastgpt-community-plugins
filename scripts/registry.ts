@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -8,7 +9,9 @@ import {
 } from '../schemas/registry.js';
 import { tryRunGit } from './git.js';
 
-type RegistryStatus = PluginRegistryEntry['status'];
+const PLUGIN_SUBMODULE_ROOT = 'packages/tools';
+
+export type RegistryStatus = PluginRegistryEntry['status'];
 
 export type UpsertRegistryOptions = {
   root: string;
@@ -33,7 +36,7 @@ export type UpsertRegistryResult = {
   submoduleCommand?: string;
 };
 
-type InferredPlugin = {
+export type InferredPlugin = {
   pluginId?: string;
   version?: string;
   source?: string;
@@ -51,7 +54,7 @@ export function upsertRegistryEntry(options: UpsertRegistryOptions): UpsertRegis
   const commit = requireValue(options.commit ?? inferred.commit, '--commit');
   const existingIndex = registry.plugins.findIndex((entry) => entry.pluginId === pluginId);
   const existing = existingIndex >= 0 ? registry.plugins[existingIndex] : undefined;
-  const submodule = options.submodule ?? inferred.submodule ?? `plugins/${pluginId}`;
+  const submodule = options.submodule ?? inferred.submodule ?? `${PLUGIN_SUBMODULE_ROOT}/${pluginId}`;
   const pluginPath = options.pluginPath ?? inferred.pluginPath ?? '.';
   const review = options.review ?? `reviews/${pluginId}/${version}.json`;
   const status = options.status ?? existing?.status ?? 'pending';
@@ -117,7 +120,7 @@ function readOrCreateRegistry(registryPath: string): PluginRegistry {
   return parseRegistryJson(JSON.parse(raw));
 }
 
-function inferPluginFromPath(root: string, from: string): InferredPlugin {
+export function inferPluginFromPath(root: string, from: string): InferredPlugin {
   const pluginRoot = path.resolve(root, from);
   const packageJsonPath = path.join(pluginRoot, 'package.json');
   const inferred: InferredPlugin = {};
@@ -135,7 +138,7 @@ function inferPluginFromPath(root: string, from: string): InferredPlugin {
     }
   }
 
-  const source = tryRunGit(['-C', pluginRoot, 'remote', 'get-url', 'origin'], root);
+  const source = inferSourceUrl(root, pluginRoot);
   if (source) {
     inferred.source = source;
   }
@@ -146,15 +149,50 @@ function inferPluginFromPath(root: string, from: string): InferredPlugin {
   }
 
   const relativePath = path.relative(root, pluginRoot).split(path.sep).join('/');
-  if (relativePath.startsWith('plugins/')) {
-    const [pluginsDir, pluginDir, ...rest] = relativePath.split('/');
-    if (pluginsDir && pluginDir) {
-      inferred.submodule = `${pluginsDir}/${pluginDir}`;
-      inferred.pluginPath = rest.length > 0 ? rest.join('/') : '.';
-    }
+  const [packagesDir, toolsDir, pluginDir, ...rest] = relativePath.split('/');
+  if (packagesDir === 'packages' && toolsDir === 'tools' && pluginDir) {
+    inferred.submodule = `${PLUGIN_SUBMODULE_ROOT}/${pluginDir}`;
+    inferred.pluginPath = rest.length > 0 ? rest.join('/') : '.';
   }
 
   return inferred;
+}
+
+export function normalizeGitRemoteUrl(remoteUrl: string): string {
+  const trimmed = remoteUrl.trim().replace(/\.git$/, '');
+  const scpLike = /^git@([^:]+):(.+)$/.exec(trimmed);
+  if (scpLike) {
+    return `https://${scpLike[1]}/${scpLike[2]}`;
+  }
+
+  const sshUrl = /^ssh:\/\/git@([^/]+)\/(.+)$/.exec(trimmed);
+  if (sshUrl) {
+    return `https://${sshUrl[1]}/${sshUrl[2]}`;
+  }
+
+  return trimmed;
+}
+
+function inferSourceUrl(root: string, pluginRoot: string): string | undefined {
+  const ghUrl = tryRunCommand('gh', ['repo', 'view', '--json', 'url', '--jq', '.url'], pluginRoot);
+  if (ghUrl) {
+    return ghUrl;
+  }
+
+  const remoteUrl = tryRunGit(['-C', pluginRoot, 'remote', 'get-url', 'origin'], root);
+  return remoteUrl ? normalizeGitRemoteUrl(remoteUrl) : undefined;
+}
+
+function tryRunCommand(command: string, args: string[], cwd: string): string | null {
+  try {
+    return execFileSync(command, args, {
+      cwd,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe']
+    }).trim();
+  } catch {
+    return null;
+  }
 }
 
 function toLowerCamelCase(value: string): string {

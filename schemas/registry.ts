@@ -30,8 +30,8 @@ export const PluginRegistryEntrySchema = z.object({
   source: z.string().url(),
   commit: CommitSchema,
   submodule: RelativePluginPathSchema.refine(
-    (value) => value.startsWith('plugins/'),
-    'must live under plugins/'
+    (value) => value.startsWith('packages/tools/'),
+    'must live under packages/tools/'
   ),
   path: RelativePluginPathSchema.default('.'),
   status: z.enum(['pending', 'active', 'revoked', 'deprecated', 'rejected']).default('pending'),

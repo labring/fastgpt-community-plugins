@@ -13,6 +13,7 @@ Given a candidate plugin repository or local path, produce a reviewable intake b
 
 - candidate `plugins.json` entry matching `schemas/registry.ts`
 - suggested `git submodule add` command
+- suggested `pnpm run plugin -- add --from packages/tools/<pluginId>` command
 - detected plugin root path
 - build/check/pack command plan
 - hard-gate risk report
@@ -41,7 +42,7 @@ Example:
   "type": "tool",
   "source": "https://github.com/example/weatherTool",
   "commit": "abcdef1234567890",
-  "submodule": "plugins/weatherTool",
+  "submodule": "packages/tools/weatherTool",
   "path": ".",
   "status": "pending",
   "support": "community",
@@ -115,6 +116,8 @@ Verdict: pass | warn | fail
 
 ## Reviewer Checklist
 - [ ] Source repo and commit match registry
+- [ ] Plugin repository has its own `packageManager` and `pnpm-lock.yaml`
+- [ ] Plugin dependencies do not use `catalog:` or `workspace:`
 - [ ] `.pkg` was rebuilt from pinned source
 - [ ] Publish event contains package checksum and marketplace release id after publish
 - [ ] Revoke action can mark the registry entry revoked and write a revoke event

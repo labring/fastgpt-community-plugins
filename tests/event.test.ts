@@ -12,7 +12,7 @@ describe('lifecycle event schema', () => {
       source: {
         repo: 'https://github.com/example/weatherTool',
         commit: 'abcdef1234567890',
-        submodule: 'plugins/weatherTool',
+        submodule: 'packages/tools/weatherTool',
         path: '.'
       },
       package: {

@@ -140,7 +140,7 @@ pnpm fastgpt-plugin create <plugin-name> --type tool-suite --cwd <target-parent>
 选择目标目录：
 
 - 在 `fastgpt-official-plugins` 中，默认放到 `packages/tools`。
-- 在本社区索引仓库中，插件应先在独立源码仓库开发；入库时再作为固定 commit 的 submodule 放到 `plugins/<pluginId>`。
+- 在本社区索引仓库中，插件应先在独立源码仓库开发；入库时再作为固定 commit 的 submodule 放到 `packages/tools/<pluginId>`。
 - 用户只想做本地原型时，创建到清晰命名的工作目录，并说明发布仍需要 GitHub 仓库。
 
 生成后先读文件再改：
@@ -154,6 +154,7 @@ sed -n '1,240p' <plugin-dir>/index.ts
 按模板结构实现：
 
 - 保持 `package.json` scripts 和依赖风格与模板一致。
+- 社区插件仓库必须能独立安装和构建，依赖使用明确版本，保留自己的 `packageManager` 与 `pnpm-lock.yaml`，不要使用 `catalog:` 或 `workspace:`。
 - 入口文件只负责 manifest、schemas 和 handler wiring。
 - 模板提供 `src/` 时，把可复用运行逻辑放到 `src/`。
 - 保持输入/输出 schema 与用户可见配置一致。
@@ -216,12 +217,12 @@ gh pr create --title "feat(<pluginId>): add FastGPT plugin" --body "<summary>"
 
 ```bash
 git rev-parse HEAD
-git submodule add <plugin-repo-url> plugins/<pluginId>
+git submodule add <plugin-repo-url> packages/tools/<pluginId>
 
-pnpm run registry -- upsert --from plugins/<pluginId> --source <plugin-repo-url> --commit <commit-sha>
+pnpm run plugin -- add --from packages/tools/<pluginId>
 ```
 
-`registry` 脚本会按 `schemas/registry.ts` 更新 `plugins.json`，随后运行：
+`plugin` CLI 会按 `schemas/registry.ts` 更新 `plugins.json`，并可通过 `git`/`gh` 从 submodule 自动推断 source URL 与 commit。随后运行：
 
 ```bash
 pnpm run validate

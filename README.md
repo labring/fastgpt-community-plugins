@@ -16,7 +16,7 @@ This repository indexes community-provided FastGPT plugins, runs deterministic v
 ## Repository Scope
 
 - Maintain a lightweight registry of community plugin references in `plugins.json`.
-- Store each plugin as a pinned git submodule under `plugins/<pluginId>`.
+- Store each plugin as a pinned git submodule under `packages/tools/<pluginId>`.
 - Use lower camelCase plugin ids, for example `googleSheets`.
 - Run schema, submodule, source layout, and policy gates before publish.
 - Use AI skills for plugin intake review and daily publish/revoke summaries.
@@ -39,14 +39,14 @@ Community plugins are reviewed for publishability and traceability. The review s
 │   ├── publish.yml                 # Manual publish workflow
 │   └── revoke.yml                  # Manual repository-side revoke workflow
 ├── events/<yyyy-mm-dd>/            # Committed publish/revoke lifecycle events
-├── plugins/<pluginId>/             # Community plugin submodules
+├── packages/tools/<pluginId>/      # Community plugin submodules
 ├── reviews/<pluginId>/             # AI review verdict artifacts
 ├── schemas/                        # Registry, review, and lifecycle event contracts
 ├── scripts/                        # Validation, publish, revoke, and policy gates
 ├── tests/                          # Vitest coverage for deterministic gates
 ├── plugins.json                    # Machine-readable community plugin registry
 ├── package.json                    # Root scripts and toolchain versions
-├── pnpm-workspace.yaml             # Workspace and catalog dependency versions
+├── pnpm-workspace.yaml             # Root toolchain catalog; plugin submodules are excluded
 └── turbo.json                      # Task orchestration
 ```
 
@@ -64,7 +64,7 @@ Community plugins are reviewed for publishability and traceability. The review s
       "type": "tool",
       "source": "https://github.com/example/weatherTool",
       "commit": "abcdef1234567890",
-      "submodule": "plugins/weatherTool",
+      "submodule": "packages/tools/weatherTool",
       "path": ".",
       "status": "pending",
       "support": "community",
@@ -75,6 +75,19 @@ Community plugins are reviewed for publishability and traceability. The review s
 ```
 
 Field rules live in [`schemas/registry.ts`](./schemas/registry.ts). Scripts and skills should depend on the schema instead of duplicating validation logic.
+
+## Plugin Dependency Boundary
+
+Plugin submodules are independent repositories. They are intentionally excluded from the root pnpm workspace.
+
+Each plugin repository should provide:
+
+- explicit dependency versions in its own `package.json`;
+- its own `packageManager` field;
+- its own `pnpm-lock.yaml`;
+- no `catalog:` or `workspace:` dependency specifiers.
+
+The root `pnpm-workspace.yaml` catalog is only for this registry repository's scripts, schemas, and tests.
 
 ## Requirements
 
@@ -100,11 +113,15 @@ pnpm test
 # Validate registry, submodules, and policy gates
 pnpm run validate
 
+# Unified human/Agent plugin lifecycle CLI
+pnpm run plugin -- add --from packages/tools/googleSheets --json
+pnpm run plugin -- check googleSheets
+
 # Add or update a registry entry
 pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plugin-repo-url> --commit <commit-sha>
 
 # Infer registry metadata from a local submodule package
-pnpm run registry -- upsert --from plugins/googleSheets --source <plugin-repo-url> --commit <commit-sha>
+pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
 # Generate a dry-run publish receipt without mutating registry state
 pnpm run publish -- --plugin <pluginId> --review <reviews/plugin/version.json> --dry-run --skip-build
@@ -117,33 +134,35 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
 
 Community plugin source code should live in its own repository. This registry only keeps a pinned reference.
 
-1. Add the plugin repository as a submodule:
+1. Ensure the plugin repository builds independently with explicit dependency versions and a committed `pnpm-lock.yaml`.
+
+2. Add the plugin repository as a submodule:
 
    ```bash
-   git submodule add <plugin-repo-url> plugins/<pluginId>
-   git -C plugins/<pluginId> checkout <commit-sha>
+   git submodule add <plugin-repo-url> packages/tools/<pluginId>
+   git -C packages/tools/<pluginId> checkout <commit-sha>
    ```
 
-2. Add or update the matching entry in `plugins.json`:
+3. Add or update the matching entry in `plugins.json`:
 
    ```bash
-   pnpm run registry -- upsert --from plugins/<pluginId> --source <plugin-repo-url> --commit <commit-sha>
+   pnpm run plugin -- add --from packages/tools/<pluginId>
    ```
 
-3. Run deterministic validation:
+4. Run deterministic validation:
 
    ```bash
    pnpm run validate
    pnpm test
    ```
 
-4. Use the `plugin-review` skill to inspect the pinned plugin and write a review verdict, usually at:
+5. Use the `plugin-review` skill to inspect the pinned plugin and write a review verdict, usually at:
 
    ```text
    reviews/<pluginId>/<version>.json
    ```
 
-5. Open a pull request containing the registry entry, submodule pointer, validation result, and review artifact.
+6. Open a pull request containing the registry entry, submodule pointer, validation result, and review artifact.
 
 ## AI Skills
 

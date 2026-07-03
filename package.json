@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "validate": "tsx scripts/validate.ts",
+    "plugin": "tsx scripts/plugin.ts",
     "registry": "tsx scripts/registry.ts",
     "publish": "tsx scripts/publish.ts",
     "revoke": "tsx scripts/revoke.ts",
@@ -25,8 +26,10 @@
   "packageManager": "pnpm@10.28.2",
   "devDependencies": {
     "@fastgpt-plugin/cli": "catalog:",
+    "@inquirer/prompts": "catalog:",
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
+    "commander": "catalog:",
     "tsx": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:",

@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { detectChangedPluginIds } from '../scripts/validate.js';
+import { detectChangedPluginIds, findUnsupportedWorkspaceDependencySpecs } from '../scripts/validate.js';
 import type { PluginRegistryEntry } from '../schemas/registry.js';
 
 describe('detectChangedPluginIds', () => {
   const plugins: PluginRegistryEntry[] = [
-    plugin('weatherTool', 'plugins/weatherTool'),
-    plugin('searchTool', 'plugins/searchTool')
+    plugin('weatherTool', 'packages/tools/weatherTool'),
+    plugin('searchTool', 'packages/tools/searchTool')
   ];
 
   it('returns no changed plugins when no diff range is provided', () => {
@@ -22,6 +22,24 @@ describe('detectChangedPluginIds', () => {
     });
 
     expect(result).toEqual([]);
+  });
+
+  it('rejects catalog and workspace dependency specifiers in plugin packages', () => {
+    expect(
+      findUnsupportedWorkspaceDependencySpecs({
+        dependencies: {
+          '@fastgpt-plugin/sdk-factory': 'catalog:',
+          local: 'workspace:*',
+          zod: '^4.3.6'
+        },
+        devDependencies: {
+          vitest: '^4.0.18'
+        }
+      })
+    ).toEqual([
+      'dependencies.@fastgpt-plugin/sdk-factory uses catalog:',
+      'dependencies.local uses workspace:*'
+    ]);
   });
 });
 

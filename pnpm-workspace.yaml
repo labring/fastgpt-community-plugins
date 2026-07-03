@@ -1,9 +1,13 @@
-packages:
-  - plugins/*
+packages: []
+
+allowBuilds:
+  esbuild: set this to true or false
 
 catalog:
-  "@fastgpt-plugin/cli": 0.1.0-beta.9
+  "@inquirer/prompts": ^8.5.2
+  "@fastgpt-plugin/cli": 0.2.0
   "@types/node": ^22
+  commander: ^14.0.3
   "@vitest/coverage-v8": ^4.0.18
   tsx: ^4.21.0
   turbo: 2.8.3

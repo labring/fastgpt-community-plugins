@@ -115,13 +115,25 @@ function validatePluginEntry(
 
   const packageJson = path.join(pluginRoot, 'package.json');
   const indexTs = path.join(pluginRoot, 'index.ts');
+  const pnpmLock = path.join(pluginRoot, 'pnpm-lock.yaml');
 
   if (!fs.existsSync(packageJson)) {
     errors.push(`${plugin.pluginId}: package.json is required at ${path.relative(root, packageJson)}`);
+  } else {
+    const dependencyIssues = findUnsupportedWorkspaceDependencySpecs(JSON.parse(fs.readFileSync(packageJson, 'utf8')));
+    errors.push(
+      ...dependencyIssues.map(
+        (issue) => `${plugin.pluginId}: ${issue}; community plugin submodules must build as independent repositories`
+      )
+    );
   }
 
   if (!fs.existsSync(indexTs)) {
     errors.push(`${plugin.pluginId}: index.ts is required at ${path.relative(root, indexTs)}`);
+  }
+
+  if (!fs.existsSync(pnpmLock)) {
+    errors.push(`${plugin.pluginId}: pnpm-lock.yaml is required at ${path.relative(root, pnpmLock)}`);
   }
 
   if (!fs.existsSync(path.join(pluginRoot, 'README.md'))) {
@@ -139,7 +151,7 @@ function getChangedFiles(root: string, baseSha?: string, headSha = 'HEAD'): stri
   }
 
   const output = tryRunGit(
-    ['diff', '--name-only', baseSha, headSha, '--', 'plugins.json', '.gitmodules', 'plugins', 'reviews', 'events'],
+    ['diff', '--name-only', baseSha, headSha, '--', 'plugins.json', '.gitmodules', 'packages/tools', 'reviews', 'events'],
     root
   );
   if (!output) {
@@ -155,6 +167,31 @@ function getChangedFiles(root: string, baseSha?: string, headSha = 'HEAD'): stri
 
 function normalizePath(filePath: string): string {
   return filePath.split(path.sep).join('/');
+}
+
+export function findUnsupportedWorkspaceDependencySpecs(packageJson: unknown): string[] {
+  if (!packageJson || typeof packageJson !== 'object') {
+    return [];
+  }
+
+  const record = packageJson as Record<string, unknown>;
+  const sections = ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies'];
+  const issues: string[] = [];
+
+  for (const section of sections) {
+    const dependencies = record[section];
+    if (!dependencies || typeof dependencies !== 'object' || Array.isArray(dependencies)) {
+      continue;
+    }
+
+    for (const [name, specifier] of Object.entries(dependencies as Record<string, unknown>)) {
+      if (typeof specifier === 'string' && /^(catalog|workspace):/.test(specifier)) {
+        issues.push(`${section}.${name} uses ${specifier}`);
+      }
+    }
+  }
+
+  return issues;
 }
 
 async function main(): Promise<void> {

@@ -15,7 +15,7 @@ This skill is advisory. It produces review evidence and a verdict for the reposi
 - version
 - source repo URL
 - source commit SHA
-- submodule path, usually `plugins/<pluginId>`
+- submodule path, usually `packages/tools/<pluginId>`
 - optional nested plugin path, default `.`
 
 ## Required Context
@@ -75,6 +75,8 @@ Mark as `fail` when any of these are present:
 - invalid registry entry
 - missing submodule or commit mismatch
 - missing `package.json` or `index.ts`
+- missing plugin-local `pnpm-lock.yaml`
+- `catalog:` or `workspace:` dependency specifiers in plugin `package.json`
 - build/check/pack failure
 - suspected private key, token, or hardcoded secret
 - process execution through `child_process`

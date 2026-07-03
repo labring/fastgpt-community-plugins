@@ -187,8 +187,9 @@ function assertPublishableAiReview(
   }
 }
 
-function buildPluginPackage(root: string, plugin: PluginRegistryEntry): void {
+export function buildPluginPackage(root: string, plugin: PluginRegistryEntry): void {
   const pluginRoot = resolvePluginRoot(root, plugin);
+  runPnpm(['--dir', pluginRoot, 'install', '--frozen-lockfile'], root);
   runPnpm(['--dir', pluginRoot, 'run', 'build'], root);
   runPnpm(['--dir', pluginRoot, 'run', 'pack'], root);
 }

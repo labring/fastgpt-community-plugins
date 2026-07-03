@@ -13,7 +13,7 @@ describe('registry schema', () => {
           type: 'tool',
           source: 'https://github.com/example/weatherTool',
           commit: 'abcdef1234567890',
-          submodule: 'plugins/weatherTool',
+          submodule: 'packages/tools/weatherTool',
           path: 'packages/tool'
         }
       ]
@@ -59,13 +59,13 @@ describe('registry schema', () => {
     expect(parentIssues.map((issue) => issue.message)).toContain('must not contain .. segments');
   });
 
-  it('requires submodules to live under plugins/', () => {
+  it('requires submodules to live under packages/tools/', () => {
     const issues = validateRegistryJson({
       version: 1,
       plugins: [validPlugin({ submodule: 'vendor/weatherTool' })]
     });
 
-    expect(issues.map((issue) => issue.message)).toContain('must live under plugins/');
+    expect(issues.map((issue) => issue.message)).toContain('must live under packages/tools/');
   });
 
   it('accepts lifecycle status and event pointers', () => {
@@ -93,7 +93,7 @@ function validPlugin(overrides: Record<string, unknown> = {}) {
     type: 'tool',
     source: 'https://github.com/example/weatherTool',
     commit: 'abcdef1234567890',
-    submodule: 'plugins/weatherTool',
+    submodule: 'packages/tools/weatherTool',
     path: '.',
     ...overrides
   };

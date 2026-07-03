@@ -16,7 +16,7 @@
 ## 仓库定位
 
 - 通过 `plugins.json` 维护轻量级社区插件索引。
-- 每个插件源码位于独立仓库，本仓库只在 `plugins/<pluginId>` 下保存固定 commit 的 git submodule。
+- 每个插件源码位于独立仓库，本仓库只在 `packages/tools/<pluginId>` 下保存固定 commit 的 git submodule。
 - `pluginId` 使用 lower camelCase，例如 `googleSheets`。
 - 发布前执行 schema、submodule、源码结构和策略规则校验。
 - 使用 AI skills 完成插件候选审核和每日 publish/revoke 摘要。
@@ -39,14 +39,14 @@
 │   ├── publish.yml                 # 手动发布 workflow
 │   └── revoke.yml                  # 手动仓库侧 revoke workflow
 ├── events/<yyyy-mm-dd>/            # 已提交的 publish/revoke 生命周期事件
-├── plugins/<pluginId>/             # 社区插件 submodule
+├── packages/tools/<pluginId>/      # 社区插件 submodule
 ├── reviews/<pluginId>/             # AI review verdict 产物
 ├── schemas/                        # registry、review、lifecycle event 契约
 ├── scripts/                        # 校验、发布、revoke、策略规则脚本
 ├── tests/                          # 确定性规则的 Vitest 测试
 ├── plugins.json                    # 机器可读的社区插件索引
 ├── package.json                    # 根工程脚本和工具链版本
-├── pnpm-workspace.yaml             # workspace 与 catalog 依赖版本
+├── pnpm-workspace.yaml             # 根仓库工具链 catalog；插件 submodule 不加入 workspace
 └── turbo.json                      # 任务编排
 ```
 
@@ -64,7 +64,7 @@
       "type": "tool",
       "source": "https://github.com/example/weatherTool",
       "commit": "abcdef1234567890",
-      "submodule": "plugins/weatherTool",
+      "submodule": "packages/tools/weatherTool",
       "path": ".",
       "status": "pending",
       "support": "community",
@@ -75,6 +75,19 @@
 ```
 
 字段规则在 [`schemas/registry.ts`](./schemas/registry.ts) 中定义。脚本和 skills 应依赖这个 schema，避免重复实现校验逻辑。
+
+## 插件依赖边界
+
+插件 submodule 是独立仓库，刻意不加入根仓库 pnpm workspace。
+
+每个插件仓库应提供：
+
+- 自己的 `package.json`，依赖使用明确版本；
+- 自己的 `packageManager` 字段；
+- 自己的 `pnpm-lock.yaml`；
+- 不使用 `catalog:` 或 `workspace:` 依赖协议。
+
+根目录 `pnpm-workspace.yaml` 的 catalog 只服务本 registry 仓库的脚本、schemas 和测试。
 
 ## 环境要求
 
@@ -100,11 +113,15 @@ pnpm test
 # 校验 registry、submodule 和策略规则
 pnpm run validate
 
+# 统一的人类/Agent 插件生命周期 CLI
+pnpm run plugin -- add --from packages/tools/googleSheets --json
+pnpm run plugin -- check googleSheets
+
 # 新增或更新 registry 条目
 pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plugin-repo-url> --commit <commit-sha>
 
 # 从本地 submodule package 推断 registry 元信息
-pnpm run registry -- upsert --from plugins/googleSheets --source <plugin-repo-url> --commit <commit-sha>
+pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
 # 生成 dry-run 发布 receipt，不修改 registry 状态
 pnpm run publish -- --plugin <pluginId> --review <reviews/plugin/version.json> --dry-run --skip-build
@@ -117,33 +134,35 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
 
 社区插件源码应放在独立仓库中。本仓库只保存固定引用。
 
-1. 将插件仓库添加为 submodule：
+1. 先确认插件仓库可以独立构建，依赖使用明确版本，并已提交自己的 `pnpm-lock.yaml`。
+
+2. 将插件仓库添加为 submodule：
 
    ```bash
-   git submodule add <plugin-repo-url> plugins/<pluginId>
-   git -C plugins/<pluginId> checkout <commit-sha>
+   git submodule add <plugin-repo-url> packages/tools/<pluginId>
+   git -C packages/tools/<pluginId> checkout <commit-sha>
    ```
 
-2. 在 `plugins.json` 中新增或更新对应条目：
+3. 在 `plugins.json` 中新增或更新对应条目：
 
    ```bash
-   pnpm run registry -- upsert --from plugins/<pluginId> --source <plugin-repo-url> --commit <commit-sha>
+   pnpm run plugin -- add --from packages/tools/<pluginId>
    ```
 
-3. 运行确定性校验：
+4. 运行确定性校验：
 
    ```bash
    pnpm run validate
    pnpm test
    ```
 
-4. 使用 `plugin-review` skill 检查固定 commit 的插件，并写入 review verdict，推荐路径为：
+5. 使用 `plugin-review` skill 检查固定 commit 的插件，并写入 review verdict，推荐路径为：
 
    ```text
    reviews/<pluginId>/<version>.json
    ```
 
-5. 提交 PR，包含 registry 条目、submodule 指针、校验结果和 review artifact。
+6. 提交 PR，包含 registry 条目、submodule 指针、校验结果和 review artifact。
 
 ## AI Skills
 

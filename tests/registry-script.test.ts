@@ -40,10 +40,10 @@ describe('registry CLI helpers', () => {
     const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
     expect(result.action).toBe('created');
     expect(result.entry.review).toBe('reviews/googleSheets/0.1.0.json');
-    expect(result.submoduleCommand).toContain('plugins/googleSheets');
+    expect(result.submoduleCommand).toContain('packages/tools/googleSheets');
     expect(registry.plugins[0]).toMatchObject({
       pluginId: 'googleSheets',
-      submodule: 'plugins/googleSheets',
+      submodule: 'packages/tools/googleSheets',
       status: 'pending',
       support: 'community'
     });
@@ -53,7 +53,7 @@ describe('registry CLI helpers', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-community-registry-'));
     tempDirs.push(root);
     const registryPath = path.join(root, 'plugins.json');
-    const pluginRoot = path.join(root, 'plugins', 'googleSheets');
+    const pluginRoot = path.join(root, 'packages', 'tools', 'googleSheets');
     fs.mkdirSync(pluginRoot, { recursive: true });
     fs.writeFileSync(registryPath, JSON.stringify({ version: 1, plugins: [] }));
     fs.writeFileSync(
@@ -67,7 +67,7 @@ describe('registry CLI helpers', () => {
     const result = upsertRegistryEntry({
       root,
       registryPath,
-      from: 'plugins/googleSheets',
+      from: 'packages/tools/googleSheets',
       source: 'https://github.com/example/googleSheets',
       commit: 'abcdef1234567890',
       dryRun: false
@@ -76,7 +76,7 @@ describe('registry CLI helpers', () => {
     expect(result.entry).toMatchObject({
       pluginId: 'googleSheets',
       version: '0.1.0',
-      submodule: 'plugins/googleSheets',
+      submodule: 'packages/tools/googleSheets',
       path: '.'
     });
     expect(result.submoduleCommand).toBeUndefined();
