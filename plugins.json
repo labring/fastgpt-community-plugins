@@ -1,4 +1,17 @@
 {
   "version": 1,
-  "plugins": []
+  "plugins": [
+    {
+      "pluginId": "googleSheets",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleSheet",
+      "commit": "293a8b5c00b9e809c23cbdacefeb8771bd73c1d1",
+      "submodule": "packages/tools/googleSheets",
+      "path": ".",
+      "status": "pending",
+      "support": "community",
+      "review": "reviews/googleSheets/0.1.0.json"
+    }
+  ]
 }
