@@ -10,8 +10,7 @@
       "submodule": "packages/tools/googleSheets",
       "path": ".",
       "status": "pending",
-      "support": "community",
-      "review": "reviews/googleSheets/0.1.0.json"
+      "support": "community"
     }
   ]
 }
