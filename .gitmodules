@@ -1,0 +1,3 @@
+[submodule "packages/tools/googleSheets"]
+	path = packages/tools/googleSheets
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleSheet
