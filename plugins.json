@@ -11,6 +11,17 @@
       "path": ".",
       "status": "pending",
       "support": "community"
+    },
+    {
+      "pluginId": "unstructured",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-unstructured",
+      "commit": "f963a7955de0336bcd8d766071152163c515ef05",
+      "submodule": "packages/tools/unstructured",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
