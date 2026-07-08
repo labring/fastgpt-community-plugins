@@ -45,8 +45,9 @@
       "commit": "17db5d469c3d301ac8a46b3749eb3c4bc1f09deb",
       "submodule": "packages/tools/qdrantVectorStore",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
     }
   ]
 }
