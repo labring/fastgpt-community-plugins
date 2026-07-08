@@ -201,8 +201,9 @@
       "commit": "426ad787b32541e5ece81d95ecd2c3261a035caa",
       "submodule": "packages/tools/pdfProcess",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/pdfProcess-0.1.0-20260708200623996-published.json"
     },
     {
       "pluginId": "antvVisualization",
