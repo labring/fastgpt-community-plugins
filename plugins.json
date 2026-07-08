@@ -69,8 +69,9 @@
       "commit": "e2ab07ca2c4a1fcdb6c83af542c461801c52cc12",
       "submodule": "packages/tools/hubspot",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/hubspot-0.1.0-20260708085854734-published.json"
     }
   ]
 }
