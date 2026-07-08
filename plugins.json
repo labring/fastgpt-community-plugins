@@ -57,8 +57,9 @@
       "commit": "d6f0366984edefbfbf93009c09a2c075683917f7",
       "submodule": "packages/tools/pineconeVectorStore",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/pineconeVectorStore-0.1.0-20260708120933267-published.json"
     },
     {
       "pluginId": "supabase",
