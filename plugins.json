@@ -21,8 +21,9 @@
       "commit": "975b387bbc14b2c3af3c1e432e75856181e53dd2",
       "submodule": "packages/tools/googleDrive",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/googleDrive-0.1.0-20260708141817939-published.json"
     },
     {
       "pluginId": "slack",
