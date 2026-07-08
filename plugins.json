@@ -60,6 +60,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/supabase-0.1.0-20260708085124220-published.json"
+    },
+    {
+      "pluginId": "hubspot",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git",
+      "commit": "e2ab07ca2c4a1fcdb6c83af542c461801c52cc12",
+      "submodule": "packages/tools/hubspot",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
