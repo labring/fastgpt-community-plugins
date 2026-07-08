@@ -54,7 +54,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git",
-      "commit": "f95de378bb132be25875bfb64065ba8faf68fc6f",
+      "commit": "74bfeeb0f9f940d829ab902d6c9e1372517fe812",
       "submodule": "packages/tools/supabase",
       "path": ".",
       "status": "pending",
