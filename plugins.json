@@ -156,6 +156,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/discord-0.1.0-20260708100734789-published.json"
+    },
+    {
+      "pluginId": "microsoftExcel",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftExcel.git",
+      "commit": "0762b921e11a671ab4e9a11ba5ef093cb42f7829",
+      "submodule": "packages/tools/microsoftExcel",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
