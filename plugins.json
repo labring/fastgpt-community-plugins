@@ -206,6 +206,18 @@
       "latestPublishEvent": "events/2026-07-08/pdfProcess-0.1.0-20260708200623996-published.json"
     },
     {
+      "pluginId": "openWeather",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-openWeather.git",
+      "commit": "5f8296b9ea36c29c9a002ee928c63f2e4d608cc9",
+      "submodule": "packages/tools/openWeather",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/openWeather-0.1.0-20260708201739695-published.json"
+    },
+    {
       "pluginId": "antvVisualization",
       "version": "0.1.0",
       "type": "tool",
