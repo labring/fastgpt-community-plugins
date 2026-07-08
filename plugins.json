@@ -228,6 +228,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/antvVisualization-0.1.0-20260708202433352-published.json"
+    },
+    {
+      "pluginId": "yahooFinance",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-yahooFinance.git",
+      "commit": "b33e8f36da0703e313ffa41b687bf15c3eaaea4f",
+      "submodule": "packages/tools/yahooFinance",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }

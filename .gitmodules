@@ -58,3 +58,6 @@
 [submodule "packages/tools/antvVisualization"]
 	path = packages/tools/antvVisualization
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-antvVisualization.git
+[submodule "packages/tools/yahooFinance"]
+	path = packages/tools/yahooFinance
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-yahooFinance.git
