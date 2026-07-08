@@ -117,8 +117,9 @@
       "commit": "82075ad5e4fb864d4f390ed21a3a5fdfbcf7f06a",
       "submodule": "packages/tools/discord",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/discord-0.1.0-20260708100734789-published.json"
     }
   ]
 }
