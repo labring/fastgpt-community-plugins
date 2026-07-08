@@ -48,6 +48,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
+    },
+    {
+      "pluginId": "hubspot",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git",
+      "commit": "7517522c4a9a9a68bc71023e3c4729da72769c25",
+      "submodule": "packages/tools/hubspot",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
