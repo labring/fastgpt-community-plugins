@@ -54,7 +54,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git",
-      "commit": "7517522c4a9a9a68bc71023e3c4729da72769c25",
+      "commit": "e2ab07ca2c4a1fcdb6c83af542c461801c52cc12",
       "submodule": "packages/tools/hubspot",
       "path": ".",
       "status": "pending",
