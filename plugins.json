@@ -105,8 +105,9 @@
       "commit": "f0cb4a4a758d923fbf3f8193c175d2c13a9a88d7",
       "submodule": "packages/tools/telegramBot",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/telegramBot-0.1.0-20260708091318692-published.json"
     }
   ]
 }
