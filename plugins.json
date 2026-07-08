@@ -81,8 +81,9 @@
       "commit": "2e9ad10d4d048f338a586032ecd5469c6888477a",
       "submodule": "packages/tools/gmail",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/gmail-0.1.0-20260708090748401-published.json"
     }
   ]
 }

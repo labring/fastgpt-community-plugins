@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "gmail",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git",
+    "commit": "2e9ad10d4d048f338a586032ecd5469c6888477a",
+    "submodule": "packages/tools/gmail",
+    "path": "."
+  },
+  "package": {
+    "file": "gmail.pkg",
+    "sha256": "86f066bf2ce7562c47f3b053abcae45c3e9a2db48ec33e83632bee83f7fc4abc",
+    "sizeBytes": 85892
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-08T09:07:48.401Z"
+}
