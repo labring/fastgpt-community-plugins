@@ -28,3 +28,7 @@
 [submodule "packages/tools/discord"]
 	path = packages/tools/discord
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discord.git
+[submodule "packages/tools/pineconeVectorStore"]
+	path = packages/tools/pineconeVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pineconeVectorStore.git
+	branch = main
