@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "openWeather",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-openWeather.git",
+    "commit": "5f8296b9ea36c29c9a002ee928c63f2e4d608cc9",
+    "submodule": "packages/tools/openWeather",
+    "path": "."
+  },
+  "package": {
+    "file": "openWeather.pkg",
+    "sha256": "2addc290de0b0317b60b6767de7b0ffed420816575201f61607ea4aada6887be",
+    "sizeBytes": 86201
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-08T20:17:39.695Z"
+}
