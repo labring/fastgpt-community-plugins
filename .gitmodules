@@ -49,3 +49,6 @@
 [submodule "packages/tools/chart"]
 	path = packages/tools/chart
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chart.git
+[submodule "packages/tools/yahooFinance"]
+	path = packages/tools/yahooFinance
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-yahooFinance.git
