@@ -10,6 +10,9 @@
 [submodule "packages/tools/qdrantVectorStore"]
 	path = packages/tools/qdrantVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore.git
+[submodule "packages/tools/supabase"]
+	path = packages/tools/supabase
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git
 [submodule "packages/tools/hubspot"]
 	path = packages/tools/hubspot
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git
