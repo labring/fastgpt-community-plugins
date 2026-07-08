@@ -10,3 +10,6 @@
 [submodule "packages/tools/qdrantVectorStore"]
 	path = packages/tools/qdrantVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore.git
+[submodule "packages/tools/gmail"]
+	path = packages/tools/gmail
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git

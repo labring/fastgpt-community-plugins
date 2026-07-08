@@ -48,6 +48,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
+    },
+    {
+      "pluginId": "gmail",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git",
+      "commit": "02ad8eb585edfb031e323d2a2b77bcce38dc5db2",
+      "submodule": "packages/tools/gmail",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
