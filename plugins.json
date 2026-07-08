@@ -14,6 +14,18 @@
       "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
     },
     {
+      "pluginId": "qdrantVectorStore",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore",
+      "commit": "17db5d469c3d301ac8a46b3749eb3c4bc1f09deb",
+      "submodule": "packages/tools/qdrantVectorStore",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
+    },
+    {
       "pluginId": "slack",
       "version": "0.1.0",
       "type": "tool",
@@ -26,6 +38,17 @@
       "latestPublishEvent": "events/2026-07-08/slack-0.1.0-20260708031203456-published.json"
     },
     {
+      "pluginId": "telegramBot",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-telegramBot",
+      "commit": "c45f820168e6b89704a89d980a9ccca14cf83c7d",
+      "submodule": "packages/tools/telegramBot",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "unstructured",
       "version": "0.1.0",
       "type": "tool",
@@ -36,18 +59,6 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/unstructured-0.1.0-20260708034119422-published.json"
-    },
-    {
-      "pluginId": "qdrantVectorStore",
-      "version": "0.1.0",
-      "type": "tool",
-      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore",
-      "commit": "17db5d469c3d301ac8a46b3749eb3c4bc1f09deb",
-      "submodule": "packages/tools/qdrantVectorStore",
-      "path": ".",
-      "status": "active",
-      "support": "community",
-      "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
     }
   ]
 }
