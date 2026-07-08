@@ -32,3 +32,6 @@
 	path = packages/tools/pineconeVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pineconeVectorStore.git
 	branch = main
+[submodule "packages/tools/googleDrive"]
+	path = packages/tools/googleDrive
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleDrive.git
