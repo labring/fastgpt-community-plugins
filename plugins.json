@@ -186,7 +186,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chart.git",
-      "commit": "1f7ee73f988b85a4970f6074584a809935b19710",
+      "commit": "38032ca6ce95163220451975515bcd05c3796475",
       "submodule": "packages/tools/chart",
       "path": ".",
       "status": "pending",
