@@ -35,3 +35,6 @@
 [submodule "packages/tools/googleDrive"]
 	path = packages/tools/googleDrive
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleDrive.git
+[submodule "packages/tools/weaviateVectorStore"]
+	path = packages/tools/weaviateVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-weaviateVectorStore.git
