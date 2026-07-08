@@ -61,3 +61,6 @@
 [submodule "packages/tools/yahooFinance"]
 	path = packages/tools/yahooFinance
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-yahooFinance.git
+[submodule "packages/tools/vannaAi"]
+	path = packages/tools/vannaAi
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git
