@@ -33,8 +33,9 @@
       "commit": "f963a7955de0336bcd8d766071152163c515ef05",
       "submodule": "packages/tools/unstructured",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/unstructured-0.1.0-20260708034119422-published.json"
     }
   ]
 }

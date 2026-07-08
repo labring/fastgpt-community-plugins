@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "unstructured",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-unstructured",
+    "commit": "f963a7955de0336bcd8d766071152163c515ef05",
+    "submodule": "packages/tools/unstructured",
+    "path": "."
+  },
+  "package": {
+    "file": "unstructured.pkg",
+    "sha256": "78caedde682004644f8140f66f81493054454afa5487116f99c378e8051b0d7e",
+    "sizeBytes": 86150
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-08T03:41:19.422Z"
+}
