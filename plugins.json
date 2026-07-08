@@ -9,8 +9,9 @@
       "commit": "8e9a1e74079e0628938e4989f39f652c96e54a8e",
       "submodule": "packages/tools/googleSheets",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
     }
   ]
 }
