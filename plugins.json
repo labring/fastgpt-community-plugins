@@ -168,6 +168,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/microsoftExcel-0.1.0-20260708142909741-published.json"
+    },
+    {
+      "pluginId": "chart",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chart.git",
+      "commit": "1f7ee73f988b85a4970f6074584a809935b19710",
+      "submodule": "packages/tools/chart",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
