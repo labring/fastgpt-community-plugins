@@ -177,8 +177,9 @@
       "commit": "42bdf601846e5199296718e377d555fc9cab7f05",
       "submodule": "packages/tools/comfyUI",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/comfyUI-0.1.0-20260708154106851-published.json"
     }
   ]
 }
