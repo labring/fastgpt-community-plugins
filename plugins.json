@@ -225,8 +225,9 @@
       "commit": "53362333ce6a6fc08e37a7bd8ffa270ee23bbf12",
       "submodule": "packages/tools/antvVisualization",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/antvVisualization-0.1.0-20260708202433352-published.json"
     }
   ]
 }

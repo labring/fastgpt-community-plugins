@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "antvVisualization",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-antvVisualization.git",
+    "commit": "53362333ce6a6fc08e37a7bd8ffa270ee23bbf12",
+    "submodule": "packages/tools/antvVisualization",
+    "path": "."
+  },
+  "package": {
+    "file": "antvVisualization.pkg",
+    "sha256": "0bbc3fb9266040d702be977fa5755c60b0edbe50c389ccc2480c7e5a131613f0",
+    "sizeBytes": 88393
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-08T20:24:33.352Z"
+}
