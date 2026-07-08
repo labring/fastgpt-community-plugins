@@ -146,8 +146,8 @@ pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plug
 # Infer registry metadata from a local submodule package
 pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
-# Generate a dry-run publish receipt without mutating registry state
-pnpm run publish -- --plugin <pluginId> --review-verdict pass --review-summary "<summary>" --dry-run --skip-build
+# Publish changed pending plugins for a merge range without mutating registry state
+pnpm run plugin -- publish-pending --base <base-sha> --head <head-sha> --dry-run --skip-build
 
 # Revoke a plugin in repository state and write a revoke event
 pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
@@ -196,12 +196,15 @@ Deterministic scripts remain responsible for schema validation, policy gates, pa
 
 ## Marketplace Publishing
 
-Publishing is manual and gated:
+Publishing runs automatically after a plugin PR is merged to `main`:
 
-1. `validate.yml` verifies registry schema, submodule consistency, source layout, and policy gates.
+1. `validate.yml` verifies registry schema, submodule consistency, source layout, and policy gates before merge.
 2. `plugin-review` posts a structured AI verdict and findings to the pull request.
-3. `publish.yml` builds or accepts a `.pkg`, requires a passing review verdict input, uploads to Marketplace, writes a publish event, updates `plugins.json`, and commits lifecycle state back to the repository.
-4. The publish receipt is uploaded as a GitHub Actions artifact under `dist/receipts`.
+3. `publish.yml` runs on `push` to `main`, detects plugins changed by the merge, and publishes only entries that are still `pending`.
+4. `publish.yml` builds the plugin as an independent repository, uploads the `.pkg` to Marketplace, writes a publish event, marks the registry entry `active`, and commits lifecycle state back to the repository.
+5. The publish receipt is uploaded as a GitHub Actions artifact under `dist/receipts`.
+
+The lifecycle commit from step 4 may trigger `publish.yml` again because it updates `plugins.json`. The second run exits without publishing because the changed plugin is no longer `pending`.
 
 Required GitHub Actions secrets:
 

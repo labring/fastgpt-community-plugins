@@ -1,36 +1,13 @@
 name: Publish Community Plugin
 
 on:
-  workflow_dispatch:
-    inputs:
-      plugin_id:
-        description: "Plugin id from plugins.json"
-        required: true
-      package_path:
-        description: "Optional prebuilt .pkg path. Leave empty to use packages/tools/<id>/<id>.pkg"
-        required: false
-      review_verdict:
-        description: "AI review verdict from the PR review comment or automation"
-        required: true
-        type: choice
-        options:
-          - pass
-          - warn
-          - fail
-      review_summary:
-        description: "One-line AI review summary recorded in the publish event"
-        required: true
-      dry_run:
-        description: "Write receipt without uploading"
-        required: false
-        default: "false"
-      skip_build:
-        description: "Skip plugin build/pack before publish"
-        required: false
-        default: "false"
-      actor:
-        description: "Actor recorded in the publish event"
-        required: false
+  push:
+    branches:
+      - main
+    paths:
+      - "plugins.json"
+      - ".gitmodules"
+      - "packages/tools/**"
 
 permissions:
   contents: write
@@ -77,46 +54,33 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Validate selected plugin hard gates
+      - name: Publish changed pending plugins
+        id: publish
         env:
-          PLUGIN_ID: ${{ inputs.plugin_id }}
-        run: pnpm run plugin -- check "$PLUGIN_ID" --skip-build
-
-      - name: Publish plugin
-        env:
-          ACTOR_INPUT: ${{ inputs.actor }}
+          BASE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
           MARKETPLACE_BASE_URL: ${{ secrets.MARKETPLACE_BASE_URL }}
           MARKETPLACE_AUTH: ${{ secrets.MARKETPLACE_AUTH }}
-          PACKAGE_PATH: ${{ inputs.package_path }}
-          PLUGIN_ID: ${{ inputs.plugin_id }}
-          REVIEW_VERDICT: ${{ inputs.review_verdict }}
-          REVIEW_SUMMARY: ${{ inputs.review_summary }}
-          DRY_RUN: ${{ inputs.dry_run }}
-          SKIP_BUILD: ${{ inputs.skip_build }}
         shell: bash
         run: |
           set -euo pipefail
-          args=("$PLUGIN_ID")
-          args+=(--review-verdict "$REVIEW_VERDICT")
-          args+=(--review-summary "$REVIEW_SUMMARY")
-          if [ -n "$ACTOR_INPUT" ]; then
-            args+=(--actor "$ACTOR_INPUT")
+          pnpm run plugin -- publish-pending \
+            --base "$BASE_SHA" \
+            --head "$HEAD_SHA" \
+            --actor "${{ github.actor }}"
+          if [ -d dist/receipts ]; then
+            published_count=$(find dist/receipts -name publish-receipt.json -type f | wc -l | tr -d ' ')
+          else
+            published_count=0
           fi
-          if [ -n "$PACKAGE_PATH" ]; then
-            args+=(--package "$PACKAGE_PATH")
-          fi
-          if [ "$DRY_RUN" = "true" ]; then
-            args+=(--dry-run)
-          fi
-          if [ "$SKIP_BUILD" = "true" ]; then
-            args+=(--skip-build)
-          fi
-          pnpm run plugin -- publish "${args[@]}"
+          published_plugins=$(node -e "const fs = require('node:fs'); const path = require('node:path'); const root = 'dist/receipts'; const receipts = []; function walk(dir) { if (!fs.existsSync(dir)) return; for (const entry of fs.readdirSync(dir, { withFileTypes: true })) { const file = path.join(dir, entry.name); if (entry.isDirectory()) walk(file); else if (entry.name === 'publish-receipt.json') receipts.push(JSON.parse(fs.readFileSync(file, 'utf8')).pluginId); } } walk(root); console.log(receipts.join(','));")
+          echo "published_count=$published_count" >> "$GITHUB_OUTPUT"
+          echo "published_plugins=$published_plugins" >> "$GITHUB_OUTPUT"
 
       - name: Commit lifecycle state
-        if: ${{ inputs.dry_run != 'true' }}
+        if: ${{ steps.publish.outputs.published_count != '0' }}
         env:
-          PLUGIN_ID: ${{ inputs.plugin_id }}
+          PUBLISHED_PLUGINS: ${{ steps.publish.outputs.published_plugins }}
         shell: bash
         run: |
           set -euo pipefail
@@ -127,10 +91,11 @@ jobs:
             echo "No lifecycle state changes to commit."
             exit 0
           fi
-          git commit -m "Publish community plugin ${PLUGIN_ID}"
+          git commit -m "Publish community plugins ${PUBLISHED_PLUGINS}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
 
       - name: Upload receipts
+        if: ${{ steps.publish.outputs.published_count != '0' }}
         uses: actions/upload-artifact@v4
         with:
           name: publish-receipts
@@ -138,7 +103,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload lifecycle events
-        if: ${{ inputs.dry_run != 'true' }}
+        if: ${{ steps.publish.outputs.published_count != '0' }}
         uses: actions/upload-artifact@v4
         with:
           name: lifecycle-events

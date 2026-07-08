@@ -5,7 +5,8 @@ import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { normalizeGitRemoteUrl } from '../scripts/registry.js';
-import { runPluginCli } from '../scripts/plugin.js';
+import { runPluginCli, selectPendingPublishPluginIds } from '../scripts/plugin.js';
+import type { PluginRegistryEntry } from '../schemas/registry.js';
 
 const tempDirs: string[] = [];
 
@@ -124,4 +125,30 @@ describe('plugin CLI', () => {
       'https://github.com/labring/google-sheets'
     );
   });
+
+  it('selects only changed pending plugins for automated publish', () => {
+    const plugins: PluginRegistryEntry[] = [
+      plugin('googleSheets', 'pending'),
+      plugin('weatherTool', 'active'),
+      plugin('searchTool', 'revoked')
+    ];
+
+    expect(selectPendingPublishPluginIds(plugins, ['googleSheets', 'weatherTool', 'searchTool', 'removedTool'])).toEqual([
+      'googleSheets'
+    ]);
+  });
 });
+
+function plugin(pluginId: string, status: PluginRegistryEntry['status']): PluginRegistryEntry {
+  return {
+    pluginId,
+    version: '0.1.0',
+    type: 'tool',
+    source: `https://github.com/example/${pluginId}`,
+    commit: 'abcdef1234567890',
+    submodule: `packages/tools/${pluginId}`,
+    path: '.',
+    status,
+    support: 'community'
+  };
+}
