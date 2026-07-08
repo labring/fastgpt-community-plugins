@@ -48,6 +48,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
+    },
+    {
+      "pluginId": "supabase",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git",
+      "commit": "74bfeeb0f9f940d829ab902d6c9e1372517fe812",
+      "submodule": "packages/tools/supabase",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
