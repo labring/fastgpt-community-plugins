@@ -19,3 +19,6 @@
 [submodule "packages/tools/gmail"]
 	path = packages/tools/gmail
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git
+[submodule "packages/tools/chromaVectorStore"]
+	path = packages/tools/chromaVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore.git

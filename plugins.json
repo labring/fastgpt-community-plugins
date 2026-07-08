@@ -84,6 +84,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/gmail-0.1.0-20260708090748401-published.json"
+    },
+    {
+      "pluginId": "chromaVectorStore",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore",
+      "commit": "5a03f94bf207287882ab8cee7e903d56f04aafca",
+      "submodule": "packages/tools/chromaVectorStore",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
