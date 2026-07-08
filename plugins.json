@@ -189,8 +189,9 @@
       "commit": "38032ca6ce95163220451975515bcd05c3796475",
       "submodule": "packages/tools/chart",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/chart-0.1.0-20260708180451361-published.json"
     }
   ]
 }
