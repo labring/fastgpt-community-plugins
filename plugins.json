@@ -240,6 +240,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/yahooFinance-0.1.0-20260708202814766-published.json"
+    },
+    {
+      "pluginId": "crawlee",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-crawlee.git",
+      "commit": "2e45d9d9e0dc736f69dda73590bed98732b0870e",
+      "submodule": "packages/tools/crawlee",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
