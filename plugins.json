@@ -108,6 +108,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/telegramBot-0.1.0-20260708091318692-published.json"
+    },
+    {
+      "pluginId": "discord",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discord",
+      "commit": "82075ad5e4fb864d4f390ed21a3a5fdfbcf7f06a",
+      "submodule": "packages/tools/discord",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
