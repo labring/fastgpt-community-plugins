@@ -12,6 +12,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
+    },
+    {
+      "pluginId": "slack",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-slack",
+      "commit": "8d7febe66776503c913f2aadef104a1787045d72",
+      "submodule": "packages/tools/slack",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
