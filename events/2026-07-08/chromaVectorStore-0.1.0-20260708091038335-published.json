@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "chromaVectorStore",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore",
+    "commit": "5a03f94bf207287882ab8cee7e903d56f04aafca",
+    "submodule": "packages/tools/chromaVectorStore",
+    "path": "."
+  },
+  "package": {
+    "file": "chromaVectorStore.pkg",
+    "sha256": "737ec794d942bfa589ee960bfb9ba2fe4dc998221979255b96b9e25b50ecc6ae",
+    "sizeBytes": 87804
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-08T09:10:38.335Z"
+}

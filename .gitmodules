@@ -10,6 +10,18 @@
 [submodule "packages/tools/qdrantVectorStore"]
 	path = packages/tools/qdrantVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore.git
+[submodule "packages/tools/supabase"]
+	path = packages/tools/supabase
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git
+[submodule "packages/tools/hubspot"]
+	path = packages/tools/hubspot
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git
+[submodule "packages/tools/gmail"]
+	path = packages/tools/gmail
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git
+[submodule "packages/tools/chromaVectorStore"]
+	path = packages/tools/chromaVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore.git
 [submodule "packages/tools/telegramBot"]
 	path = packages/tools/telegramBot
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-telegramBot.git
