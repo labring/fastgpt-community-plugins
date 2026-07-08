@@ -42,7 +42,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-telegramBot",
-      "commit": "c45f820168e6b89704a89d980a9ccca14cf83c7d",
+      "commit": "f0cb4a4a758d923fbf3f8193c175d2c13a9a88d7",
       "submodule": "packages/tools/telegramBot",
       "path": ".",
       "status": "pending",
