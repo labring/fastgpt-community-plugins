@@ -32,3 +32,6 @@
 	path = packages/tools/pineconeVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pineconeVectorStore.git
 	branch = main
+[submodule "packages/tools/weaviateVectorStore"]
+	path = packages/tools/weaviateVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-weaviateVectorStore.git
