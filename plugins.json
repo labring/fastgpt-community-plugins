@@ -14,6 +14,17 @@
       "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
     },
     {
+      "pluginId": "googleDrive",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleDrive.git",
+      "commit": "975b387bbc14b2c3af3c1e432e75856181e53dd2",
+      "submodule": "packages/tools/googleDrive",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "slack",
       "version": "0.1.0",
       "type": "tool",
