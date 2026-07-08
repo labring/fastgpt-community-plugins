@@ -2,17 +2,6 @@
   "version": 1,
   "plugins": [
     {
-      "pluginId": "chromaVectorStore",
-      "version": "0.1.0",
-      "type": "tool",
-      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore",
-      "commit": "5a03f94bf207287882ab8cee7e903d56f04aafca",
-      "submodule": "packages/tools/chromaVectorStore",
-      "path": ".",
-      "status": "pending",
-      "support": "community"
-    },
-    {
       "pluginId": "googleSheets",
       "version": "0.1.0",
       "type": "tool",
@@ -23,18 +12,6 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
-    },
-    {
-      "pluginId": "qdrantVectorStore",
-      "version": "0.1.0",
-      "type": "tool",
-      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore",
-      "commit": "17db5d469c3d301ac8a46b3749eb3c4bc1f09deb",
-      "submodule": "packages/tools/qdrantVectorStore",
-      "path": ".",
-      "status": "active",
-      "support": "community",
-      "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
     },
     {
       "pluginId": "slack",
@@ -59,6 +36,65 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/unstructured-0.1.0-20260708034119422-published.json"
+    },
+    {
+      "pluginId": "qdrantVectorStore",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore",
+      "commit": "17db5d469c3d301ac8a46b3749eb3c4bc1f09deb",
+      "submodule": "packages/tools/qdrantVectorStore",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/qdrantVectorStore-0.1.0-20260708034526891-published.json"
+    },
+    {
+      "pluginId": "supabase",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git",
+      "commit": "74bfeeb0f9f940d829ab902d6c9e1372517fe812",
+      "submodule": "packages/tools/supabase",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/supabase-0.1.0-20260708085124220-published.json"
+    },
+    {
+      "pluginId": "hubspot",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git",
+      "commit": "e2ab07ca2c4a1fcdb6c83af542c461801c52cc12",
+      "submodule": "packages/tools/hubspot",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/hubspot-0.1.0-20260708085854734-published.json"
+    },
+    {
+      "pluginId": "gmail",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git",
+      "commit": "2e9ad10d4d048f338a586032ecd5469c6888477a",
+      "submodule": "packages/tools/gmail",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/gmail-0.1.0-20260708090748401-published.json"
+    },
+    {
+      "pluginId": "chromaVectorStore",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore",
+      "commit": "5a03f94bf207287882ab8cee7e903d56f04aafca",
+      "submodule": "packages/tools/chromaVectorStore",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
