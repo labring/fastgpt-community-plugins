@@ -52,3 +52,6 @@
 [submodule "packages/tools/pdfProcess"]
 	path = packages/tools/pdfProcess
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pdfProcess.git
+[submodule "packages/tools/openWeather"]
+	path = packages/tools/openWeather
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-openWeather.git
