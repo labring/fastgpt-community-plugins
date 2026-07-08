@@ -194,6 +194,17 @@
       "latestPublishEvent": "events/2026-07-08/chart-0.1.0-20260708180451361-published.json"
     },
     {
+      "pluginId": "pdfProcess",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pdfProcess.git",
+      "commit": "426ad787b32541e5ece81d95ecd2c3261a035caa",
+      "submodule": "packages/tools/pdfProcess",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "antvVisualization",
       "version": "0.1.0",
       "type": "tool",
