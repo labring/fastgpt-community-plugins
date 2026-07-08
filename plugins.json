@@ -54,7 +54,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git",
-      "commit": "02ad8eb585edfb031e323d2a2b77bcce38dc5db2",
+      "commit": "2e9ad10d4d048f338a586032ecd5469c6888477a",
       "submodule": "packages/tools/gmail",
       "path": ".",
       "status": "pending",
