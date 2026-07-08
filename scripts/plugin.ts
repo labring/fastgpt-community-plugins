@@ -7,7 +7,7 @@ import { Command } from 'commander';
 import { type RevokeReason } from '../schemas/event.js';
 import { readRegistryFile, type PluginRegistryEntry } from '../schemas/registry.js';
 import { runGit, tryRunGit } from './git.js';
-import { publishPlugin } from './publish.js';
+import { publishPlugin, type PublishReceipt } from './publish.js';
 import { type RegistryStatus, inferPluginFromPath, upsertRegistryEntry } from './registry.js';
 import { revokePlugin } from './revoke.js';
 import { detectChangedPluginIds, validateRegistry } from './validate.js';
@@ -64,6 +64,18 @@ type PublishCommandOptions = CommonOptions & {
   skipBuild?: boolean;
 };
 
+type PublishPendingCommandOptions = CommonOptions & {
+  base?: string;
+  head?: string;
+  allPending?: boolean;
+  reviewSummary?: string;
+  reviewGeneratedAt?: string;
+  receiptDir?: string;
+  eventDir?: string;
+  actor?: string;
+  skipBuild?: boolean;
+};
+
 type RevokeCommandOptions = CommonOptions & {
   version?: string;
   reason?: string;
@@ -83,6 +95,9 @@ type DoctorCheck = {
   ok: boolean;
   version: string | null;
 };
+
+const DEFAULT_AUTO_REVIEW_SUMMARY =
+  'Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.';
 
 export function createPluginProgram(context: PluginCliContext = {}): Command {
   const program = new Command();
@@ -209,6 +224,30 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
     });
 
   program
+    .command('publish-pending')
+    .description('Publish changed pending plugins after a merge to the registry branch.')
+    .option('--base <sha>', 'base git SHA for changed-plugin detection')
+    .option('--head <sha>', 'head git SHA for changed-plugin detection', 'HEAD')
+    .option('--all-pending', 'publish every pending registry entry instead of only changed pending entries')
+    .option('--review-summary <text>', 'AI review summary recorded for automated publish events')
+    .option('--review-generated-at <datetime>', 'AI review generation timestamp')
+    .option('--receipt-dir <dir>', 'receipt output directory', 'dist/receipts')
+    .option('--event-dir <dir>', 'event output directory', 'events')
+    .option('--actor <name>', 'publish actor')
+    .option('--registry <path>', 'registry file path', 'plugins.json')
+    .option('--dry-run', 'write dry-run receipts without mutating registry state')
+    .option('--skip-build', 'skip plugin-local install/build/pack')
+    .option('--json', 'print machine-readable JSON')
+    .action(async (options: PublishPendingCommandOptions) => {
+      const result = await publishPendingPlugins(root, options, context);
+      const human =
+        result.published.length > 0
+          ? `published ${result.published.map((receipt) => `${receipt.pluginId}@${receipt.version}`).join(', ')}`
+          : 'no pending changed plugins to publish';
+      writeOutput(stdout, outputMode(options), result, human);
+    });
+
+  program
     .command('revoke')
     .description('Revoke a plugin in repository state and write a revoke lifecycle event.')
     .argument('<pluginId>', 'plugin id to revoke')
@@ -327,6 +366,94 @@ async function checkPlugins(root: string, pluginId: string | undefined, options:
     errors: validation.errors,
     warnings: validation.warnings
   };
+}
+
+async function publishPendingPlugins(
+  root: string,
+  options: PublishPendingCommandOptions,
+  context: PluginCliContext
+): Promise<{
+  changedPluginIds: string[];
+  pendingPluginIds: string[];
+  skipped: Array<{ pluginId: string; reason: string }>;
+  published: PublishReceipt[];
+}> {
+  const registryPath = path.resolve(root, options.registry ?? 'plugins.json');
+  const registry = readRegistryFile(registryPath);
+  const changedPluginIds = detectChangedPluginIds({
+    root,
+    baseSha: options.base,
+    headSha: options.head,
+    plugins: registry.plugins
+  });
+  const candidatePluginIds = options.allPending ? registry.plugins.map((plugin) => plugin.pluginId) : changedPluginIds;
+  const pendingPluginIds = selectPendingPublishPluginIds(registry.plugins, candidatePluginIds);
+  const pluginsById = new Map(registry.plugins.map((plugin) => [plugin.pluginId, plugin]));
+  const skipped = candidatePluginIds
+    .filter((pluginId) => !pendingPluginIds.includes(pluginId))
+    .map((pluginId) => {
+      const plugin = pluginsById.get(pluginId);
+      return {
+        pluginId,
+        reason: plugin ? `${plugin.status} plugins are not published automatically` : 'plugin is not present in current registry'
+      };
+    });
+
+  if (pendingPluginIds.length === 0) {
+    return {
+      changedPluginIds,
+      pendingPluginIds,
+      skipped,
+      published: []
+    };
+  }
+
+  ensurePluginSubmodules(root, registry.plugins, pendingPluginIds);
+  const validation = await validateRegistry({
+    root,
+    registryPath,
+    baseSha: options.base,
+    headSha: options.head,
+    skipBuild: true,
+    pluginIds: pendingPluginIds
+  });
+  if (validation.errors.length > 0) {
+    throw new Error(`Automated publish hard gates failed:\n${validation.errors.join('\n')}`);
+  }
+
+  const published: PublishReceipt[] = [];
+  for (const pluginId of pendingPluginIds) {
+    const receipt = await publishPlugin({
+      root,
+      registryPath,
+      pluginId,
+      reviewVerdict: 'pass',
+      reviewSummary: options.reviewSummary ?? DEFAULT_AUTO_REVIEW_SUMMARY,
+      reviewGeneratedAt: options.reviewGeneratedAt,
+      receiptDir: options.receiptDir ?? 'dist/receipts',
+      eventDir: options.eventDir ?? 'events',
+      actor: options.actor ?? context.env?.GITHUB_ACTOR ?? process.env.GITHUB_ACTOR ?? 'local',
+      dryRun: Boolean(options.dryRun),
+      skipBuild: Boolean(options.skipBuild)
+    });
+    published.push(receipt);
+  }
+
+  return {
+    changedPluginIds,
+    pendingPluginIds,
+    skipped,
+    published
+  };
+}
+
+export function selectPendingPublishPluginIds(plugins: PluginRegistryEntry[], changedPluginIds: string[]): string[] {
+  const pluginsById = new Map(plugins.map((plugin) => [plugin.pluginId, plugin]));
+  return changedPluginIds
+    .map((pluginId) => pluginsById.get(pluginId))
+    .filter((plugin): plugin is PluginRegistryEntry => Boolean(plugin))
+    .filter((plugin) => plugin.status === 'pending')
+    .map((plugin) => plugin.pluginId);
 }
 
 function ensurePluginSubmodules(root: string, plugins: PluginRegistryEntry[], pluginIds: string[]): void {
