@@ -168,6 +168,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/microsoftExcel-0.1.0-20260708142909741-published.json"
+    },
+    {
+      "pluginId": "comfyUI",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-comfyUI.git",
+      "commit": "42bdf601846e5199296718e377d555fc9cab7f05",
+      "submodule": "packages/tools/comfyUI",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
