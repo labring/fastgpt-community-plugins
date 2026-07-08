@@ -246,7 +246,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-crawlee.git",
-      "commit": "2e45d9d9e0dc736f69dda73590bed98732b0870e",
+      "commit": "c2957a5db42b015c6d28fa1502bf90320603b12b",
       "submodule": "packages/tools/crawlee",
       "path": ".",
       "status": "pending",
