@@ -146,8 +146,8 @@ pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plug
 # 从本地 submodule package 推断 registry 元信息
 pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
-# 按 merge range 发布发生变化的 pending 插件，不修改 registry 状态
-pnpm run plugin -- publish-pending --base <base-sha> --head <head-sha> --dry-run --skip-build
+# 发布 pending 插件，不修改 registry 状态
+pnpm run plugin -- publish-pending --all-pending --dry-run --skip-build
 
 # 在仓库侧 revoke 插件并写入 revoke event
 pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
@@ -200,7 +200,7 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
 
 1. `validate.yml` 在合并前校验 registry schema、submodule 一致性、源码结构和策略规则。
 2. `plugin-review` 将结构化 AI verdict 和 findings 评论到 PR。
-3. `publish.yml` 在 `main` 收到 `push` 后运行，检测本次 merge 变更过的插件，并只发布仍处于 `pending` 状态的条目。
+3. `publish.yml` 在 `main` 收到 `push` 后运行，并发布仍处于 `pending` 状态的 registry 条目。
 4. `publish.yml` 按独立仓构建插件，将 `.pkg` 上传到 Marketplace，写入 publish event，将 registry 条目标记为 `active`，并把生命周期状态提交回仓库。
 5. publish receipt 会作为 GitHub Actions artifact 上传到 `dist/receipts`。
 

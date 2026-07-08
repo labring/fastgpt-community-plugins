@@ -8,6 +8,9 @@ on:
       - "plugins.json"
       - ".gitmodules"
       - "packages/tools/**"
+      - ".github/workflows/publish.yml"
+      - "scripts/plugin.ts"
+      - "scripts/publish.ts"
 
 permissions:
   contents: write
@@ -67,6 +70,7 @@ jobs:
           pnpm run plugin -- publish-pending \
             --base "$BASE_SHA" \
             --head "$HEAD_SHA" \
+            --all-pending \
             --actor "${{ github.actor }}"
           if [ -d dist/receipts ]; then
             published_count=$(find dist/receipts -name publish-receipt.json -type f | wc -l | tr -d ' ')

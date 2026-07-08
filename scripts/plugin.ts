@@ -67,6 +67,7 @@ type PublishCommandOptions = CommonOptions & {
 type PublishPendingCommandOptions = CommonOptions & {
   base?: string;
   head?: string;
+  allPending?: boolean;
   reviewSummary?: string;
   reviewGeneratedAt?: string;
   receiptDir?: string;
@@ -227,6 +228,7 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
     .description('Publish changed pending plugins after a merge to the registry branch.')
     .option('--base <sha>', 'base git SHA for changed-plugin detection')
     .option('--head <sha>', 'head git SHA for changed-plugin detection', 'HEAD')
+    .option('--all-pending', 'publish every pending registry entry instead of only changed pending entries')
     .option('--review-summary <text>', 'AI review summary recorded for automated publish events')
     .option('--review-generated-at <datetime>', 'AI review generation timestamp')
     .option('--receipt-dir <dir>', 'receipt output directory', 'dist/receipts')
@@ -384,9 +386,10 @@ async function publishPendingPlugins(
     headSha: options.head,
     plugins: registry.plugins
   });
-  const pendingPluginIds = selectPendingPublishPluginIds(registry.plugins, changedPluginIds);
+  const candidatePluginIds = options.allPending ? registry.plugins.map((plugin) => plugin.pluginId) : changedPluginIds;
+  const pendingPluginIds = selectPendingPublishPluginIds(registry.plugins, candidatePluginIds);
   const pluginsById = new Map(registry.plugins.map((plugin) => [plugin.pluginId, plugin]));
-  const skipped = changedPluginIds
+  const skipped = candidatePluginIds
     .filter((pluginId) => !pendingPluginIds.includes(pluginId))
     .map((pluginId) => {
       const plugin = pluginsById.get(pluginId);
