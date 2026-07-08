@@ -1,6 +1,9 @@
 [submodule "packages/tools/googleSheets"]
 	path = packages/tools/googleSheets
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleSheet
+[submodule "packages/tools/slack"]
+	path = packages/tools/slack
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-slack.git
 [submodule "packages/tools/unstructured"]
 	path = packages/tools/unstructured
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-unstructured
