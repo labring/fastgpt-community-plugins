@@ -25,3 +25,6 @@
 [submodule "packages/tools/telegramBot"]
 	path = packages/tools/telegramBot
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-telegramBot.git
+[submodule "packages/tools/discord"]
+	path = packages/tools/discord
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discord.git
