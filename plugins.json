@@ -57,8 +57,9 @@
       "commit": "74bfeeb0f9f940d829ab902d6c9e1372517fe812",
       "submodule": "packages/tools/supabase",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/supabase-0.1.0-20260708085124220-published.json"
     }
   ]
 }
