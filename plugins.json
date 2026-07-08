@@ -14,6 +14,18 @@
       "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
     },
     {
+      "pluginId": "googleDrive",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleDrive.git",
+      "commit": "975b387bbc14b2c3af3c1e432e75856181e53dd2",
+      "submodule": "packages/tools/googleDrive",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/googleDrive-0.1.0-20260708141817939-published.json"
+    },
+    {
       "pluginId": "slack",
       "version": "0.1.0",
       "type": "tool",
@@ -60,6 +72,18 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-08/pineconeVectorStore-0.1.0-20260708120933267-published.json"
+    },
+    {
+      "pluginId": "weaviateVectorStore",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-weaviateVectorStore.git",
+      "commit": "3042267f6835e376d513e87340fad66df154331a",
+      "submodule": "packages/tools/weaviateVectorStore",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-08/weaviateVectorStore-0.1.0-20260708141335075-published.json"
     },
     {
       "pluginId": "supabase",
