@@ -324,6 +324,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/gitlab-0.1.0-20260709063235121-published.json"
+    },
+    {
+      "pluginId": "confluence",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-confluence.git",
+      "commit": "fa2cae50f043d8d0ff59bb5cd29216a454555ad2",
+      "submodule": "packages/tools/confluence",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }

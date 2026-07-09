@@ -82,3 +82,6 @@
 [submodule "packages/tools/gitlab"]
 	path = packages/tools/gitlab
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git
+[submodule "packages/tools/confluence"]
+	path = packages/tools/confluence
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-confluence.git
