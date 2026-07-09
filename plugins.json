@@ -338,6 +338,17 @@
       "latestPublishEvent": "events/2026-07-09/confluence-0.1.0-20260709063617998-published.json"
     },
     {
+      "pluginId": "salesforce",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-salesforce.git",
+      "commit": "bc1c404cd102c04781974408ac34d66db62bcce1",
+      "submodule": "packages/tools/salesforce",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "zendesk",
       "version": "0.1.0",
       "type": "tool",
