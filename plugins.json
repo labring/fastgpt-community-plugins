@@ -249,8 +249,9 @@
       "commit": "c2957a5db42b015c6d28fa1502bf90320603b12b",
       "submodule": "packages/tools/crawlee",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/crawlee-0.1.0-20260709000835756-published.json"
     }
   ]
 }
