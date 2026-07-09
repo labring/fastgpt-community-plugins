@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "zendesk",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git",
+    "commit": "edc349fdfd06954f008433f47f7d3354c825e650",
+    "submodule": "packages/tools/zendesk",
+    "path": "."
+  },
+  "package": {
+    "file": "zendesk.pkg",
+    "sha256": "2b8a5c42d789bedaa4abf57d8ea886adbdd0aaa4babd1e70076baeb823237da0",
+    "sizeBytes": 85644
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-09T10:13:22.641Z"
+}
