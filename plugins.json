@@ -273,8 +273,9 @@
       "commit": "da783fe9420d1f02c12f8e730312a0ce376b7ad0",
       "submodule": "packages/tools/trello",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/trello-0.1.0-20260709041151501-published.json"
     }
   ]
 }
