@@ -73,3 +73,6 @@
 [submodule "packages/tools/stagehand"]
 	path = packages/tools/stagehand
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stagehand.git
+[submodule "packages/tools/jira"]
+	path = packages/tools/jira
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-jira.git
