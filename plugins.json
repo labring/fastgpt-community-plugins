@@ -300,6 +300,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/jira-0.1.0-20260709043836741-published.json"
+    },
+    {
+      "pluginId": "gitlab",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git",
+      "commit": "04c56df8265bcb92b678d937c359ac2c7bd0cef0",
+      "submodule": "packages/tools/gitlab",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }

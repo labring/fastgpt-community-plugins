@@ -76,3 +76,6 @@
 [submodule "packages/tools/jira"]
 	path = packages/tools/jira
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-jira.git
+[submodule "packages/tools/gitlab"]
+	path = packages/tools/gitlab
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git
