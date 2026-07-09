@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "gitlab",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git",
+    "commit": "04c56df8265bcb92b678d937c359ac2c7bd0cef0",
+    "submodule": "packages/tools/gitlab",
+    "path": "."
+  },
+  "package": {
+    "file": "gitlab.pkg",
+    "sha256": "927f13fd531013c4a2b90a5873a2fd4a8d1f9dc8cb4c3569f61fb2017c340c89",
+    "sizeBytes": 89713
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-09T06:32:35.121Z"
+}

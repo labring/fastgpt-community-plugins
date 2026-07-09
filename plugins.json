@@ -302,6 +302,30 @@
       "latestPublishEvent": "events/2026-07-09/jira-0.1.0-20260709043836741-published.json"
     },
     {
+      "pluginId": "linear",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git",
+      "commit": "121b1617123be544a9daaa87bb5f1c9d77f70973",
+      "submodule": "packages/tools/linear",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/linear-0.1.0-20260709061428509-published.json"
+    },
+    {
+      "pluginId": "gitlab",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git",
+      "commit": "04c56df8265bcb92b678d937c359ac2c7bd0cef0",
+      "submodule": "packages/tools/gitlab",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/gitlab-0.1.0-20260709063235121-published.json"
+    },
+    {
       "pluginId": "confluence",
       "version": "0.1.0",
       "type": "tool",

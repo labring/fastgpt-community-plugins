@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "linear",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git",
+    "commit": "121b1617123be544a9daaa87bb5f1c9d77f70973",
+    "submodule": "packages/tools/linear",
+    "path": "."
+  },
+  "package": {
+    "file": "linear.pkg",
+    "sha256": "865d4d3e9fe5c3b513558cdce1ad2670e5723d86d31bf2a03517f957136194c9",
+    "sizeBytes": 87313
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-09T06:14:28.509Z"
+}
