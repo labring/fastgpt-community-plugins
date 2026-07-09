@@ -67,6 +67,9 @@
 [submodule "packages/tools/vannaAi"]
 	path = packages/tools/vannaAi
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git
+[submodule "packages/tools/trello"]
+	path = packages/tools/trello
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-trello.git
 [submodule "packages/tools/stagehand"]
 	path = packages/tools/stagehand
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stagehand.git
