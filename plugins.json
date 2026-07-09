@@ -342,7 +342,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git",
-      "commit": "56cdf1c52e2d78872a990a860dc5371a84702f1f",
+      "commit": "edc349fdfd06954f008433f47f7d3354c825e650",
       "submodule": "packages/tools/zendesk",
       "path": ".",
       "status": "pending",
