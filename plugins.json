@@ -287,6 +287,17 @@
       "path": ".",
       "status": "pending",
       "support": "community"
+    },
+    {
+      "pluginId": "linear",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git",
+      "commit": "121b1617123be544a9daaa87bb5f1c9d77f70973",
+      "submodule": "packages/tools/linear",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
