@@ -264,6 +264,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/vannaAi-0.1.0-20260709001412573-published.json"
+    },
+    {
+      "pluginId": "linear",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git",
+      "commit": "b41b9f831486e0a653ac20a48779467855c810e3",
+      "submodule": "packages/tools/linear",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
