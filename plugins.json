@@ -309,8 +309,9 @@
       "commit": "121b1617123be544a9daaa87bb5f1c9d77f70973",
       "submodule": "packages/tools/linear",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/linear-0.1.0-20260709061428509-published.json"
     }
   ]
 }
