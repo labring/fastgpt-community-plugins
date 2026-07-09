@@ -79,3 +79,6 @@
 [submodule "packages/tools/linear"]
 	path = packages/tools/linear
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git
+[submodule "packages/tools/gitlab"]
+	path = packages/tools/gitlab
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git
