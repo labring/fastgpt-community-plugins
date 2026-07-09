@@ -171,6 +171,11 @@ export function normalizeGitRemoteUrl(remoteUrl: string): string {
 }
 
 function inferSourceUrl(root: string, pluginRoot: string): string | undefined {
+  const insideWorkTree = tryRunGit(['-C', pluginRoot, 'rev-parse', '--is-inside-work-tree'], root);
+  if (insideWorkTree !== 'true') {
+    return undefined;
+  }
+
   const ghUrl = tryRunCommand('gh', ['repo', 'view', '--json', 'url', '--jq', '.url'], pluginRoot);
   if (ghUrl) {
     return ghUrl;
