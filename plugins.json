@@ -261,8 +261,9 @@
       "commit": "105524d98229b6c22e73f97db7fcaf47a34807f3",
       "submodule": "packages/tools/vannaAi",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/vannaAi-0.1.0-20260709001412573-published.json"
     }
   ]
 }

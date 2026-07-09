@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "vannaAi",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git",
+    "commit": "105524d98229b6c22e73f97db7fcaf47a34807f3",
+    "submodule": "packages/tools/vannaAi",
+    "path": "."
+  },
+  "package": {
+    "file": "vannaAi.pkg",
+    "sha256": "fbc27cb780668f02a79bb1865927654fdbf7bff39325ac307100ef847fb08dd7",
+    "sizeBytes": 87664
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-09T00:14:12.573Z"
+}
