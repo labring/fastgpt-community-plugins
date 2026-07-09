@@ -345,8 +345,9 @@
       "commit": "bc1c404cd102c04781974408ac34d66db62bcce1",
       "submodule": "packages/tools/salesforce",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/salesforce-0.1.0-20260709101924608-published.json"
     },
     {
       "pluginId": "zendesk",
