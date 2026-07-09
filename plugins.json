@@ -336,6 +336,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/confluence-0.1.0-20260709063617998-published.json"
+    },
+    {
+      "pluginId": "zendesk",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git",
+      "commit": "56cdf1c52e2d78872a990a860dc5371a84702f1f",
+      "submodule": "packages/tools/zendesk",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
