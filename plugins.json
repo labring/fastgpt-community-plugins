@@ -347,6 +347,17 @@
       "path": ".",
       "status": "pending",
       "support": "community"
+    },
+    {
+      "pluginId": "zendesk",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git",
+      "commit": "edc349fdfd06954f008433f47f7d3354c825e650",
+      "submodule": "packages/tools/zendesk",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }

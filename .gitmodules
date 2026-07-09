@@ -88,3 +88,6 @@
 [submodule "packages/tools/salesforce"]
 	path = packages/tools/salesforce
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-salesforce.git
+[submodule "packages/tools/zendesk"]
+	path = packages/tools/zendesk
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git
