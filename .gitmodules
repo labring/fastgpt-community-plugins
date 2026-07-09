@@ -64,3 +64,6 @@
 [submodule "packages/tools/crawlee"]
 	path = packages/tools/crawlee
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-crawlee.git
+[submodule "packages/tools/vannaAi"]
+	path = packages/tools/vannaAi
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git

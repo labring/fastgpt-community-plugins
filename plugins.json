@@ -252,6 +252,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/crawlee-0.1.0-20260709000835756-published.json"
+    },
+    {
+      "pluginId": "vannaAi",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git",
+      "commit": "105524d98229b6c22e73f97db7fcaf47a34807f3",
+      "submodule": "packages/tools/vannaAi",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
