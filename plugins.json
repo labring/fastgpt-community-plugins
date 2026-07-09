@@ -276,6 +276,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/trello-0.1.0-20260709041151501-published.json"
+    },
+    {
+      "pluginId": "stagehand",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stagehand.git",
+      "commit": "ea3c2ee92d17420711eafe699b7e24e78d9878d1",
+      "submodule": "packages/tools/stagehand",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
