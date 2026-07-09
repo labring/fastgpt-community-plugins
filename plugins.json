@@ -321,8 +321,9 @@
       "commit": "04c56df8265bcb92b678d937c359ac2c7bd0cef0",
       "submodule": "packages/tools/gitlab",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/gitlab-0.1.0-20260709063235121-published.json"
     }
   ]
 }
