@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "stagehand",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stagehand.git",
+    "commit": "ea3c2ee92d17420711eafe699b7e24e78d9878d1",
+    "submodule": "packages/tools/stagehand",
+    "path": "."
+  },
+  "package": {
+    "file": "stagehand.pkg",
+    "sha256": "ccc3e7ab39c654ad187296b63bc295b2dfdc6638f0fc6a055c896a538b2d9366",
+    "sizeBytes": 1301880
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-09T04:23:02.427Z"
+}
