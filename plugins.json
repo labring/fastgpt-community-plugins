@@ -290,6 +290,18 @@
       "latestPublishEvent": "events/2026-07-09/stagehand-0.1.0-20260709042302427-published.json"
     },
     {
+      "pluginId": "jira",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-jira.git",
+      "commit": "c4acbdd5a007cacb48ea03ecb1d14155719a1219",
+      "submodule": "packages/tools/jira",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-09/jira-0.1.0-20260709043836741-published.json"
+    },
+    {
       "pluginId": "linear",
       "version": "0.1.0",
       "type": "tool",
