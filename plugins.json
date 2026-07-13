@@ -441,8 +441,9 @@
       "commit": "b0f7e2a9020e0accdaf6743e7dfdfe26e64a0426",
       "submodule": "packages/tools/sentry",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-13/sentry-0.1.0-20260713145129709-published.json"
     }
   ]
 }
