@@ -360,6 +360,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/zendesk-0.1.0-20260709101322641-published.json"
+    },
+    {
+      "pluginId": "googleCalendar",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleCalendar",
+      "commit": "42024f1f64f7fe96f5bee729c8e355c6e64b07cd",
+      "submodule": "packages/tools/googleCalendar",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
