@@ -97,3 +97,6 @@
 [submodule "packages/tools/microsoftOutlook"]
 	path = packages/tools/microsoftOutlook
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftOutlook.git
+[submodule "packages/tools/microsoftTeams"]
+	path = packages/tools/microsoftTeams
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftTeams.git
