@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "twilio",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-twilio",
+    "commit": "95a21d8595b7a39f062a9d9d2b12fad34e3a6dd5",
+    "submodule": "packages/tools/twilio",
+    "path": "."
+  },
+  "package": {
+    "file": "twilio.pkg",
+    "sha256": "d021ed013ee6a0fc3d3f3934f6afb5fdcefa7b2e60d97026b55ce889cb25384d",
+    "sizeBytes": 84535
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-13T10:50:57.801Z"
+}

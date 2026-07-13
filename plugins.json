@@ -405,8 +405,9 @@
       "commit": "95a21d8595b7a39f062a9d9d2b12fad34e3a6dd5",
       "submodule": "packages/tools/twilio",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-13/twilio-0.1.0-20260713105057801-published.json"
     }
   ]
 }
