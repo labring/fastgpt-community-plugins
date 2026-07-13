@@ -100,3 +100,6 @@
 [submodule "packages/tools/microsoftTeams"]
 	path = packages/tools/microsoftTeams
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftTeams.git
+[submodule "packages/tools/twilio"]
+	path = packages/tools/twilio
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-twilio.git
