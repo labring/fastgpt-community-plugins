@@ -429,8 +429,9 @@
       "commit": "3fd621ef059abf7457dbe183bec7dffb94db7536",
       "submodule": "packages/tools/elasticsearch",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-13/elasticsearch-0.1.0-20260713132116737-published.json"
     }
   ]
 }
