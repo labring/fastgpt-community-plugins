@@ -420,6 +420,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-13/stripe-0.1.0-20260713115108782-published.json"
+    },
+    {
+      "pluginId": "elasticsearch",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-elasticsearch",
+      "commit": "3fd621ef059abf7457dbe183bec7dffb94db7536",
+      "submodule": "packages/tools/elasticsearch",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }

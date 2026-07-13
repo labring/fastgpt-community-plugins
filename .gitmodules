@@ -106,3 +106,6 @@
 [submodule "packages/tools/stripe"]
 	path = packages/tools/stripe
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stripe.git
+[submodule "packages/tools/elasticsearch"]
+	path = packages/tools/elasticsearch
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-elasticsearch.git
