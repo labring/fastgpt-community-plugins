@@ -103,3 +103,6 @@
 [submodule "packages/tools/twilio"]
 	path = packages/tools/twilio
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-twilio.git
+[submodule "packages/tools/stripe"]
+	path = packages/tools/stripe
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stripe.git
