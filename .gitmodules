@@ -94,6 +94,9 @@
 [submodule "packages/tools/googleCalendar"]
 	path = packages/tools/googleCalendar
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleCalendar.git
+[submodule "packages/tools/microsoftOutlook"]
+	path = packages/tools/microsoftOutlook
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftOutlook.git
 [submodule "packages/tools/twilio"]
 	path = packages/tools/twilio
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-twilio.git
