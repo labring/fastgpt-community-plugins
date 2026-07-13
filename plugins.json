@@ -444,6 +444,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-13/sentry-0.1.0-20260713145129709-published.json"
+    },
+    {
+      "pluginId": "pagerDuty",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pagerDuty",
+      "commit": "ada87b46e168e07f6336eb27be9902790d994f55",
+      "submodule": "packages/tools/pagerDuty",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }

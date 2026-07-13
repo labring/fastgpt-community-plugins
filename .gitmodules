@@ -112,3 +112,6 @@
 [submodule "packages/tools/sentry"]
 	path = packages/tools/sentry
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sentry.git
+[submodule "packages/tools/pagerDuty"]
+	path = packages/tools/pagerDuty
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pagerDuty.git
