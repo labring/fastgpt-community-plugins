@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "microsoftOutlook",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftOutlook",
+    "commit": "684b7060a1d722d474bd60542396f78a0bd960ed",
+    "submodule": "packages/tools/microsoftOutlook",
+    "path": "."
+  },
+  "package": {
+    "file": "microsoftOutlook.pkg",
+    "sha256": "0876645216cfa11ab03899791eae6f50f1916f5275cfc367fdd03e28cacf4739",
+    "sizeBytes": 85443
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-13T10:38:52.319Z"
+}

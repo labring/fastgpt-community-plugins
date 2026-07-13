@@ -374,6 +374,18 @@
       "latestPublishEvent": "events/2026-07-13/googleCalendar-0.1.0-20260713101138501-published.json"
     },
     {
+      "pluginId": "microsoftOutlook",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftOutlook",
+      "commit": "684b7060a1d722d474bd60542396f78a0bd960ed",
+      "submodule": "packages/tools/microsoftOutlook",
+      "path": ".",
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-13/microsoftOutlook-0.1.0-20260713103852319-published.json"
+    },
+    {
       "pluginId": "microsoftTeams",
       "version": "0.1.0",
       "type": "tool",
