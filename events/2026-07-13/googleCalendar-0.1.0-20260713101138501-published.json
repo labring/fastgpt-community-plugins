@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "googleCalendar",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleCalendar",
+    "commit": "42024f1f64f7fe96f5bee729c8e355c6e64b07cd",
+    "submodule": "packages/tools/googleCalendar",
+    "path": "."
+  },
+  "package": {
+    "file": "googleCalendar.pkg",
+    "sha256": "416288910558975568b16bc5b48e81ce96dee0c91a16b8b6de56fb2943f65315",
+    "sizeBytes": 85401
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-13T10:11:38.501Z"
+}
