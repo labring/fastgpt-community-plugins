@@ -91,6 +91,9 @@
 [submodule "packages/tools/zendesk"]
 	path = packages/tools/zendesk
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git
+[submodule "packages/tools/googleCalendar"]
+	path = packages/tools/googleCalendar
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleCalendar.git
 [submodule "packages/tools/microsoftOutlook"]
 	path = packages/tools/microsoftOutlook
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftOutlook.git
