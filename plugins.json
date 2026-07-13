@@ -360,6 +360,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-09/zendesk-0.1.0-20260709101322641-published.json"
+    },
+    {
+      "pluginId": "microsoftTeams",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftTeams",
+      "commit": "80c0aea0d0b5478866576e527ff15e5359e5122e",
+      "submodule": "packages/tools/microsoftTeams",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
