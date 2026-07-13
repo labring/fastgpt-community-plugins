@@ -109,3 +109,6 @@
 [submodule "packages/tools/elasticsearch"]
 	path = packages/tools/elasticsearch
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-elasticsearch.git
+[submodule "packages/tools/sentry"]
+	path = packages/tools/sentry
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sentry.git

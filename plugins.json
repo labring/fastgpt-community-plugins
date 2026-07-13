@@ -432,6 +432,17 @@
       "status": "active",
       "support": "community",
       "latestPublishEvent": "events/2026-07-13/elasticsearch-0.1.0-20260713132116737-published.json"
+    },
+    {
+      "pluginId": "sentry",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sentry",
+      "commit": "b0f7e2a9020e0accdaf6743e7dfdfe26e64a0426",
+      "submodule": "packages/tools/sentry",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
     }
   ]
 }
