@@ -369,8 +369,9 @@
       "commit": "42024f1f64f7fe96f5bee729c8e355c6e64b07cd",
       "submodule": "packages/tools/googleCalendar",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-13/googleCalendar-0.1.0-20260713101138501-published.json"
     }
   ]
 }
