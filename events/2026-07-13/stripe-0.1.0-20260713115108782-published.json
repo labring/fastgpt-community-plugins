@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "stripe",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stripe",
+    "commit": "ab6807786d5ab04b19318a44dad9f10cb51e7dee",
+    "submodule": "packages/tools/stripe",
+    "path": "."
+  },
+  "package": {
+    "file": "stripe.pkg",
+    "sha256": "017ef5ede09a8b8fe8fb8024a39ae2ca8db3626d4706b15b9e195df5d5e7dec2",
+    "sizeBytes": 84941
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-13T11:51:08.782Z"
+}
