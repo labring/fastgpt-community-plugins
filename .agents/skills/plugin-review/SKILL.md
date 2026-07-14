@@ -28,13 +28,16 @@ Before writing a verdict:
 2. Read the candidate registry entry from `plugins.json`.
 3. Inspect the pinned submodule path and nested plugin path.
 4. Review `package.json`, `index.ts`, README, license, dependency list, and generated `.pkg` location if present.
-5. Use deterministic script output when available: `pnpm run validate`, build/check/pack logs, policy scan findings, and package checksum.
+5. Locate the main plugin logo and any child-tool logo overrides, open or render every distinct image, and verify which assets the generated manifest and final package use. Child tools may reuse a main logo that has passed this inspection.
+6. Use deterministic script output when available: `pnpm run validate`, build/check/pack logs, policy scan findings, and package checksum.
+
+Do not approve a logo from its filename or existence alone. Inspect its visible content; for SVG files, inspect both the source and rendered result when possible. The plugin must have a deliberate, production-ready logo that identifies its own product, brand, or function.
 
 ## Verdict Rules
 
-- `pass`: deterministic gates pass and no blocking policy risk is found.
+- `pass`: deterministic gates and the logo inspection pass, and no blocking policy risk is found.
 - `warn`: deterministic gates pass but maintenance, license, dependency, network, or usability risk needs human review before publish.
-- `fail`: deterministic gates fail, source/commit mismatch exists, package cannot be built, or blocking policy risk is found.
+- `fail`: deterministic gates or the logo inspection fail, source/commit mismatch exists, package cannot be built, or blocking policy risk is found.
 
 Never use `pass` to mean the plugin is feature-complete, bug-free, or officially maintained.
 
@@ -55,6 +58,7 @@ Plugin root: <submodule>/<path>
 ### Evidence
 - registry/submodule:
 - install/build/check/pack:
+- icon/assets: main=<path>, child overrides=<paths|none>, manifest=<reference>, package=<reference>, placeholder check=<pass|fail>
 - policy scan:
 - package sha256:
 
@@ -95,6 +99,7 @@ In the PR comment, include:
 - source repo and commit inspected
 - plugin root path
 - build/check/pack result
+- main logo path, child-tool overrides, visual inspection result, and final manifest/package references
 - policy scan result
 - secrets/process/filesystem/network concerns
 - dependency or license concerns
@@ -110,6 +115,10 @@ Mark as `fail` when any of these are present:
 - missing plugin-local `pnpm-lock.yaml`
 - `catalog:` or `workspace:` dependency specifiers in plugin `package.json`
 - build/check/pack failure
+- missing, unreadable, malformed, or unrenderable main plugin logo
+- main or child-tool logo missing from, or incorrectly referenced by, the generated manifest or final package
+- the FastGPT plugin template's default question-mark logo, including recolored, resized, or otherwise superficial variants
+- an obvious placeholder or temporary logo, such as a question mark, generic initial, stock placeholder, or image unrelated to the plugin's product, brand, or function
 - suspected private key, token, or hardcoded secret
 - process execution through `child_process`
 - destructive filesystem removal
