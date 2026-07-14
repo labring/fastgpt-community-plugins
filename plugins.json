@@ -434,6 +434,17 @@
       "latestPublishEvent": "events/2026-07-14/sentry-0.1.0-20260714035011081-published.json"
     },
     {
+      "pluginId": "shopify",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-shopify",
+      "commit": "b6b59074683808a123e243a35679baf93b3b2643",
+      "submodule": "packages/tools/shopify",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "slack",
       "version": "0.1.0",
       "type": "tool",
