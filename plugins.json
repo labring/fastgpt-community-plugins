@@ -441,8 +441,9 @@
       "commit": "b6b59074683808a123e243a35679baf93b3b2643",
       "submodule": "packages/tools/shopify",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/shopify-0.1.0-20260714230424705-published.json"
     },
     {
       "pluginId": "slack",
