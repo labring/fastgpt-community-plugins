@@ -14,6 +14,17 @@
       "latestPublishEvent": "events/2026-07-08/antvVisualization-0.1.0-20260708202433352-published.json"
     },
     {
+      "pluginId": "apify",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apify",
+      "commit": "37ef943f5d696121f4ad30eeb0717fa816e4f5d0",
+      "submodule": "packages/tools/apify",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "asana",
       "version": "0.1.0",
       "type": "tool",

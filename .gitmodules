@@ -130,3 +130,6 @@
 [submodule "packages/tools/calendly"]
 	path = packages/tools/calendly
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-calendly.git
+[submodule "packages/tools/apify"]
+	path = packages/tools/apify
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apify.git
