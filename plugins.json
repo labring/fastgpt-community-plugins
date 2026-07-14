@@ -21,8 +21,9 @@
       "commit": "4ff901ec30933f35d4c1ce684fb1248b13a9f61a",
       "submodule": "packages/tools/asana",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/asana-0.1.0-20260714011527760-published.json"
     },
     {
       "pluginId": "chart",
