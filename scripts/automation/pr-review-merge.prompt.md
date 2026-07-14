@@ -34,7 +34,7 @@ If there are no open PRs, report that clearly and exit successfully.
 
 For each open PR, perform up to three review rounds:
 
-1. Deterministic evidence round: validate registry/submodule/source metadata and run available deterministic gates such as `pnpm run validate`, package build/check/pack commands, policy scan, and checksum verification when applicable.
+1. Artifact and deterministic evidence round: validate registry/submodule/source metadata; locate, open or render, and inspect the main plugin logo and every distinct child-tool override; verify the inspected assets are used by the generated manifest and final package; reject the FastGPT template default question-mark logo and other obvious placeholders; then run available deterministic gates such as `pnpm run validate`, package build/check/pack commands, policy scan, and checksum verification when applicable. A filename or successful file-existence check is not logo evidence.
 2. Risk round: inspect security, license, dependency, network, filesystem, process execution, source ownership, and maintenance risk.
 3. Merge-readiness round: verify GitHub status checks, mergeability, review decision, labels, draft state, blocking comments, and whether any simple repository metadata conflicts can be safely fixed by the automation.
 
@@ -76,6 +76,7 @@ If the conflict is outside the eligible files, is not obviously mechanical, cann
 Merge a PR only when every condition below is true:
 
 - The `plugin-review` verdict is `pass`.
+- The review comment contains `icon/assets` evidence naming the inspected main logo and child overrides, confirms the final manifest/package references, and reports no default-template or placeholder-logo hard block.
 - The PR is open and not draft.
 - The PR head SHA still matches the SHA that was reviewed, or the newer SHA was produced by the automation's metadata-only remediation and then re-reviewed.
 - GitHub reports the PR as mergeable, or the merge queue accepts it without admin bypass.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Review FastGPT Plugin"
   short_description: "Review a FastGPT community plugin PR and post a publishability verdict"
-  default_prompt: "Use $plugin-review to inspect the candidate FastGPT community plugin in the current pull request, run or read deterministic validation evidence, and post a structured pass, warn, or fail publishability verdict as a GitHub PR comment."
+  default_prompt: "Use $plugin-review to inspect the candidate FastGPT community plugin in the current pull request, including opening or rendering its final main and child-tool logos and failing any FastGPT template default or placeholder image, run or read deterministic validation evidence, and post a structured pass, warn, or fail publishability verdict as a GitHub PR comment."
