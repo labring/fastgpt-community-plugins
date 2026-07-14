@@ -36,7 +36,7 @@ Community plugins are reviewed for publishability and traceability. The review s
 │   └── daily-summary/              # AI daily lifecycle summary skill
 ├── .github/workflows/
 │   ├── validate.yml                # PR and manual registry validation
-│   ├── publish.yml                 # Manual publish workflow
+│   ├── publish.yml                 # Automatic publish and republish workflow
 │   └── revoke.yml                  # Manual repository-side revoke workflow
 ├── events/<yyyy-mm-dd>/            # Committed publish/revoke lifecycle events
 ├── packages/tools/<pluginId>/      # Community plugin submodules
@@ -146,8 +146,8 @@ pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plug
 # Infer registry metadata from a local submodule package
 pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
-# Publish pending plugins without mutating registry state
-pnpm run plugin -- publish-pending --all-pending --dry-run --skip-build
+# Preview pending publishes and stale active-plugin republishes without mutating registry state
+pnpm run plugin -- publish-pending --all-pending --reconcile-active --dry-run
 
 # Revoke a plugin in repository state and write a revoke event
 pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
@@ -200,11 +200,11 @@ Publishing runs automatically after a plugin PR is merged to `main`:
 
 1. `validate.yml` verifies registry schema, submodule consistency, source layout, and policy gates before merge.
 2. `plugin-review` posts a structured AI verdict and findings to the pull request.
-3. `publish.yml` runs on `push` to `main` and publishes registry entries that are still `pending`.
+3. `publish.yml` runs on `push` to `main` with `--all-pending --reconcile-active`. It publishes `pending` entries and republishes `active` entries whose version or pinned source revision differs from their latest publish event.
 4. `publish.yml` builds the plugin as an independent repository, uploads the `.pkg` to Marketplace, writes a publish event, marks the registry entry `active`, and commits lifecycle state back to the repository.
 5. The publish receipt is uploaded as a GitHub Actions artifact under `dist/receipts`.
 
-The lifecycle commit from step 4 may trigger `publish.yml` again because it updates `plugins.json`. The second run exits without publishing because the plugin is no longer `pending`.
+The lifecycle commit from step 4 may trigger `publish.yml` again because it updates `plugins.json`. The second run exits without publishing because each active registry revision now matches its latest publish event.
 
 Required GitHub Actions secrets:
 

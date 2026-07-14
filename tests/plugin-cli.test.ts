@@ -5,7 +5,11 @@ import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { normalizeGitRemoteUrl } from '../scripts/registry.js';
-import { runPluginCli, selectPendingPublishPluginIds } from '../scripts/plugin.js';
+import {
+  resolveAutomatedPublishTargets,
+  runPluginCli,
+  selectPendingPublishPluginIds
+} from '../scripts/plugin.js';
 import type { PluginRegistryEntry } from '../schemas/registry.js';
 
 const tempDirs: string[] = [];
@@ -137,9 +141,102 @@ describe('plugin CLI', () => {
       'googleSheets'
     ]);
   });
+
+  it('keeps legacy all-pending output when active reconciliation is disabled', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-plugin-cli-'));
+    tempDirs.push(root);
+    fs.writeFileSync(
+      path.join(root, 'plugins.json'),
+      JSON.stringify({ version: 1, plugins: [plugin('weatherTool', 'active')] })
+    );
+    const jsonOutput: string[] = [];
+    const humanOutput: string[] = [];
+
+    await runPluginCli(['publish-pending', '--all-pending', '--json'], {
+      root,
+      stdout: (message) => jsonOutput.push(message),
+      stdinIsTTY: false
+    });
+    await runPluginCli(['publish-pending', '--all-pending'], {
+      root,
+      stdout: (message) => humanOutput.push(message),
+      stdinIsTTY: false
+    });
+
+    expect(JSON.parse(jsonOutput[0] ?? '{}')).toMatchObject({
+      republishPluginIds: [],
+      publishPluginIds: [],
+      skipped: [{ pluginId: 'weatherTool', reason: 'active plugins are not published automatically' }],
+      published: []
+    });
+    expect(humanOutput).toEqual(['no pending changed plugins to publish']);
+  });
+
+  it('republishes active plugins only when their registry revision differs from the latest publish event', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-plugin-cli-'));
+    tempDirs.push(root);
+    const staleEventPath = 'events/2026-07-13/weatherTool-0.1.0-published.json';
+    const currentEventPath = 'events/2026-07-13/searchTool-0.1.0-published.json';
+    const plugins = [
+      plugin('weatherTool', 'active', {
+        commit: 'bbbbbbbbbbbbbbbb',
+        latestPublishEvent: staleEventPath
+      }),
+      plugin('searchTool', 'active', {
+        commit: 'cccccccccccccccc',
+        latestPublishEvent: currentEventPath
+      })
+    ];
+    writePublishEvent(root, staleEventPath, plugins[0]!, 'aaaaaaaaaaaaaaaa');
+    writePublishEvent(root, currentEventPath, plugins[1]!, 'cccccccccccccccc');
+
+    expect(resolveAutomatedPublishTargets(root, plugins, ['weatherTool', 'searchTool'])).toEqual({
+      pendingPluginIds: [],
+      republishPluginIds: [],
+      publishPluginIds: []
+    });
+    expect(
+      resolveAutomatedPublishTargets(root, plugins, ['weatherTool', 'searchTool'], { reconcileActive: true })
+    ).toEqual({
+      pendingPluginIds: [],
+      republishPluginIds: ['weatherTool'],
+      publishPluginIds: ['weatherTool']
+    });
+  });
+
+  it('fails closed when an active plugin latest publish event cannot be parsed', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-plugin-cli-'));
+    tempDirs.push(root);
+    const eventPath = 'events/2026-07-13/weatherTool-0.1.0-published.json';
+    const pluginEntry = plugin('weatherTool', 'active', { latestPublishEvent: eventPath });
+    const absolutePath = path.join(root, eventPath);
+    fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
+    fs.writeFileSync(absolutePath, '{ invalid json');
+
+    expect(() =>
+      resolveAutomatedPublishTargets(root, [pluginEntry], ['weatherTool'], { reconcileActive: true })
+    ).toThrow(`weatherTool: unable to read latest publish event ${eventPath}`);
+  });
+
+  it('fails closed when latestPublishEvent belongs to another plugin', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-plugin-cli-'));
+    tempDirs.push(root);
+    const eventPath = 'events/2026-07-13/weatherTool-0.1.0-published.json';
+    const pluginEntry = plugin('weatherTool', 'active', { latestPublishEvent: eventPath });
+    const otherPlugin = plugin('searchTool', 'active');
+    writePublishEvent(root, eventPath, otherPlugin, otherPlugin.commit);
+
+    expect(() =>
+      resolveAutomatedPublishTargets(root, [pluginEntry], ['weatherTool'], { reconcileActive: true })
+    ).toThrow(`weatherTool: latest publish event ${eventPath} belongs to searchTool`);
+  });
 });
 
-function plugin(pluginId: string, status: PluginRegistryEntry['status']): PluginRegistryEntry {
+function plugin(
+  pluginId: string,
+  status: PluginRegistryEntry['status'],
+  overrides: Partial<PluginRegistryEntry> = {}
+): PluginRegistryEntry {
   return {
     pluginId,
     version: '0.1.0',
@@ -149,6 +246,49 @@ function plugin(pluginId: string, status: PluginRegistryEntry['status']): Plugin
     submodule: `packages/tools/${pluginId}`,
     path: '.',
     status,
-    support: 'community'
+    support: 'community',
+    ...overrides
   };
+}
+
+function writePublishEvent(
+  root: string,
+  eventPath: string,
+  pluginEntry: PluginRegistryEntry,
+  commit: string
+): void {
+  const absolutePath = path.join(root, eventPath);
+  fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
+  fs.writeFileSync(
+    absolutePath,
+    JSON.stringify({
+      schemaVersion: 1,
+      eventType: 'published',
+      pluginId: pluginEntry.pluginId,
+      version: pluginEntry.version,
+      source: {
+        repo: pluginEntry.source,
+        commit,
+        submodule: pluginEntry.submodule,
+        path: pluginEntry.path
+      },
+      package: {
+        file: `${pluginEntry.pluginId}.pkg`,
+        sha256: 'a'.repeat(64),
+        sizeBytes: 1
+      },
+      review: {
+        verdict: 'pass',
+        summary: 'fixture pass',
+        generatedAt: null
+      },
+      marketplace: {
+        releaseId: null,
+        uploaded: true,
+        visibility: 'listed'
+      },
+      actor: 'test-runner',
+      createdAt: '2026-07-13T00:00:00.000Z'
+    })
+  );
 }
