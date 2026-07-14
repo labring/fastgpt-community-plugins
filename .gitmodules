@@ -121,3 +121,6 @@
 [submodule "packages/tools/clickup"]
 	path = packages/tools/clickup
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-clickup.git
+[submodule "packages/tools/dropbox"]
+	path = packages/tools/dropbox
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-dropbox.git
