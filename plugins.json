@@ -26,6 +26,17 @@
       "latestPublishEvent": "events/2026-07-14/asana-0.1.0-20260714011527760-published.json"
     },
     {
+      "pluginId": "box",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-box",
+      "commit": "959c5b32c3110511f350c4144159623819a73bbc",
+      "submodule": "packages/tools/box",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "chart",
       "version": "0.1.0",
       "type": "tool",

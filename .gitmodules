@@ -124,3 +124,6 @@
 [submodule "packages/tools/dropbox"]
 	path = packages/tools/dropbox
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-dropbox.git
+[submodule "packages/tools/box"]
+	path = packages/tools/box
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-box.git
