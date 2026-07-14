@@ -249,8 +249,9 @@
       "commit": "01c0510843bda7758c67f0111e9102d74346ee2f",
       "submodule": "packages/tools/grafana",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/grafana-0.1.0-20260714190646572-published.json"
     },
     {
       "pluginId": "hubspot",
