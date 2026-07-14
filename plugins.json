@@ -381,8 +381,9 @@
       "commit": "aa2b47f81a282d0243089f5544b44ab7a5d5d159",
       "submodule": "packages/tools/posthog",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/posthog-0.1.0-20260714203010524-published.json"
     },
     {
       "pluginId": "qdrantVectorStore",
