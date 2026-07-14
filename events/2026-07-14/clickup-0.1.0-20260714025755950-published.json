@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "clickup",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-clickup",
+    "commit": "6fb0bb0abf466a2c6e2897d0e8e46404fc23dce6",
+    "submodule": "packages/tools/clickup",
+    "path": "."
+  },
+  "package": {
+    "file": "clickup.pkg",
+    "sha256": "1303afa6c3f4234eaa27078e07e73fe2e28dbb259b2df7d694a1d0fdcc46c00c",
+    "sizeBytes": 86987
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-14T02:57:55.950Z"
+}

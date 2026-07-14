@@ -57,8 +57,9 @@
       "commit": "6fb0bb0abf466a2c6e2897d0e8e46404fc23dce6",
       "submodule": "packages/tools/clickup",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/clickup-0.1.0-20260714025755950-published.json"
     },
     {
       "pluginId": "comfyUI",
