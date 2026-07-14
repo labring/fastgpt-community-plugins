@@ -57,7 +57,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Publish changed pending plugins
+      - name: Publish pending and stale active plugins
         id: publish
         env:
           BASE_SHA: ${{ github.event.before }}
@@ -71,6 +71,7 @@ jobs:
             --base "$BASE_SHA" \
             --head "$HEAD_SHA" \
             --all-pending \
+            --reconcile-active \
             --actor "${{ github.actor }}"
           if [ -d dist/receipts ]; then
             published_count=$(find dist/receipts -name publish-receipt.json -type f | wc -l | tr -d ' ')

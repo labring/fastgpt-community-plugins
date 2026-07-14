@@ -36,7 +36,7 @@
 │   └── daily-summary/              # AI 每日生命周期摘要 skill
 ├── .github/workflows/
 │   ├── validate.yml                # PR 和手动 registry 校验
-│   ├── publish.yml                 # 手动发布 workflow
+│   ├── publish.yml                 # 自动发布与重新发布 workflow
 │   └── revoke.yml                  # 手动仓库侧 revoke workflow
 ├── events/<yyyy-mm-dd>/            # 已提交的 publish/revoke 生命周期事件
 ├── packages/tools/<pluginId>/      # 社区插件 submodule
@@ -146,8 +146,8 @@ pnpm run registry -- upsert --plugin googleSheets --version 0.1.0 --source <plug
 # 从本地 submodule package 推断 registry 元信息
 pnpm run registry -- upsert --from packages/tools/googleSheets --source <plugin-repo-url> --commit <commit-sha>
 
-# 发布 pending 插件，不修改 registry 状态
-pnpm run plugin -- publish-pending --all-pending --dry-run --skip-build
+# 预演 pending 发布和 stale active 插件重发，不修改 registry 状态
+pnpm run plugin -- publish-pending --all-pending --reconcile-active --dry-run
 
 # 在仓库侧 revoke 插件并写入 revoke event
 pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current package check"
@@ -200,11 +200,11 @@ pnpm run revoke -- --plugin <pluginId> --reason broken --details "Fails current 
 
 1. `validate.yml` 在合并前校验 registry schema、submodule 一致性、源码结构和策略规则。
 2. `plugin-review` 将结构化 AI verdict 和 findings 评论到 PR。
-3. `publish.yml` 在 `main` 收到 `push` 后运行，并发布仍处于 `pending` 状态的 registry 条目。
+3. `publish.yml` 在 `main` 收到 `push` 后使用 `--all-pending --reconcile-active`：发布 `pending` 条目，并重新发布 version 或固定 source revision 与最新 publish event 不一致的 `active` 条目。
 4. `publish.yml` 按独立仓构建插件，将 `.pkg` 上传到 Marketplace，写入 publish event，将 registry 条目标记为 `active`，并把生命周期状态提交回仓库。
 5. publish receipt 会作为 GitHub Actions artifact 上传到 `dist/receipts`。
 
-第 4 步提交的 lifecycle commit 也可能再次触发 `publish.yml`，但第二次运行会因为插件已经不是 `pending` 而直接跳过，避免重复发布。
+第 4 步提交的 lifecycle commit 也可能再次触发 `publish.yml`，但此时 active registry revision 已与最新 publish event 一致，第二次运行会直接跳过，避免重复发布。
 
 GitHub Actions 需要配置以下 secrets：
 

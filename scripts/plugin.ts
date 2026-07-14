@@ -4,7 +4,7 @@ import path from 'node:path';
 import { input } from '@inquirer/prompts';
 import { Command } from 'commander';
 
-import { type RevokeReason } from '../schemas/event.js';
+import { readLifecycleEventFile, type RevokeReason } from '../schemas/event.js';
 import { readRegistryFile, type PluginRegistryEntry } from '../schemas/registry.js';
 import { runGit, tryRunGit } from './git.js';
 import { publishPlugin, type PublishReceipt } from './publish.js';
@@ -68,6 +68,7 @@ type PublishPendingCommandOptions = CommonOptions & {
   base?: string;
   head?: string;
   allPending?: boolean;
+  reconcileActive?: boolean;
   reviewSummary?: string;
   reviewGeneratedAt?: string;
   receiptDir?: string;
@@ -225,10 +226,11 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
 
   program
     .command('publish-pending')
-    .description('Publish changed pending plugins after a merge to the registry branch.')
+    .description('Publish pending plugins and reconcile active plugin revisions after a registry merge.')
     .option('--base <sha>', 'base git SHA for changed-plugin detection')
     .option('--head <sha>', 'head git SHA for changed-plugin detection', 'HEAD')
     .option('--all-pending', 'publish every pending registry entry instead of only changed pending entries')
+    .option('--reconcile-active', 'republish active entries whose registry revision differs from the latest publish event')
     .option('--review-summary <text>', 'AI review summary recorded for automated publish events')
     .option('--review-generated-at <datetime>', 'AI review generation timestamp')
     .option('--receipt-dir <dir>', 'receipt output directory', 'dist/receipts')
@@ -243,7 +245,9 @@ export function createPluginProgram(context: PluginCliContext = {}): Command {
       const human =
         result.published.length > 0
           ? `published ${result.published.map((receipt) => `${receipt.pluginId}@${receipt.version}`).join(', ')}`
-          : 'no pending changed plugins to publish';
+          : options.reconcileActive
+            ? 'no pending or stale active plugins to publish'
+            : 'no pending changed plugins to publish';
       writeOutput(stdout, outputMode(options), result, human);
     });
 
@@ -375,6 +379,8 @@ async function publishPendingPlugins(
 ): Promise<{
   changedPluginIds: string[];
   pendingPluginIds: string[];
+  republishPluginIds: string[];
+  publishPluginIds: string[];
   skipped: Array<{ pluginId: string; reason: string }>;
   published: PublishReceipt[];
 }> {
@@ -387,42 +393,55 @@ async function publishPendingPlugins(
     plugins: registry.plugins
   });
   const candidatePluginIds = options.allPending ? registry.plugins.map((plugin) => plugin.pluginId) : changedPluginIds;
-  const pendingPluginIds = selectPendingPublishPluginIds(registry.plugins, candidatePluginIds);
+  const { pendingPluginIds, republishPluginIds, publishPluginIds } = resolveAutomatedPublishTargets(
+    root,
+    registry.plugins,
+    candidatePluginIds,
+    { reconcileActive: Boolean(options.reconcileActive) }
+  );
   const pluginsById = new Map(registry.plugins.map((plugin) => [plugin.pluginId, plugin]));
   const skipped = candidatePluginIds
-    .filter((pluginId) => !pendingPluginIds.includes(pluginId))
+    .filter((pluginId) => !publishPluginIds.includes(pluginId))
     .map((pluginId) => {
       const plugin = pluginsById.get(pluginId);
       return {
         pluginId,
-        reason: plugin ? `${plugin.status} plugins are not published automatically` : 'plugin is not present in current registry'
+        reason: plugin
+          ? plugin.status === 'active'
+            ? options.reconcileActive
+              ? 'active plugin revision already matches its latest publish event'
+              : 'active plugins are not published automatically'
+            : `${plugin.status} plugins are not published automatically`
+          : 'plugin is not present in current registry'
       };
     });
 
-  if (pendingPluginIds.length === 0) {
+  if (publishPluginIds.length === 0) {
     return {
       changedPluginIds,
       pendingPluginIds,
+      republishPluginIds,
+      publishPluginIds,
       skipped,
       published: []
     };
   }
 
-  ensurePluginSubmodules(root, registry.plugins, pendingPluginIds);
+  ensurePluginSubmodules(root, registry.plugins, publishPluginIds);
   const validation = await validateRegistry({
     root,
     registryPath,
     baseSha: options.base,
     headSha: options.head,
     skipBuild: true,
-    pluginIds: pendingPluginIds
+    pluginIds: publishPluginIds
   });
   if (validation.errors.length > 0) {
     throw new Error(`Automated publish hard gates failed:\n${validation.errors.join('\n')}`);
   }
 
   const published: PublishReceipt[] = [];
-  for (const pluginId of pendingPluginIds) {
+  for (const pluginId of publishPluginIds) {
     const receipt = await publishPlugin({
       root,
       registryPath,
@@ -442,6 +461,8 @@ async function publishPendingPlugins(
   return {
     changedPluginIds,
     pendingPluginIds,
+    republishPluginIds,
+    publishPluginIds,
     skipped,
     published
   };
@@ -454,6 +475,66 @@ export function selectPendingPublishPluginIds(plugins: PluginRegistryEntry[], ch
     .filter((plugin): plugin is PluginRegistryEntry => Boolean(plugin))
     .filter((plugin) => plugin.status === 'pending')
     .map((plugin) => plugin.pluginId);
+}
+
+export function resolveAutomatedPublishTargets(
+  root: string,
+  plugins: PluginRegistryEntry[],
+  candidatePluginIds: string[],
+  options: { reconcileActive?: boolean } = {}
+): {
+  pendingPluginIds: string[];
+  republishPluginIds: string[];
+  publishPluginIds: string[];
+} {
+  const pluginsById = new Map(plugins.map((plugin) => [plugin.pluginId, plugin]));
+  const pendingPluginIds = selectPendingPublishPluginIds(plugins, candidatePluginIds);
+  const republishPluginIds = options.reconcileActive
+    ? candidatePluginIds.filter((pluginId) => {
+        const plugin = pluginsById.get(pluginId);
+        return plugin?.status === 'active' && !hasCurrentPublishEvent(root, plugin);
+      })
+    : [];
+  const publishableIds = new Set([...pendingPluginIds, ...republishPluginIds]);
+
+  return {
+    pendingPluginIds,
+    republishPluginIds,
+    publishPluginIds: candidatePluginIds.filter((pluginId) => publishableIds.has(pluginId))
+  };
+}
+
+function hasCurrentPublishEvent(root: string, plugin: PluginRegistryEntry): boolean {
+  if (!plugin.latestPublishEvent) {
+    return false;
+  }
+
+  let event: ReturnType<typeof readLifecycleEventFile>;
+  try {
+    event = readLifecycleEventFile(path.resolve(root, plugin.latestPublishEvent));
+  } catch (error) {
+    const detail = error instanceof Error ? `: ${error.message}` : '';
+    throw new Error(`${plugin.pluginId}: unable to read latest publish event ${plugin.latestPublishEvent}${detail}`);
+  }
+
+  if (event.eventType !== 'published') {
+    throw new Error(
+      `${plugin.pluginId}: latest publish event ${plugin.latestPublishEvent} has event type ${event.eventType}`
+    );
+  }
+  if (event.pluginId !== plugin.pluginId) {
+    throw new Error(
+      `${plugin.pluginId}: latest publish event ${plugin.latestPublishEvent} belongs to ${event.pluginId}`
+    );
+  }
+
+  return (
+    event.version === plugin.version &&
+    event.source.repo === plugin.source &&
+    event.source.commit === plugin.commit &&
+    event.source.submodule === plugin.submodule &&
+    event.source.path === plugin.path
+  );
 }
 
 function ensurePluginSubmodules(root: string, plugins: PluginRegistryEntry[], pluginIds: string[]): void {
