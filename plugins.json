@@ -374,6 +374,17 @@
       "latestPublishEvent": "events/2026-07-08/pineconeVectorStore-0.1.0-20260708120933267-published.json"
     },
     {
+      "pluginId": "posthog",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-posthog",
+      "commit": "aa2b47f81a282d0243089f5544b44ab7a5d5d159",
+      "submodule": "packages/tools/posthog",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "qdrantVectorStore",
       "version": "0.1.0",
       "type": "tool",
