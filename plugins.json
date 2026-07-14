@@ -59,7 +59,7 @@
       "path": ".",
       "status": "active",
       "support": "community",
-      "latestPublishEvent": "events/2026-07-14/clickup-0.1.0-20260714025755950-published.json"
+      "latestPublishEvent": "events/2026-07-14/clickup-0.1.0-20260714034956353-published.json"
     },
     {
       "pluginId": "comfyUI",
@@ -119,7 +119,7 @@
       "path": ".",
       "status": "active",
       "support": "community",
-      "latestPublishEvent": "events/2026-07-13/elasticsearch-0.1.0-20260713132116737-published.json"
+      "latestPublishEvent": "events/2026-07-14/elasticsearch-0.1.0-20260714035001100-published.json"
     },
     {
       "pluginId": "gitlab",
@@ -275,7 +275,7 @@
       "path": ".",
       "status": "active",
       "support": "community",
-      "latestPublishEvent": "events/2026-07-13/pagerDuty-0.1.0-20260713224734664-published.json"
+      "latestPublishEvent": "events/2026-07-14/pagerDuty-0.1.0-20260714035006388-published.json"
     },
     {
       "pluginId": "pdfProcess",
@@ -335,7 +335,7 @@
       "path": ".",
       "status": "active",
       "support": "community",
-      "latestPublishEvent": "events/2026-07-13/sentry-0.1.0-20260713145129709-published.json"
+      "latestPublishEvent": "events/2026-07-14/sentry-0.1.0-20260714035011081-published.json"
     },
     {
       "pluginId": "slack",

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "pagerDuty",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pagerDuty",
+    "commit": "fec5a13febe127356e94641df4c2d51ac86f6396",
+    "submodule": "packages/tools/pagerDuty",
+    "path": "."
+  },
+  "package": {
+    "file": "pagerDuty.pkg",
+    "sha256": "93e435ce3075a0f2b3dc31b8381584817d77f6cfc4681f4ee585cada8a18d9d4",
+    "sizeBytes": 85489
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-14T03:50:06.388Z"
+}
