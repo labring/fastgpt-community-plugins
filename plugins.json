@@ -141,8 +141,9 @@
       "commit": "4dd9ff98527fdf7df3f28d35c96db93384a6773d",
       "submodule": "packages/tools/datadog",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/datadog-0.1.0-20260714140856480-published.json"
     },
     {
       "pluginId": "discord",
