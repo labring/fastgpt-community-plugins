@@ -410,6 +410,17 @@
       "latestPublishEvent": "events/2026-07-09/salesforce-0.1.0-20260709101924608-published.json"
     },
     {
+      "pluginId": "sendgrid",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sendgrid",
+      "commit": "26b9d286834eb68f73b1dde9081994d145cffd1f",
+      "submodule": "packages/tools/sendgrid",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "sentry",
       "version": "0.1.0",
       "type": "tool",
