@@ -142,3 +142,6 @@
 [submodule "packages/tools/posthog"]
 	path = packages/tools/posthog
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-posthog.git
+[submodule "packages/tools/sendgrid"]
+	path = packages/tools/sendgrid
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sendgrid.git
