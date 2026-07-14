@@ -136,3 +136,6 @@
 [submodule "packages/tools/datadog"]
 	path = packages/tools/datadog
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-datadog.git
+[submodule "packages/tools/grafana"]
+	path = packages/tools/grafana
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-grafana.git
