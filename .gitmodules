@@ -145,3 +145,6 @@
 [submodule "packages/tools/sendgrid"]
 	path = packages/tools/sendgrid
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sendgrid.git
+[submodule "packages/tools/shopify"]
+	path = packages/tools/shopify
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-shopify.git
