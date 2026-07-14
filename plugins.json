@@ -117,8 +117,9 @@
       "commit": "8fdc1117d61cadfed20a3d36d8bb23edc9b81739",
       "submodule": "packages/tools/dropbox",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/dropbox-0.1.0-20260714041900775-published.json"
     },
     {
       "pluginId": "elasticsearch",
