@@ -30,7 +30,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-box",
-      "commit": "959c5b32c3110511f350c4144159623819a73bbc",
+      "commit": "f483f8b57c32e88b347ec3a91da02dad6c796b80",
       "submodule": "packages/tools/box",
       "path": ".",
       "status": "active",
