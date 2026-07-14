@@ -127,3 +127,6 @@
 [submodule "packages/tools/box"]
 	path = packages/tools/box
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-box.git
+[submodule "packages/tools/calendly"]
+	path = packages/tools/calendly
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-calendly.git

@@ -38,6 +38,17 @@
       "latestPublishEvent": "events/2026-07-14/box-0.1.0-20260714094906348-published.json"
     },
     {
+      "pluginId": "calendly",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-calendly",
+      "commit": "49c7a37979f0da55eace3c51368095d4e8847d14",
+      "submodule": "packages/tools/calendly",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "chart",
       "version": "0.1.0",
       "type": "tool",
