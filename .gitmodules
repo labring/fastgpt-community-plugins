@@ -139,3 +139,6 @@
 [submodule "packages/tools/grafana"]
 	path = packages/tools/grafana
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-grafana.git
+[submodule "packages/tools/posthog"]
+	path = packages/tools/posthog
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-posthog.git
