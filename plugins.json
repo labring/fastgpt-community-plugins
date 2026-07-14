@@ -417,8 +417,9 @@
       "commit": "26b9d286834eb68f73b1dde9081994d145cffd1f",
       "submodule": "packages/tools/sendgrid",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-14/sendgrid-0.1.0-20260714214856167-published.json"
     },
     {
       "pluginId": "sentry",
