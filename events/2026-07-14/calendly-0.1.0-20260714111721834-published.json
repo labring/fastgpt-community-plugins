@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "calendly",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-calendly",
+    "commit": "49c7a37979f0da55eace3c51368095d4e8847d14",
+    "submodule": "packages/tools/calendly",
+    "path": "."
+  },
+  "package": {
+    "file": "calendly.pkg",
+    "sha256": "a011067f4651d4b8a7dfd1e55e9de4d05c06b954dd69c92312b7e2eb34f4f17e",
+    "sizeBytes": 88497
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-14T11:17:21.834Z"
+}
