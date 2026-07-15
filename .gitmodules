@@ -160,3 +160,6 @@
 [submodule "packages/tools/mailchimp"]
 	path = packages/tools/mailchimp
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp.git
+[submodule "packages/tools/contentful"]
+	path = packages/tools/contentful
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-contentful.git
