@@ -330,7 +330,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp",
-      "commit": "1464fde8fafdd29d5d3d7bc297d623964f6a83fd",
+      "commit": "cf48c7339da854e108f993c7576e9e3ba0ff47f5",
       "submodule": "packages/tools/mailchimp",
       "path": ".",
       "status": "pending",
