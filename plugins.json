@@ -326,6 +326,17 @@
       "latestPublishEvent": "events/2026-07-09/linear-0.1.0-20260709061428509-published.json"
     },
     {
+      "pluginId": "mailchimp",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp",
+      "commit": "cf48c7339da854e108f993c7576e9e3ba0ff47f5",
+      "submodule": "packages/tools/mailchimp",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "microsoftExcel",
       "version": "0.1.0",
       "type": "tool",

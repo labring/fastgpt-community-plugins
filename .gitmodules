@@ -157,3 +157,6 @@
 [submodule "packages/tools/figma"]
 	path = packages/tools/figma
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma.git
+[submodule "packages/tools/mailchimp"]
+	path = packages/tools/mailchimp
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp.git
