@@ -148,3 +148,6 @@
 [submodule "packages/tools/shopify"]
 	path = packages/tools/shopify
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-shopify.git
+[submodule "packages/tools/deepl"]
+	path = packages/tools/deepl
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl.git

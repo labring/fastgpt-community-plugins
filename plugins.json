@@ -146,6 +146,17 @@
       "latestPublishEvent": "events/2026-07-14/datadog-0.1.0-20260714140856480-published.json"
     },
     {
+      "pluginId": "deepl",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl",
+      "commit": "d3bad64dbec5dc0c8418cad7a317a7b6e40155cb",
+      "submodule": "packages/tools/deepl",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "discord",
       "version": "0.1.0",
       "type": "tool",
