@@ -141,8 +141,9 @@
       "commit": "a51b45bfa844d0ad50dd37fc7367c34a8eff1391",
       "submodule": "packages/tools/contentful",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/contentful-0.1.0-20260715115403145-published.json"
     },
     {
       "pluginId": "crawlee",
