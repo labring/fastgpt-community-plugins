@@ -134,6 +134,17 @@
       "latestPublishEvent": "events/2026-07-09/confluence-0.1.0-20260709063617998-published.json"
     },
     {
+      "pluginId": "contentful",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-contentful",
+      "commit": "a51b45bfa844d0ad50dd37fc7367c34a8eff1391",
+      "submodule": "packages/tools/contentful",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "crawlee",
       "version": "0.1.0",
       "type": "tool",
