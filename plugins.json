@@ -9,8 +9,9 @@
       "commit": "6bb05bbe7778bde5314a5d46a28f04f32f2c8ffb",
       "submodule": "packages/tools/activeCampaign",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/activeCampaign-0.1.0-20260715220630406-published.json"
     },
     {
       "pluginId": "antvVisualization",
