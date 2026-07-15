@@ -154,3 +154,6 @@
 [submodule "packages/tools/browserless"]
 	path = packages/tools/browserless
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-browserless
+[submodule "packages/tools/figma"]
+	path = packages/tools/figma
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma.git
