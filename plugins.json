@@ -441,8 +441,9 @@
       "commit": "bbf92ec551d91532273aff27cbfc9705787f3d66",
       "submodule": "packages/tools/pipedrive",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/pipedrive-0.1.0-20260715181722347-published.json"
     },
     {
       "pluginId": "posthog",
