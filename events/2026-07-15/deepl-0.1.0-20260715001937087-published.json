@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "deepl",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl",
+    "commit": "d3bad64dbec5dc0c8418cad7a317a7b6e40155cb",
+    "submodule": "packages/tools/deepl",
+    "path": "."
+  },
+  "package": {
+    "file": "deepl.pkg",
+    "sha256": "647e37bb91824bb4efeb54338774910c8d7f8d2f9b877832ceba7d048a2cfbde",
+    "sizeBytes": 84606
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-15T00:19:37.087Z"
+}

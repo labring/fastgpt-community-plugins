@@ -153,8 +153,9 @@
       "commit": "d3bad64dbec5dc0c8418cad7a317a7b6e40155cb",
       "submodule": "packages/tools/deepl",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/deepl-0.1.0-20260715001937087-published.json"
     },
     {
       "pluginId": "discord",
