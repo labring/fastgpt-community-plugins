@@ -333,8 +333,9 @@
       "commit": "cf48c7339da854e108f993c7576e9e3ba0ff47f5",
       "submodule": "packages/tools/mailchimp",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/mailchimp-0.1.0-20260715075721359-published.json"
     },
     {
       "pluginId": "microsoftExcel",
