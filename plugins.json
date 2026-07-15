@@ -206,6 +206,17 @@
       "latestPublishEvent": "events/2026-07-14/elasticsearch-0.1.0-20260714035001100-published.json"
     },
     {
+      "pluginId": "figma",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma",
+      "commit": "ba5d15750b5c28eb776d63e24ebcb4fdfa9256f7",
+      "submodule": "packages/tools/figma",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "gitlab",
       "version": "0.1.0",
       "type": "tool",
