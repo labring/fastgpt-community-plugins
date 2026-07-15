@@ -163,3 +163,6 @@
 [submodule "packages/tools/contentful"]
 	path = packages/tools/contentful
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-contentful.git
+[submodule "packages/tools/pipedrive"]
+	path = packages/tools/pipedrive
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pipedrive.git
