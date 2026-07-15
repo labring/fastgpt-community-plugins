@@ -434,6 +434,17 @@
       "latestPublishEvent": "events/2026-07-08/pineconeVectorStore-0.1.0-20260708120933267-published.json"
     },
     {
+      "pluginId": "pipedrive",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pipedrive",
+      "commit": "bbf92ec551d91532273aff27cbfc9705787f3d66",
+      "submodule": "packages/tools/pipedrive",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "posthog",
       "version": "0.1.0",
       "type": "tool",
