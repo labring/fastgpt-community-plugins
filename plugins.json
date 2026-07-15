@@ -210,7 +210,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma",
-      "commit": "ba5d15750b5c28eb776d63e24ebcb4fdfa9256f7",
+      "commit": "3b305027bd5f4d06d70950df4ee41e87bbd27d64",
       "submodule": "packages/tools/figma",
       "path": ".",
       "status": "pending",
