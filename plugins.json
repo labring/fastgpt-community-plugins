@@ -213,8 +213,9 @@
       "commit": "3b305027bd5f4d06d70950df4ee41e87bbd27d64",
       "submodule": "packages/tools/figma",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/figma-0.1.0-20260715052412702-published.json"
     },
     {
       "pluginId": "gitlab",

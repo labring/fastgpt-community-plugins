@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "figma",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma",
+    "commit": "3b305027bd5f4d06d70950df4ee41e87bbd27d64",
+    "submodule": "packages/tools/figma",
+    "path": "."
+  },
+  "package": {
+    "file": "figma.pkg",
+    "sha256": "a9189ae4f995cac06e7a1b3903d20a1a52e33a3acb513f012b03e4de4736cef3",
+    "sizeBytes": 85777
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-15T05:24:12.702Z"
+}
