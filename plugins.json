@@ -81,8 +81,9 @@
       "commit": "20d006c87caa88532d694fe73ca4e57a82a8625f",
       "submodule": "packages/tools/canva",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/canva-0.1.0-20260715193642147-published.json"
     },
     {
       "pluginId": "chart",
