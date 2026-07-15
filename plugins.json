@@ -57,8 +57,9 @@
       "commit": "8a22c5a65ddceb5513317fa744fb7d508208581a",
       "submodule": "packages/tools/browserless",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-15/browserless-0.1.0-20260715014027182-published.json"
     },
     {
       "pluginId": "calendly",
