@@ -50,6 +50,17 @@
       "latestPublishEvent": "events/2026-07-14/box-0.1.0-20260714094906348-published.json"
     },
     {
+      "pluginId": "browserless",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-browserless",
+      "commit": "8a22c5a65ddceb5513317fa744fb7d508208581a",
+      "submodule": "packages/tools/browserless",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "calendly",
       "version": "0.1.0",
       "type": "tool",
