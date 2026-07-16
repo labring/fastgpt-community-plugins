@@ -210,7 +210,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks",
-      "commit": "e91c5b701e305db786a3d96ac31a977345b53f49",
+      "commit": "6b06e921ada232b014be8d3961d501e48f2943b3",
       "submodule": "packages/tools/databricks",
       "path": ".",
       "status": "pending",
