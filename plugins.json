@@ -38,6 +38,17 @@
       "latestPublishEvent": "events/2026-07-14/apify-0.1.0-20260714125333389-published.json"
     },
     {
+      "pluginId": "apitemplate",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apitemplate",
+      "commit": "563688f030f5a2c792312d23095b33c79de4f797",
+      "submodule": "packages/tools/apitemplate",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "asana",
       "version": "0.1.0",
       "type": "tool",
