@@ -117,8 +117,9 @@
       "commit": "78218a56e999a0ebe12238b82cc42ae0e9abce82",
       "submodule": "packages/tools/chargebee",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-16/chargebee-0.1.0-20260716042832329-published.json"
     },
     {
       "pluginId": "chart",
