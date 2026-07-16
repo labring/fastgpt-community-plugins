@@ -175,3 +175,6 @@
 [submodule "packages/tools/discourse"]
 	path = packages/tools/discourse
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discourse.git
+[submodule "packages/tools/apitemplate"]
+	path = packages/tools/apitemplate
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apitemplate.git
