@@ -206,6 +206,17 @@
       "latestPublishEvent": "events/2026-07-09/crawlee-0.1.0-20260709000835756-published.json"
     },
     {
+      "pluginId": "databricks",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks",
+      "commit": "6b06e921ada232b014be8d3961d501e48f2943b3",
+      "submodule": "packages/tools/databricks",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "datadog",
       "version": "0.1.0",
       "type": "tool",
