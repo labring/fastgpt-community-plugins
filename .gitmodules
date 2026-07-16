@@ -178,3 +178,6 @@
 [submodule "packages/tools/apitemplate"]
 	path = packages/tools/apitemplate
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apitemplate.git
+[submodule "packages/tools/chargebee"]
+	path = packages/tools/chargebee
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chargebee.git

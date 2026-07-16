@@ -110,6 +110,17 @@
       "latestPublishEvent": "events/2026-07-15/canva-0.1.0-20260715193642147-published.json"
     },
     {
+      "pluginId": "chargebee",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chargebee",
+      "commit": "78218a56e999a0ebe12238b82cc42ae0e9abce82",
+      "submodule": "packages/tools/chargebee",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "chart",
       "version": "0.1.0",
       "type": "tool",
