@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "discourse",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discourse",
+    "commit": "aca5e9f8d42940c765a950ef4469ef84cfc6e4f3",
+    "submodule": "packages/tools/discourse",
+    "path": "."
+  },
+  "package": {
+    "file": "discourse.pkg",
+    "sha256": "6f474bb8d9157947d2dbdc6d0c4f01057586d936657a3d296dc5f6c0b20c20b3",
+    "sizeBytes": 84916
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-16T00:31:22.084Z"
+}

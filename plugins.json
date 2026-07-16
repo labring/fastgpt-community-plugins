@@ -225,8 +225,9 @@
       "commit": "aca5e9f8d42940c765a950ef4469ef84cfc6e4f3",
       "submodule": "packages/tools/discourse",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-16/discourse-0.1.0-20260716003122084-published.json"
     },
     {
       "pluginId": "dropbox",
