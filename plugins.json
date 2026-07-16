@@ -45,8 +45,9 @@
       "commit": "563688f030f5a2c792312d23095b33c79de4f797",
       "submodule": "packages/tools/apitemplate",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-16/apitemplate-0.1.0-20260716014557963-published.json"
     },
     {
       "pluginId": "asana",
