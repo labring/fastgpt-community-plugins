@@ -213,8 +213,9 @@
       "commit": "6b06e921ada232b014be8d3961d501e48f2943b3",
       "submodule": "packages/tools/databricks",
       "path": ".",
-      "status": "pending",
-      "support": "community"
+      "status": "active",
+      "support": "community",
+      "latestPublishEvent": "events/2026-07-16/databricks-0.1.0-20260716123920003-published.json"
     },
     {
       "pluginId": "datadog",

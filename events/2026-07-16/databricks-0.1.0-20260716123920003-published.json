@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "databricks",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks",
+    "commit": "6b06e921ada232b014be8d3961d501e48f2943b3",
+    "submodule": "packages/tools/databricks",
+    "path": "."
+  },
+  "package": {
+    "file": "databricks.pkg",
+    "sha256": "4586bd5d1e033ae2cff66006d060b5bf7d79c2b5a88969ce293fe30a76a9a50a",
+    "sizeBytes": 87368
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-07-16T12:39:20.003Z"
+}
