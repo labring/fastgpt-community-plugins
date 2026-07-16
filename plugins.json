@@ -623,7 +623,7 @@
       "path": ".",
       "status": "active",
       "support": "community",
-      "latestPublishEvent": "events/2026-07-13/stripe-0.1.0-20260713115108782-published.json"
+      "latestPublishEvent": "events/2026-07-16/stripe-0.1.0-20260716192021054-published.json"
     },
     {
       "pluginId": "supabase",
