@@ -618,7 +618,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stripe",
-      "commit": "ab6807786d5ab04b19318a44dad9f10cb51e7dee",
+      "commit": "484aa05b9b2ae0a670a939450feee1da9bf90701",
       "submodule": "packages/tools/stripe",
       "path": ".",
       "status": "active",
