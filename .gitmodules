@@ -172,3 +172,6 @@
 [submodule "packages/tools/activeCampaign"]
 	path = packages/tools/activeCampaign
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git
+[submodule "packages/tools/discourse"]
+	path = packages/tools/discourse
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discourse.git
