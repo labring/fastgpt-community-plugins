@@ -422,6 +422,17 @@
       "latestPublishEvent": "events/2026-07-15/mailchimp-0.1.0-20260715075721359-published.json"
     },
     {
+      "pluginId": "media550wCn",
+      "version": "0.0.1",
+      "type": "tool",
+      "source": "https://github.com/sunshinehu/550w-fastgpt-media",
+      "commit": "221d40241f66aeea34d66c98601cce8282362006",
+      "submodule": "packages/tools/media550wCn",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "microsoftExcel",
       "version": "0.1.0",
       "type": "tool",
