@@ -184,3 +184,6 @@
 [submodule "packages/tools/databricks"]
 	path = packages/tools/databricks
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks.git
+[submodule "packages/tools/acedataGptImage"]
+	path = packages/tools/acedataGptImage
+	url = https://github.com/AceDataCloud/GPTImageFastGPT.git
