@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataVeo",
+      "version": "0.2.1",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/VeoFastGPT",
+      "commit": "0facb2787b38c31379d9fa68d392897a891f35b3",
+      "submodule": "packages/tools/acedataVeo",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
