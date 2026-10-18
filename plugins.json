@@ -242,6 +242,17 @@
       "latestPublishEvent": "events/2026-07-15/deepl-0.1.0-20260715001937087-published.json"
     },
     {
+      "pluginId": "deepSeekSearch",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/c121914yu/fastgpt-plugin-deepseek-search",
+      "commit": "4152d4875ed5a54b7a52ee8c576267653edb7218",
+      "submodule": "packages/tools/deepSeekSearch",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "discord",
       "version": "0.1.0",
       "type": "tool",
