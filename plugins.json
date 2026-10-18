@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataGoogleSearch",
+      "version": "0.1.1",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/GoogleSearchFastGPT",
+      "commit": "956f26f868fb8847965ae2577427ace786ccc874",
+      "submodule": "packages/tools/acedataGoogleSearch",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
