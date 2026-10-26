@@ -362,6 +362,17 @@
       "latestPublishEvent": "events/2026-07-08/googleSheets-0.1.0-20260708022726606-published.json"
     },
     {
+      "pluginId": "gpt6LunaDecision",
+      "version": "1.0.0",
+      "type": "tool",
+      "source": "https://github.com/c121914yu/gpt6LunaDecision",
+      "commit": "f60479787033fc90211a7759f38ac3599e2fd34c",
+      "submodule": "packages/tools/gpt6LunaDecision",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "grafana",
       "version": "0.1.0",
       "type": "tool",
