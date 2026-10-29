@@ -184,6 +184,9 @@
 [submodule "packages/tools/databricks"]
 	path = packages/tools/databricks
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks.git
+[submodule "packages/tools/acedataNanoBanana"]
+	path = packages/tools/acedataNanoBanana
+	url = https://github.com/AceDataCloud/NanoBananaFastGPT.git
 [submodule "packages/tools/deepSeekSearch"]
 	path = packages/tools/deepSeekSearch
 	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
