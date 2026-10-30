@@ -75,13 +75,13 @@
 	path = packages/tools/datadog
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-datadog.git
 
-[submodule "packages/tools/deepl"]
-	path = packages/tools/deepl
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl.git
-
 [submodule "packages/tools/deepSeekSearch"]
 	path = packages/tools/deepSeekSearch
 	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
+
+[submodule "packages/tools/deepl"]
+	path = packages/tools/deepl
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl.git
 
 [submodule "packages/tools/discord"]
 	path = packages/tools/discord
@@ -146,6 +146,10 @@
 [submodule "packages/tools/mailchimp"]
 	path = packages/tools/mailchimp
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp.git
+
+[submodule "packages/tools/media550wCn"]
+	path = packages/tools/media550wCn
+	url = https://github.com/sunshinehu/550w-fastgpt-media.git
 
 [submodule "packages/tools/microsoftExcel"]
 	path = packages/tools/microsoftExcel
