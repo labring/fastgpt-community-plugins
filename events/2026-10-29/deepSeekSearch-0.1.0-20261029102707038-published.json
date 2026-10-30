@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "eventType": "published",
+  "pluginId": "deepSeekSearch",
+  "version": "0.1.0",
+  "source": {
+    "repo": "https://github.com/c121914yu/fastgpt-plugin-deepseek-search",
+    "commit": "4152d4875ed5a54b7a52ee8c576267653edb7218",
+    "submodule": "packages/tools/deepSeekSearch",
+    "path": "."
+  },
+  "package": {
+    "file": "deepSeekSearch.pkg",
+    "sha256": "31411be81abde950d14845d4b3c5cdb9e9114d46e4c4bfbcc56027540d0c8d49",
+    "sizeBytes": 87276
+  },
+  "review": {
+    "verdict": "pass",
+    "summary": "Automated publish after merge. PR review evidence remains in GitHub comments, and deterministic publish gates passed in this workflow.",
+    "generatedAt": null
+  },
+  "marketplace": {
+    "releaseId": null,
+    "uploaded": true,
+    "visibility": "listed"
+  },
+  "actor": "FinleyGe",
+  "createdAt": "2026-10-29T10:27:07.038Z"
+}
