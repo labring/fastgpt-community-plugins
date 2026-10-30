@@ -85,6 +85,10 @@ export function upsertRegistryEntry(options: UpsertRegistryOptions): UpsertRegis
 
   if (!options.dryRun) {
     fs.writeFileSync(options.registryPath, `${JSON.stringify(parsed, null, 2)}\n`);
+    const gitmodulesPath = path.join(options.root, '.gitmodules');
+    if (fs.existsSync(gitmodulesPath)) {
+      sortGitmodulesFile(gitmodulesPath);
+    }
   }
 
   const submodulePath = path.join(options.root, submodule);
@@ -254,13 +258,98 @@ function parseArgs(argv: string[]): { command: string; args: Map<string, string 
   return { command, args };
 }
 
+export function sortGitmodulesContent(raw: string): string {
+  const lines = raw.split(/\r?\n/);
+  const headerLines: string[] = [];
+  const entries: { name: string; lines: string[] }[] = [];
+  let currentEntry: { name: string; lines: string[] } | undefined;
+
+  for (const line of lines) {
+    const match = /^\s*\[submodule\s+"([^"]+)"\]\s*$/.exec(line);
+    if (match) {
+      if (currentEntry) {
+        entries.push(currentEntry);
+      }
+      currentEntry = { name: match[1] ?? '', lines: [line] };
+    } else if (currentEntry) {
+      currentEntry.lines.push(line);
+    } else {
+      headerLines.push(line);
+    }
+  }
+
+  if (currentEntry) {
+    entries.push(currentEntry);
+  }
+
+  entries.sort((a, b) => a.name.localeCompare(b.name));
+
+  const chunks: string[] = [];
+  const headerText = headerLines.join('\n').trim();
+  if (headerText) {
+    chunks.push(headerText);
+  }
+
+  for (const entry of entries) {
+    const entryText = entry.lines.join('\n').trim();
+    if (entryText) {
+      chunks.push(entryText);
+    }
+  }
+
+  return chunks.length > 0 ? `${chunks.join('\n\n')}\n` : '';
+}
+
+export function sortGitmodulesFile(gitmodulesPath: string): boolean {
+  if (!fs.existsSync(gitmodulesPath)) return false;
+  const original = fs.readFileSync(gitmodulesPath, 'utf8');
+  const sorted = sortGitmodulesContent(original);
+  if (original !== sorted) {
+    fs.writeFileSync(gitmodulesPath, sorted);
+    return true;
+  }
+  return false;
+}
+
+export function sortRegistryFile(registryPath: string): boolean {
+  if (!fs.existsSync(registryPath)) return false;
+  const raw = fs.readFileSync(registryPath, 'utf8');
+  const registry = parseRegistryJson(JSON.parse(raw));
+  registry.plugins.sort((a, b) => a.pluginId.localeCompare(b.pluginId));
+  const formatted = `${JSON.stringify(registry, null, 2)}\n`;
+  if (raw !== formatted) {
+    fs.writeFileSync(registryPath, formatted);
+    return true;
+  }
+  return false;
+}
+
 async function main(): Promise<void> {
   const root = process.cwd();
   const { command, args } = parseArgs(process.argv.slice(2));
 
+  if (command === 'sort') {
+    const registryPath = path.resolve(root, String(args.get('registry') ?? 'plugins.json'));
+    const gitmodulesPath = path.resolve(root, String(args.get('gitmodules') ?? '.gitmodules'));
+    const registryChanged = sortRegistryFile(registryPath);
+    const gitmodulesChanged = sortGitmodulesFile(gitmodulesPath);
+    console.log(
+      JSON.stringify(
+        {
+          action: 'sorted',
+          pluginsSorted: registryChanged,
+          gitmodulesSorted: gitmodulesChanged
+        },
+        null,
+        2
+      )
+    );
+    return;
+  }
+
   if (command !== 'upsert') {
     throw new Error(
-      'Usage: pnpm run registry -- upsert --plugin <pluginId> --version <version> --source <repo-url> --commit <sha>'
+      'Usage: pnpm run registry -- upsert ... OR pnpm run registry -- sort'
     );
   }
 

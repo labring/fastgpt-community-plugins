@@ -1,192 +1,254 @@
-[submodule "packages/tools/googleSheets"]
-	path = packages/tools/googleSheets
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleSheet
-[submodule "packages/tools/slack"]
-	path = packages/tools/slack
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-slack.git
-[submodule "packages/tools/unstructured"]
-	path = packages/tools/unstructured
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-unstructured
-[submodule "packages/tools/qdrantVectorStore"]
-	path = packages/tools/qdrantVectorStore
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore.git
-[submodule "packages/tools/supabase"]
-	path = packages/tools/supabase
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git
-[submodule "packages/tools/hubspot"]
-	path = packages/tools/hubspot
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git
-[submodule "packages/tools/gmail"]
-	path = packages/tools/gmail
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git
+[submodule "packages/tools/activeCampaign"]
+	path = packages/tools/activeCampaign
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git
+
+[submodule "packages/tools/antvVisualization"]
+	path = packages/tools/antvVisualization
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-antvVisualization.git
+
+[submodule "packages/tools/apify"]
+	path = packages/tools/apify
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apify.git
+
+[submodule "packages/tools/apitemplate"]
+	path = packages/tools/apitemplate
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apitemplate.git
+
+[submodule "packages/tools/asana"]
+	path = packages/tools/asana
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-asana.git
+
+[submodule "packages/tools/box"]
+	path = packages/tools/box
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-box.git
+
+[submodule "packages/tools/browserless"]
+	path = packages/tools/browserless
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-browserless
+
+[submodule "packages/tools/calendly"]
+	path = packages/tools/calendly
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-calendly.git
+
+[submodule "packages/tools/canva"]
+	path = packages/tools/canva
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-canva.git
+
+[submodule "packages/tools/chargebee"]
+	path = packages/tools/chargebee
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chargebee.git
+
+[submodule "packages/tools/chart"]
+	path = packages/tools/chart
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chart.git
+
 [submodule "packages/tools/chromaVectorStore"]
 	path = packages/tools/chromaVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chromaVectorStore.git
-[submodule "packages/tools/telegramBot"]
-	path = packages/tools/telegramBot
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-telegramBot.git
-[submodule "packages/tools/discord"]
-	path = packages/tools/discord
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discord.git
-[submodule "packages/tools/pineconeVectorStore"]
-	path = packages/tools/pineconeVectorStore
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pineconeVectorStore.git
-	branch = main
+
+[submodule "packages/tools/clickup"]
+	path = packages/tools/clickup
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-clickup.git
+
 [submodule "packages/tools/comfyUI"]
 	path = packages/tools/comfyUI
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-comfyUI.git
 	branch = main
+
+[submodule "packages/tools/confluence"]
+	path = packages/tools/confluence
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-confluence.git
+
+[submodule "packages/tools/contentful"]
+	path = packages/tools/contentful
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-contentful.git
+
+[submodule "packages/tools/crawlee"]
+	path = packages/tools/crawlee
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-crawlee.git
+
+[submodule "packages/tools/databricks"]
+	path = packages/tools/databricks
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks.git
+
+[submodule "packages/tools/datadog"]
+	path = packages/tools/datadog
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-datadog.git
+
+[submodule "packages/tools/deepl"]
+	path = packages/tools/deepl
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl.git
+
+[submodule "packages/tools/deepSeekSearch"]
+	path = packages/tools/deepSeekSearch
+	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
+
+[submodule "packages/tools/discord"]
+	path = packages/tools/discord
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discord.git
+
+[submodule "packages/tools/discourse"]
+	path = packages/tools/discourse
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discourse.git
+
+[submodule "packages/tools/dropbox"]
+	path = packages/tools/dropbox
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-dropbox.git
+
+[submodule "packages/tools/elasticsearch"]
+	path = packages/tools/elasticsearch
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-elasticsearch.git
+
+[submodule "packages/tools/figma"]
+	path = packages/tools/figma
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma.git
+
+[submodule "packages/tools/gitlab"]
+	path = packages/tools/gitlab
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git
+
+[submodule "packages/tools/gmail"]
+	path = packages/tools/gmail
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gmail.git
+
+[submodule "packages/tools/googleCalendar"]
+	path = packages/tools/googleCalendar
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleCalendar.git
+
+[submodule "packages/tools/googleDrive"]
+	path = packages/tools/googleDrive
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleDrive.git
+
+[submodule "packages/tools/googleSheets"]
+	path = packages/tools/googleSheets
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleSheet
+
+[submodule "packages/tools/gpt6LunaDecision"]
+	path = packages/tools/gpt6LunaDecision
+	url = https://github.com/c121914yu/gpt6LunaDecision.git
+
+[submodule "packages/tools/grafana"]
+	path = packages/tools/grafana
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-grafana.git
+
+[submodule "packages/tools/hubspot"]
+	path = packages/tools/hubspot
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-hubspot.git
+
+[submodule "packages/tools/jira"]
+	path = packages/tools/jira
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-jira.git
+
+[submodule "packages/tools/linear"]
+	path = packages/tools/linear
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git
+
+[submodule "packages/tools/mailchimp"]
+	path = packages/tools/mailchimp
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp.git
+
 [submodule "packages/tools/microsoftExcel"]
 	path = packages/tools/microsoftExcel
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftExcel.git
 	branch = main
-[submodule "packages/tools/googleDrive"]
-	path = packages/tools/googleDrive
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleDrive.git
-[submodule "packages/tools/weaviateVectorStore"]
-	path = packages/tools/weaviateVectorStore
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-weaviateVectorStore.git
-[submodule "packages/tools/chart"]
-	path = packages/tools/chart
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chart.git
-[submodule "packages/tools/pdfProcess"]
-	path = packages/tools/pdfProcess
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pdfProcess.git
-[submodule "packages/tools/openWeather"]
-	path = packages/tools/openWeather
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-openWeather.git
-[submodule "packages/tools/antvVisualization"]
-	path = packages/tools/antvVisualization
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-antvVisualization.git
-[submodule "packages/tools/yahooFinance"]
-	path = packages/tools/yahooFinance
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-yahooFinance.git
-[submodule "packages/tools/crawlee"]
-	path = packages/tools/crawlee
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-crawlee.git
-[submodule "packages/tools/vannaAi"]
-	path = packages/tools/vannaAi
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git
-[submodule "packages/tools/trello"]
-	path = packages/tools/trello
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-trello.git
-[submodule "packages/tools/stagehand"]
-	path = packages/tools/stagehand
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stagehand.git
-[submodule "packages/tools/jira"]
-	path = packages/tools/jira
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-jira.git
-[submodule "packages/tools/linear"]
-	path = packages/tools/linear
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-linear.git
-[submodule "packages/tools/gitlab"]
-	path = packages/tools/gitlab
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-gitlab.git
-[submodule "packages/tools/confluence"]
-	path = packages/tools/confluence
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-confluence.git
-[submodule "packages/tools/salesforce"]
-	path = packages/tools/salesforce
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-salesforce.git
-[submodule "packages/tools/zendesk"]
-	path = packages/tools/zendesk
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git
-[submodule "packages/tools/googleCalendar"]
-	path = packages/tools/googleCalendar
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-googleCalendar.git
+
 [submodule "packages/tools/microsoftOutlook"]
 	path = packages/tools/microsoftOutlook
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftOutlook.git
+
 [submodule "packages/tools/microsoftTeams"]
 	path = packages/tools/microsoftTeams
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftTeams.git
-[submodule "packages/tools/twilio"]
-	path = packages/tools/twilio
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-twilio.git
-[submodule "packages/tools/stripe"]
-	path = packages/tools/stripe
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stripe.git
-[submodule "packages/tools/elasticsearch"]
-	path = packages/tools/elasticsearch
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-elasticsearch.git
-[submodule "packages/tools/sentry"]
-	path = packages/tools/sentry
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sentry.git
+
+[submodule "packages/tools/openWeather"]
+	path = packages/tools/openWeather
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-openWeather.git
+
 [submodule "packages/tools/pagerDuty"]
 	path = packages/tools/pagerDuty
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pagerDuty.git
-[submodule "packages/tools/asana"]
-	path = packages/tools/asana
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-asana.git
-[submodule "packages/tools/clickup"]
-	path = packages/tools/clickup
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-clickup.git
-[submodule "packages/tools/dropbox"]
-	path = packages/tools/dropbox
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-dropbox.git
-[submodule "packages/tools/box"]
-	path = packages/tools/box
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-box.git
-[submodule "packages/tools/calendly"]
-	path = packages/tools/calendly
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-calendly.git
-[submodule "packages/tools/apify"]
-	path = packages/tools/apify
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apify.git
-[submodule "packages/tools/datadog"]
-	path = packages/tools/datadog
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-datadog.git
-[submodule "packages/tools/grafana"]
-	path = packages/tools/grafana
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-grafana.git
-[submodule "packages/tools/posthog"]
-	path = packages/tools/posthog
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-posthog.git
-[submodule "packages/tools/sendgrid"]
-	path = packages/tools/sendgrid
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sendgrid.git
-[submodule "packages/tools/shopify"]
-	path = packages/tools/shopify
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-shopify.git
-[submodule "packages/tools/deepl"]
-	path = packages/tools/deepl
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl.git
-[submodule "packages/tools/browserless"]
-	path = packages/tools/browserless
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-browserless
-[submodule "packages/tools/figma"]
-	path = packages/tools/figma
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-figma.git
-[submodule "packages/tools/mailchimp"]
-	path = packages/tools/mailchimp
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp.git
-[submodule "packages/tools/contentful"]
-	path = packages/tools/contentful
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-contentful.git
+
+[submodule "packages/tools/pdfProcess"]
+	path = packages/tools/pdfProcess
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pdfProcess.git
+
+[submodule "packages/tools/pineconeVectorStore"]
+	path = packages/tools/pineconeVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pineconeVectorStore.git
+	branch = main
+
 [submodule "packages/tools/pipedrive"]
 	path = packages/tools/pipedrive
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-pipedrive.git
-[submodule "packages/tools/canva"]
-	path = packages/tools/canva
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-canva.git
-[submodule "packages/tools/activeCampaign"]
-	path = packages/tools/activeCampaign
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git
-[submodule "packages/tools/discourse"]
-	path = packages/tools/discourse
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discourse.git
-[submodule "packages/tools/apitemplate"]
-	path = packages/tools/apitemplate
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-apitemplate.git
-[submodule "packages/tools/chargebee"]
-	path = packages/tools/chargebee
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-chargebee.git
-[submodule "packages/tools/databricks"]
-	path = packages/tools/databricks
-	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-databricks.git
-[submodule "packages/tools/deepSeekSearch"]
-	path = packages/tools/deepSeekSearch
-	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
-[submodule "packages/tools/gpt6LunaDecision"]
-	path = packages/tools/gpt6LunaDecision
-	url = https://github.com/c121914yu/gpt6LunaDecision.git
+
+[submodule "packages/tools/posthog"]
+	path = packages/tools/posthog
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-posthog.git
+
+[submodule "packages/tools/qdrantVectorStore"]
+	path = packages/tools/qdrantVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore.git
+
+[submodule "packages/tools/salesforce"]
+	path = packages/tools/salesforce
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-salesforce.git
+
+[submodule "packages/tools/sendgrid"]
+	path = packages/tools/sendgrid
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sendgrid.git
+
+[submodule "packages/tools/sentry"]
+	path = packages/tools/sentry
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-sentry.git
+
+[submodule "packages/tools/shopify"]
+	path = packages/tools/shopify
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-shopify.git
+
+[submodule "packages/tools/slack"]
+	path = packages/tools/slack
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-slack.git
+
+[submodule "packages/tools/stagehand"]
+	path = packages/tools/stagehand
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stagehand.git
+
+[submodule "packages/tools/stripe"]
+	path = packages/tools/stripe
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-stripe.git
+
+[submodule "packages/tools/supabase"]
+	path = packages/tools/supabase
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-supabase.git
+
+[submodule "packages/tools/telegramBot"]
+	path = packages/tools/telegramBot
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-telegramBot.git
+
+[submodule "packages/tools/trello"]
+	path = packages/tools/trello
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-trello.git
+
+[submodule "packages/tools/twilio"]
+	path = packages/tools/twilio
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-twilio.git
+
+[submodule "packages/tools/unstructured"]
+	path = packages/tools/unstructured
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-unstructured
+
+[submodule "packages/tools/vannaAi"]
+	path = packages/tools/vannaAi
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-vannaAi.git
+
+[submodule "packages/tools/weaviateVectorStore"]
+	path = packages/tools/weaviateVectorStore
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-weaviateVectorStore.git
+
+[submodule "packages/tools/yahooFinance"]
+	path = packages/tools/yahooFinance
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-yahooFinance.git
+
+[submodule "packages/tools/zendesk"]
+	path = packages/tools/zendesk
+	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git
