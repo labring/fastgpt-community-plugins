@@ -147,6 +147,10 @@
 	path = packages/tools/mailchimp
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-mailchimp.git
 
+[submodule "packages/tools/media550wCn"]
+	path = packages/tools/media550wCn
+	url = https://github.com/sunshinehu/550w-fastgpt-media.git
+
 [submodule "packages/tools/microsoftExcel"]
 	path = packages/tools/microsoftExcel
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-microsoftExcel.git
