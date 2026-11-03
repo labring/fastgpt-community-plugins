@@ -75,13 +75,13 @@
 	path = packages/tools/datadog
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-datadog.git
 
-[submodule "packages/tools/deepSeekSearch"]
-	path = packages/tools/deepSeekSearch
-	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
-
 [submodule "packages/tools/deepl"]
 	path = packages/tools/deepl
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-deepl.git
+
+[submodule "packages/tools/deepSeekSearch"]
+	path = packages/tools/deepSeekSearch
+	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
 
 [submodule "packages/tools/discord"]
 	path = packages/tools/discord
