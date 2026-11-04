@@ -450,7 +450,7 @@
       "version": "0.0.1",
       "type": "tool",
       "source": "https://github.com/sunshinehu/550w-fastgpt-media",
-      "commit": "4c2e89780051a158227dc4d9b29aa2fda0de74d6",
+      "commit": "24f6e32ba43a9b0f1e759cda69a210c780f268e8",
       "submodule": "packages/tools/media550wCn",
       "path": ".",
       "status": "active",
