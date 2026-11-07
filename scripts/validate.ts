@@ -4,6 +4,7 @@ import path from 'node:path';
 import { parseRegistryJson, readRegistryFile, resolvePluginRoot, type PluginRegistryEntry } from '../schemas/registry.js';
 import { tryRunGit } from './git.js';
 import { scanPluginPolicy } from './policy.js';
+import { sortGitmodulesContent } from './registry.js';
 
 export type ValidateOptions = {
   root: string;
@@ -43,6 +44,14 @@ export async function validateRegistry(options: ValidateOptions): Promise<Valida
     }
 
     validatePluginEntry(options.root, plugin, errors, warnings);
+  }
+
+  const gitmodulesPath = path.join(options.root, '.gitmodules');
+  if (fs.existsSync(gitmodulesPath)) {
+    const raw = fs.readFileSync(gitmodulesPath, 'utf8');
+    if (raw !== sortGitmodulesContent(raw)) {
+      warnings.push('.gitmodules is not sorted alphabetically. Run `pnpm run registry:sort` to fix.');
+    }
   }
 
   if (!options.skipBuild && changedPluginIds.length > 0) {
