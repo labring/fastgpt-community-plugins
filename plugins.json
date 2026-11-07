@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataNanoBanana",
+      "version": "0.2.2",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/NanoBananaFastGPT",
+      "commit": "ed0d38581519321f1820bc464933944d5cb39fca",
+      "submodule": "packages/tools/acedataNanoBanana",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
