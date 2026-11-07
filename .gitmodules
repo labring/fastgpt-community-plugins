@@ -1,3 +1,7 @@
+[submodule "packages/tools/acedataFaceTransform"]
+	path = packages/tools/acedataFaceTransform
+	url = https://github.com/AceDataCloud/FaceTransformFastGPT.git
+
 [submodule "packages/tools/activeCampaign"]
 	path = packages/tools/activeCampaign
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git

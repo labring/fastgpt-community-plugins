@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataFaceTransform",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/FaceTransformFastGPT",
+      "commit": "974bcfe802915ffddb83081c5afa9d08dab06d96",
+      "submodule": "packages/tools/acedataFaceTransform",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
