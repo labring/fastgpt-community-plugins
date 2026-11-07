@@ -4,7 +4,13 @@ import path from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { pluginIdFromPackageName, upsertRegistryEntry } from '../scripts/registry.js';
+import {
+  pluginIdFromPackageName,
+  sortGitmodulesContent,
+  sortGitmodulesFile,
+  sortRegistryFile,
+  upsertRegistryEntry
+} from '../scripts/registry.js';
 
 const tempDirs: string[] = [];
 
@@ -44,9 +50,47 @@ describe('registry CLI helpers', () => {
     expect(registry.plugins[0]).toMatchObject({
       pluginId: 'googleSheets',
       submodule: 'packages/tools/googleSheets',
-      status: 'pending',
-      support: 'community'
+      version: '0.1.0'
     });
+  });
+
+  it('sorts .gitmodules content and files alphabetically by submodule name', () => {
+    const raw = `
+[submodule "packages/tools/zendesk"]
+\tpath = packages/tools/zendesk
+\turl = https://github.com/example/zendesk.git
+
+[submodule "packages/tools/activeCampaign"]
+\tpath = packages/tools/activeCampaign
+\turl = https://github.com/example/activeCampaign.git
+
+[submodule "packages/tools/googleSheets"]
+\tpath = packages/tools/googleSheets
+\turl = https://github.com/example/googleSheets.git
+`;
+    const sorted = sortGitmodulesContent(raw);
+    const expected = `[submodule "packages/tools/activeCampaign"]
+\tpath = packages/tools/activeCampaign
+\turl = https://github.com/example/activeCampaign.git
+
+[submodule "packages/tools/googleSheets"]
+\tpath = packages/tools/googleSheets
+\turl = https://github.com/example/googleSheets.git
+
+[submodule "packages/tools/zendesk"]
+\tpath = packages/tools/zendesk
+\turl = https://github.com/example/zendesk.git
+`;
+    expect(sorted).toBe(expected);
+
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fastgpt-gitmodules-test-'));
+    tempDirs.push(root);
+    const gitmodulesPath = path.join(root, '.gitmodules');
+    fs.writeFileSync(gitmodulesPath, raw);
+
+    expect(sortGitmodulesFile(gitmodulesPath)).toBe(true);
+    expect(fs.readFileSync(gitmodulesPath, 'utf8')).toBe(expected);
+    expect(sortGitmodulesFile(gitmodulesPath)).toBe(false);
   });
 
   it('infers plugin id and version from a local plugin package', () => {
