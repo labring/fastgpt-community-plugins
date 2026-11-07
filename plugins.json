@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataFlux",
+      "version": "0.2.1",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/FluxFastGPT",
+      "commit": "a1e594d2d96cfeb1936dcca9773d2dd6e1d9c102",
+      "submodule": "packages/tools/acedataFlux",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",

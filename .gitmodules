@@ -1,3 +1,7 @@
+[submodule "packages/tools/acedataFlux"]
+	path = packages/tools/acedataFlux
+	url = https://github.com/AceDataCloud/FluxFastGPT.git
+
 [submodule "packages/tools/activeCampaign"]
 	path = packages/tools/activeCampaign
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git
