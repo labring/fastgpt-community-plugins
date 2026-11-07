@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataHappyHorse",
+      "version": "0.2.2",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/HappyHorseFastGPT",
+      "commit": "abf763e6ad66101460c9c904665ae8bbaadffbbc",
+      "submodule": "packages/tools/acedataHappyHorse",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
