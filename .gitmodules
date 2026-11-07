@@ -1,3 +1,7 @@
+[submodule "packages/tools/acedataMiniMax"]
+	path = packages/tools/acedataMiniMax
+	url = https://github.com/AceDataCloud/MiniMaxFastGPT.git
+
 [submodule "packages/tools/activeCampaign"]
 	path = packages/tools/activeCampaign
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git
