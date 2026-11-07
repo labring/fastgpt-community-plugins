@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataWan",
+      "version": "0.2.1",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/WanFastGPT",
+      "commit": "d64b1d5cd52d54431f4d10f3eaccb4899d4d60d5",
+      "submodule": "packages/tools/acedataWan",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
