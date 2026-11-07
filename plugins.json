@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataSuno",
+      "version": "0.2.2",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/SunoFastGPT",
+      "commit": "06b69fdd6589c5d5c4ecfea3e5adebf113b86556",
+      "submodule": "packages/tools/acedataSuno",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
