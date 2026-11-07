@@ -7,6 +7,7 @@
     "validate": "tsx scripts/validate.ts",
     "plugin": "tsx scripts/plugin.ts",
     "registry": "tsx scripts/registry.ts",
+    "registry:sort": "tsx scripts/registry.ts sort",
     "publish": "tsx scripts/publish.ts",
     "revoke": "tsx scripts/revoke.ts",
     "test": "vitest run",
