@@ -158,6 +158,17 @@
       "latestPublishEvent": "events/2026-07-14/clickup-0.1.0-20260714034956353-published.json"
     },
     {
+      "pluginId": "cloro",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/cloro-dev/fastgpt-plugin-cloro",
+      "commit": "7b0d1934b574f187e50d0d8d769ceb226cc074b8",
+      "submodule": "packages/tools/cloro",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "comfyUI",
       "version": "0.1.0",
       "type": "tool",

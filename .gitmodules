@@ -50,6 +50,10 @@
 	path = packages/tools/clickup
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-clickup.git
 
+[submodule "packages/tools/cloro"]
+	path = packages/tools/cloro
+	url = https://github.com/cloro-dev/fastgpt-plugin-cloro.git
+
 [submodule "packages/tools/comfyUI"]
 	path = packages/tools/comfyUI
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-comfyUI.git
