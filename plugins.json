@@ -162,7 +162,7 @@
       "version": "0.1.0",
       "type": "tool",
       "source": "https://github.com/cloro-dev/fastgpt-plugin-cloro",
-      "commit": "7b0d1934b574f187e50d0d8d769ceb226cc074b8",
+      "commit": "79cba8b4a0955511c0e4b98d9dd832afd3db3728",
       "submodule": "packages/tools/cloro",
       "path": ".",
       "status": "pending",
