@@ -83,6 +83,10 @@
 	path = packages/tools/deepSeekSearch
 	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-search.git
 
+[submodule "packages/tools/deepSeekTools"]
+	path = packages/tools/deepSeekTools
+	url = https://github.com/c121914yu/fastgpt-plugin-deepseek-tools.git
+
 [submodule "packages/tools/discord"]
 	path = packages/tools/discord
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-discord.git
