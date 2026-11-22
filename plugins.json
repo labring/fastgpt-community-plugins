@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataGptImage",
+      "version": "0.2.3",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/GPTImageFastGPT",
+      "commit": "6c7a1299ae3ce50d6609b35baf0539508ea8eb19",
+      "submodule": "packages/tools/acedataGptImage",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
