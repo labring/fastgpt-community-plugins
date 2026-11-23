@@ -3,10 +3,10 @@
   "plugins": [
     {
       "pluginId": "acedataVeo",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "type": "tool",
       "source": "https://github.com/AceDataCloud/VeoFastGPT",
-      "commit": "0facb2787b38c31379d9fa68d392897a891f35b3",
+      "commit": "b0412316ce76b898742ddcbea73770e2f1ca6de8",
       "submodule": "packages/tools/acedataVeo",
       "path": ".",
       "status": "pending",
