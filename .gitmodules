@@ -1,3 +1,7 @@
+[submodule "packages/tools/acedataSeedream"]
+	path = packages/tools/acedataSeedream
+	url = https://github.com/AceDataCloud/SeedreamFastGPT.git
+
 [submodule "packages/tools/activeCampaign"]
 	path = packages/tools/activeCampaign
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-activeCampaign.git

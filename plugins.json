@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataSeedream",
+      "version": "0.2.2",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/SeedreamFastGPT",
+      "commit": "bace221f0f7b6837997435589526438d06693ba2",
+      "submodule": "packages/tools/acedataSeedream",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
