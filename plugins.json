@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataSeedance",
+      "version": "0.2.3",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/SeedanceFastGPT",
+      "commit": "c2e3083e25b435d33022af010723d7bd17725f7b",
+      "submodule": "packages/tools/acedataSeedance",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
