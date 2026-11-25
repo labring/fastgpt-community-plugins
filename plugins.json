@@ -2,6 +2,17 @@
   "version": 1,
   "plugins": [
     {
+      "pluginId": "acedataAceMusic",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/AceDataCloud/ACEMusicFastGPT.git",
+      "commit": "2c1fc93a5828e04a8244e88146c46ae74b8dd7c6",
+      "submodule": "packages/tools/acedataAceMusic",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "activeCampaign",
       "version": "0.1.0",
       "type": "tool",
