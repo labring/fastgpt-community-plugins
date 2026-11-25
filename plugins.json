@@ -254,6 +254,17 @@
       "latestPublishEvent": "events/2026-10-29/deepSeekSearch-0.1.0-20261029102707038-published.json"
     },
     {
+      "pluginId": "desearchFastgptIntegration",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/Desearch-ai/desearch-fastgpt-plugin",
+      "commit": "886878a97821b17a2fd9f3967b242eb609ea943c",
+      "submodule": "packages/tools/desearchFastgptIntegration",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "discord",
       "version": "0.1.0",
       "type": "tool",
