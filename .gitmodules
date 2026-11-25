@@ -256,3 +256,6 @@
 [submodule "packages/tools/zendesk"]
 	path = packages/tools/zendesk
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-zendesk.git
+[submodule "packages/tools/acedataAceMusic"]
+	path = packages/tools/acedataAceMusic
+	url = https://github.com/AceDataCloud/ACEMusicFastGPT.git
