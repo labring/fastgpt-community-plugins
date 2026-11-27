@@ -566,6 +566,17 @@
       "latestPublishEvent": "events/2026-07-14/posthog-0.1.0-20260714203010524-published.json"
     },
     {
+      "pluginId": "promptEfficiently",
+      "version": "0.1.0",
+      "type": "tool",
+      "source": "https://github.com/promptefficiently/fastgpt-plugin-promptEfficiently",
+      "commit": "bf2fcddc3f8651939ce6956531fc9f6819e80990",
+      "submodule": "packages/tools/promptEfficiently",
+      "path": ".",
+      "status": "pending",
+      "support": "community"
+    },
+    {
       "pluginId": "qdrantVectorStore",
       "version": "0.1.0",
       "type": "tool",
