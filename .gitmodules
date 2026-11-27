@@ -189,6 +189,10 @@
 	path = packages/tools/posthog
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-posthog.git
 
+[submodule "packages/tools/promptEfficiently"]
+	path = packages/tools/promptEfficiently
+	url = https://github.com/promptefficiently/fastgpt-plugin-promptEfficiently.git
+
 [submodule "packages/tools/qdrantVectorStore"]
 	path = packages/tools/qdrantVectorStore
 	url = https://github.com/Finley-Agent-Zhuazhua/fastgpt-plugin-qdrantVectorStore.git
